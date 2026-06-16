@@ -123,8 +123,8 @@ tbody tr:hover td{background:#fafafa}
 .result-none{color:#9ca3af;font-style:italic}
 .result-pass{color:#16a34a;font-weight:600}
 .result-fail{color:#dc2626;font-weight:600}
-.toast{position:fixed;top:76px;left:50%;transform:translateX(-50%);background:#fff;border:1px solid #e5e7eb;border-left:4px solid #16a34a;border-radius:10px;padding:12px 20px;font-size:14px;font-weight:500;color:#374151;box-shadow:0 4px 20px rgba(0,0,0,.12);display:flex;align-items:center;gap:10px;z-index:999;opacity:0;pointer-events:none;transition:opacity .25s;white-space:nowrap;min-width:240px}
-.toast.show{opacity:1}
+.toast{position:fixed;top:76px;right:24px;background:#fff;border:1px solid #e5e7eb;border-left:4px solid #16a34a;border-radius:10px;padding:12px 20px;font-size:14px;font-weight:500;color:#374151;box-shadow:0 4px 20px rgba(0,0,0,.12);display:flex;align-items:center;gap:10px;z-index:999;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;transform:translateX(20px);white-space:nowrap;min-width:240px}
+.toast.show{opacity:1;transform:translateX(0)}
 @keyframes tspin{to{transform:rotate(360deg)}}
 .tspin{animation:tspin 1s linear infinite;display:block}
 </style>
