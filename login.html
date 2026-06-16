@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đăng nhập - Quản lý Nhân sự</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    background: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── CARD ── */
+  .login-card {
+    background: #FDDEC8;
+    border-radius: 24px;
+    width: 660px;
+    padding: 52px 88px 60px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+    position: relative;
+  }
+
+  /* ── LOGO ── */
+  .logo-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .logo-circle {
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    border: 4px solid #1C3B5A;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* ── TITLE ── */
+  .login-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1C3B5A;
+    margin-bottom: 30px;
+    letter-spacing: 0.3px;
+  }
+
+  /* ── FORM GROUP ── */
+  .form-group {
+    margin-bottom: 20px;
+  }
+  .form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333333;
+    margin-bottom: 8px;
+  }
+  .form-input {
+    display: block;
+    width: 100%;
+    height: 52px;
+    padding: 0 18px;
+    background: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #333333;
+    outline: none;
+    transition: box-shadow 0.15s;
+  }
+  .form-input:focus {
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.25);
+  }
+  .form-input::placeholder {
+    color: #c0c0c0;
+  }
+
+  /* ── ERROR MESSAGE ── */
+  .error-wrap {
+    min-height: 26px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .error-msg {
+    font-size: 14px;
+    color: #F97316;
+    text-align: center;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+  .error-msg.hidden {
+    display: none;
+  }
+
+  /* ── BUTTON ── */
+  .login-btn {
+    display: block;
+    width: 100%;
+    height: 52px;
+    background: #F97316;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .login-btn:hover  { background: #e86d10; }
+  .login-btn:active { transform: scale(0.995); background: #d86208; }
+
+
+</style>
+</head>
+<body>
+
+<div class="login-card">
+
+  <!-- LOGO -->
+  <div class="logo-wrap">
+    <div class="logo-circle">
+      <!-- Icon: 3 người + sách mở + gear -->
+      <svg width="62" height="58" viewBox="0 0 62 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- === NGƯỜI TRÁI === -->
+        <circle cx="15" cy="18" r="6" fill="#1C3B5A"/>
+        <path d="M6 37 C6 29.5 10.5 25.5 15 25.5 C18 25.5 20.5 27 22 29.5" fill="#1C3B5A"/>
+
+        <!-- === NGƯỜI PHẢI === -->
+        <circle cx="47" cy="18" r="6" fill="#1C3B5A"/>
+        <path d="M40 29.5 C41.5 27 44 25.5 47 25.5 C51.5 25.5 56 29.5 56 37" fill="#1C3B5A"/>
+
+        <!-- === NGƯỜI GIỮA (cao hơn, nổi bật hơn) === -->
+        <circle cx="31" cy="13" r="8" fill="#1C3B5A"/>
+        <path d="M19 40 C19 29.5 24.5 24.5 31 24.5 C37.5 24.5 43 29.5 43 40 Z" fill="#1C3B5A"/>
+
+        <!-- === SÁCH MỞ === -->
+        <!-- Trang trái -->
+        <path d="M1 44 L31 39.5 L31 56 L1 58.5 Z" fill="#F97316"/>
+        <!-- Trang phải -->
+        <path d="M31 39.5 L61 44 L61 58.5 L31 56 Z" fill="#D86010"/>
+        <!-- Gáy sách -->
+        <line x1="31" y1="39.5" x2="31" y2="56" stroke="white" stroke-width="1.5"/>
+        <!-- Dòng kẻ trang trái -->
+        <line x1="8"  y1="50" x2="27" y2="46.5" stroke="white" stroke-width="0.8" opacity="0.5"/>
+        <line x1="8"  y1="54" x2="27" y2="51"   stroke="white" stroke-width="0.8" opacity="0.5"/>
+        <!-- Dòng kẻ trang phải -->
+        <line x1="35" y1="46.5" x2="54" y2="50" stroke="white" stroke-width="0.8" opacity="0.5"/>
+        <line x1="35" y1="51"   x2="54" y2="54" stroke="white" stroke-width="0.8" opacity="0.5"/>
+
+        <!-- === GEAR (bánh răng) === -->
+        <g transform="translate(49.5, 50)">
+          <!-- Răng bánh răng (8 răng) -->
+          <rect x="-2"  y="-9.5" width="4" height="3.5" rx="0.8" fill="#F97316"/>
+          <rect x="-2"  y="6"    width="4" height="3.5" rx="0.8" fill="#F97316"/>
+          <rect x="6"   y="-2"   width="3.5" height="4" rx="0.8" fill="#F97316"/>
+          <rect x="-9.5" y="-2"  width="3.5" height="4" rx="0.8" fill="#F97316"/>
+          <!-- Thân bánh răng -->
+          <circle r="7" fill="#F97316"/>
+          <!-- Lỗ giữa -->
+          <circle r="3.2" fill="#FDDEC8"/>
+        </g>
+
+      </svg>
+    </div>
+  </div>
+
+  <!-- TIÊU ĐỀ -->
+  <h1 class="login-title">Đăng nhập</h1>
+
+  <!-- FORM -->
+  <div class="form-group">
+    <label class="form-label" for="inp-user">Tên đăng nhập</label>
+    <input
+      type="text"
+      id="inp-user"
+      class="form-input"
+      placeholder=""
+      autocomplete="username"
+      onkeydown="if(event.key==='Enter') doLogin()"
+    >
+  </div>
+
+  <div class="form-group">
+    <label class="form-label" for="inp-pass">Mật khẩu</label>
+    <input
+      type="password"
+      id="inp-pass"
+      class="form-input"
+      placeholder=""
+      autocomplete="current-password"
+      onkeydown="if(event.key==='Enter') doLogin()"
+    >
+  </div>
+
+  <!-- ERROR -->
+  <div class="error-wrap">
+    <span class="error-msg hidden" id="error-msg"></span>
+  </div>
+
+  <!-- BUTTON -->
+  <button class="login-btn" id="login-btn" onclick="doLogin()">Đăng nhập</button>
+
+
+</div>
+
+<script>
+  /* ── DỮ LIỆU NGƯỜI DÙNG ── */
+  const USERS = [
+    { username: 'admin',  password: 'admin123',  role: 'admin',    name: 'Nguyễn Văn Admin',   status: 'active' },
+    { username: 'tccb',   password: 'tccb123',   role: 'tccb',     name: 'Trần Thị Hương',     status: 'active' },
+    { username: 'gv',     password: 'gv123',     role: 'employee', name: 'Lê Văn An',           status: 'active' },
+    { username: 'locked', password: 'locked123', role: 'employee', name: 'Người dùng bị khóa', status: 'locked' },
+  ];
+
+  /* ── HIỂN THỊ / ẨN LỖI ── */
+  function showError(msg) {
+    const el = document.getElementById('error-msg');
+    el.textContent = msg;
+    el.classList.remove('hidden');
+  }
+  function hideError() {
+    document.getElementById('error-msg').classList.add('hidden');
+  }
+
+  /* ── ĐĂNG NHẬP ── */
+  function doLogin() {
+    const username = document.getElementById('inp-user').value.trim();
+    const password = document.getElementById('inp-pass').value;
+    hideError();
+
+    /* Case 1: Thiếu thông tin */
+    if (!username || !password) {
+      showError('Vui lòng nhập đầy đủ thông tin');
+      return;
+    }
+
+    const user = USERS.find(u => u.username === username);
+
+    /* Case 2: Sai tên / mật khẩu */
+    if (!user || user.password !== password) {
+      showError('Tên đăng nhập hoặc mật khẩu không đúng');
+      return;
+    }
+
+    /* Case 3: Tài khoản bị khóa */
+    if (user.status === 'locked') {
+      showError('Tài khoản của bạn đã bị khóa. Vui lòng liên hệ Quản trị viên');
+      return;
+    }
+
+    /* ── Đăng nhập thành công ── */
+    // Lưu session
+    sessionStorage.setItem('currentUser', JSON.stringify(user));
+
+    // Chuyển hướng theo role (khi có trang tương ứng)
+    const routes = {
+      admin:    'admin.html',
+      tccb:     'employee-office.html',
+      employee: 'employee.html',
+    };
+    const next = routes[user.role] || 'dashboard.html';
+
+    // Hiển thị thông báo thành công (tạm thời)
+    const btn = document.getElementById('login-btn');
+    btn.textContent = '✓ Đang vào hệ thống...';
+    btn.style.background = '#16a34a';
+    btn.disabled = true;
+
+    setTimeout(() => { window.location.href = next; }, 800);
+  }
+
+  function roleLabel(role) {
+    return { admin: 'Quản trị viên', tccb: 'Cán bộ TCCB', employee: 'Cán bộ / Giảng viên' }[role] || role;
+  }
+
+  /* ── Ẩn lỗi khi người dùng bắt đầu nhập ── */
+  ['inp-user', 'inp-pass'].forEach(id => {
+    document.getElementById(id).addEventListener('input', hideError);
+  });
+</script>
+</body>
+</html>
