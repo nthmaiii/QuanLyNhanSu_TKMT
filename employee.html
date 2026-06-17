@@ -65,23 +65,6 @@
       fill: #fff;
     }
 
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .brand-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: #1a202c;
-      line-height: 1.2;
-    }
-
-    .brand-sub {
-      font-size: 12px;
-      color: #718096;
-    }
-
     .hdr-user {
       position: relative;
     }
@@ -239,7 +222,6 @@
       margin-bottom: 20px;
     }
 
-    /* ═════════ CẬP NHẬT THANH TABS GIỐNG 100% ĐÒN MẪU ═════════ */
     .tabs {
       display: flex;
       background: #f3f4f6;
@@ -248,12 +230,10 @@
       gap: 6px;
       margin-bottom: 24px;
       width: 100%;
-      /* Kéo dài hết 100% màn hình */
     }
 
     .tab-b {
       flex: 1;
-      /* Phân bổ kích thước đều nhau hoàn toàn */
       padding: 10px 16px;
       font-size: 14px;
       font-weight: 500;
@@ -271,16 +251,10 @@
       color: #1f2937;
     }
 
-
     .tab-b.active {
       background: #fff2e6;
-      /* Màu nền cam nhạt giống menu trái */
       color: #ff8c1a;
-      /* Màu chữ cam thương hiệu */
       font-weight: 600;
-      /* Chữ đậm */
-      box-shadow: none;
-      /* Bỏ đổ bóng thừa để giống menu trái */
     }
 
     .tp {
@@ -297,11 +271,6 @@
       border-radius: 16px;
       padding: 24px;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-    }
-
-    .profile-layout {
-      display: flex;
-      gap: 32px;
     }
 
     .avatar-section {
@@ -326,25 +295,8 @@
       transition: all 0.2s;
     }
 
-    .avatar-placeholder:hover {
-      background: #e9ecef;
-      border-color: #adb5bd;
-    }
-
     .form-container {
       flex: 1;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .form-grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
     }
 
     .fg {
@@ -423,10 +375,6 @@
       font-size: 14px;
       color: #2d3748;
       border-bottom: 1px solid #edf2f7;
-    }
-
-    tbody tr:last-child td {
-      border-bottom: none;
     }
 
     .bd {
@@ -519,49 +467,64 @@
       display: none;
       align-items: center;
       justify-content: center;
-      z-index: 300;
+      z-index: 3000;
     }
 
     .ov.open {
-      display: flex;
+      display: flex !important;
     }
 
     .ov-toast {
       position: fixed;
-      top: 76px;
+      top: 24px;
       right: 24px;
       background: #fff;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 12px 24px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      z-index: 999;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 14px 24px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+      z-index: 9999;
       display: none;
-      font-size: 14px;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #10b981;
+      min-width: 280px;
+      animation: slideInToast 0.3s ease;
     }
-    /* Khi phân hệ đổi mật khẩu active thì chuyển sang flex để căn giữa */
-#pg-change-password.active {
-    display: flex !important;
-}
 
-/* Định dạng dòng thông báo lỗi ngay dưới chân input */
-.err-msg {
-    color: #f03e3e;
-    font-size: 12px;
-    display: none;
-    margin-top: 2px;
-    text-align: left;
-}
+    @keyframes slideInToast {
+      from {
+        transform: translateX(120%);
+        opacity: 0;
+      }
 
-/* Kích hoạt hiển thị chữ lỗi */
-.err-msg.show {
-    display: block;
-}
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
 
-/* Đổi viền input sang màu đỏ khi có lỗi */
-.fi.input-err {
-    border-color: #f03e3e !important;
-}
+    #pg-change-password.active {
+      display: flex !important;
+    }
+
+    .err-msg {
+      color: #f03e3e;
+      font-size: 12px;
+      display: none;
+      margin-top: 2px;
+      text-align: left;
+    }
+
+    .err-msg.show {
+      display: block;
+    }
+
+    .fi.input-err {
+      border-color: #f03e3e !important;
+    }
   </style>
 </head>
 
@@ -580,14 +543,6 @@
         <path d="M5 43L31 39L31 53L5 56Z" fill="#F97316" />
         <path d="M31 39L57 43L57 56L31 53Z" fill="#D86010" />
         <line x1="31" y1="39" x2="31" y2="53" stroke="#fff" stroke-width="1.5" />
-        <g transform="translate(50,51)">
-          <rect x="-2" y="-8" width="4" height="3" rx="0.6" fill="#F97316" />
-          <rect x="-2" y="5" width="4" height="3" rx="0.6" fill="#F97316" />
-          <rect x="5" y="-2" width="3" height="4" rx="0.6" fill="#F97316" />
-          <rect x="-8" y="-2" width="3" height="4" rx="0.6" fill="#F97316" />
-          <circle r="6" fill="#F97316" />
-          <circle r="2.5" fill="#fff" />
-        </g>
       </svg>
       <div>
         <div style="font-size:15px;font-weight:700;color:#1C3B5A;line-height:1.2">Quản lý nhân sự</div>
@@ -611,12 +566,16 @@
         </svg>
       </button>
       <div class="hdr-dd" id="hdr-dd">
-        <div class="dd-item" onclick="navTo('change-password', null)">Đổi mật khẩu</div>
+        <div class="dd-item" onclick="navTo('change-password', null)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            style="margin-right:8px;">
+            <rect x="3" y="11" width="18" height="11" rx="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>Đổi mật khẩu
+        </div>
         <div class="dd-item" onclick="toast('Đăng xuất thành công')" style="border-top: 1px solid #f7fafc;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             style="margin-right:8px;">
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" /></svg>
-          Đăng xuất
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" /></svg>Đăng xuất
         </div>
       </div>
     </div>
@@ -627,69 +586,84 @@
       <div class="sb-item active" onclick="navTo('profile',this)">
         <svg class="sb-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-          <circle cx="12" cy="7" r="4" /></svg>
-        Hồ sơ cá nhân
+          <circle cx="12" cy="7" r="4" /></svg>Hồ sơ cá nhân
       </div>
       <div class="sb-item" onclick="navTo('dept',this)">
         <svg class="sb-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-          <polyline points="9 22 9 12 15 12 15 22" /></svg>
-        Đơn vị công tác
+          <polyline points="9 22 9 12 15 12 15 22" /></svg>Đơn vị công tác
       </div>
       <div class="sb-item" onclick="navTo('training',this)">
         <svg class="sb-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" /></svg>
-        Khóa đào tạo
+          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" /></svg>Khóa đào tạo
       </div>
     </nav>
 
     <main class="main">
-      <div class="pg" id="pg-change-password" style="display: none; min-height: calc(100vh - 120px); flex-direction: column; justify-content: center; align-items: center; background-color: #fafafa;">
-        <div class="pg-title">Đổi mật khẩu</div>
-        <div style="width: 100%; max-width: 560px; background: #fff; padding: 40px; border: 1px solid #e2e8f0; border-radius: 0px;">
-          
-          <h3 style="font-size: 16px; font-weight: 600; color: #333; margin-bottom: 28px;">Đổi mật khẩu</h3>
 
-          <div style="display: flex; flex-direction: column; gap: 20px;">
-            
-            <div class="fg" style="display: flex; flex-direction: column; gap: 8px;">
-              <label class="fgl" style="font-size: 14px; font-weight: 500; color: #333;">Mật khẩu cũ <span style="color: red;">*</span></label>
-              <div style="position: relative; width: 100%;">
-                <input type="password" id="old-pass" class="fi" style="height: 42px; padding: 0 40px 0 12px; border: 1px solid #dcdcdc; border-radius: 0px; width: 100%; outline: none;" placeholder="Nhập mật khẩu cũ">
-                <span style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #718096; font-size: 14px;"></span>
-              </div>
-              <div id="err-old-pass" class="err-msg"></div>
-            </div>
-            
-            <div class="fg" style="display: flex; flex-direction: column; gap: 8px;">
-              <label class="fgl" style="font-size: 14px; font-weight: 500; color: #333;">Mật khẩu mới <span style="color: red;">*</span></label>
-              <div style="position: relative; width: 100%;">
-                <input type="password" id="new-pass" class="fi" style="height: 42px; padding: 0 40px 0 12px; border: 1px solid #dcdcdc; border-radius: 0px; width: 100%; outline: none;" placeholder="Nhập mật khẩu mới">
-                <span style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #718096; font-size: 14px;"></span>
-              </div>
-              <div id="err-new-pass" class="err-msg"></div>
-            </div>
-            
-            <div class="fg" style="display: flex; flex-direction: column; gap: 8px;">
-              <label class="fgl" style="font-size: 14px; font-weight: 500; color: #333;">Xác nhận mật khẩu mới <span style="color: red;">*</span></label>
-              <div style="position: relative; width: 100%;">
-                <input type="password" id="confirm-pass" class="fi" style="height: 42px; padding: 0 40px 0 12px; border: 1px solid #dcdcdc; border-radius: 0px; width: 100%; outline: none;" placeholder="Nhập lại mật khẩu mới">
-                <span style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #718096; font-size: 14px;"></span>
-              </div>
-              <div id="err-confirm-pass" class="err-msg"></div>
-            </div>
-            
-          </div>
-          
-          <div style="margin-top: 32px;">
-            <button onclick="submitPassword()" style="width: 100%; height: 44px; background: #ff8000; color: #fff; border: none; border-radius: 0px; font-weight: 500; cursor: pointer; font-size: 14px; transition: background 0.2s;">Lưu thay đổi</button>
-          </div>
-          
+      <div class="pg" id="pg-dept">
+        <div class="pg-title">Đơn vị công tác</div>
+        
+        <div class="tabs">
+          <button class="tab-b active" onclick="pgTab('dept',0,this)">Thông tin đơn vị</button>
+          <button class="tab-b" onclick="pgTab('dept',1,this)">Lịch sử thay đổi</button>
+          <button class="tab-b" onclick="pgTab('dept',2,this)">Kiêm nhiệm / Biệt phái</button>
         </div>
+
+        <div class="tp active" id="dept-tp0">
+          <div class="card-wrapper" style="border-radius: 12px; padding: 24px; background: #fff; border: 1px solid #e2e8f0;">
+            <div class="form-container">
+              
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 20px;">
+                
+                <div class="fg"><label class="fgl">Mã đơn vị</label><input class="fi" type="text" value="DD01"></div>
+                <div class="fg"><label class="fgl">Tên đơn vị</label><input class="fi" type="text" value="Phòng tài chính"></div>
+                
+                <div class="fg"><label class="fgl">Loại đơn vị</label><input class="fi" type="text" value="TLU-202604"></div>
+                <div class="fg"><label class="fgl">Đơn vị cha</label><input class="fi" type="text" value="Phòng kinh doanh"></div>
+                
+                <div class="fg"><label class="fgl">Email</label><input class="fi" type="text" value="abc@123.com"></div>
+                <div class="fg"><label class="fgl">Số điện thoại</label><input class="fi" type="text" value="0987876764"></div>
+
+
+                <div class="fg" style="grid-column: span 2;">
+                  <label class="fgl">Link website</label>
+                  <input class="fi" type="text" value="https://google.com">
+                </div>
+                
+                <div class="fg" style="grid-column: span 2;">
+                  <label class="fgl">Địa chỉ</label>
+                  <input class="fi" type="text" value="Hà Nội">
+                </div>
+                
+                <div class="fg" style="grid-column: span 2;">
+                  <label class="fgl">Địa chỉ văn phòng</label>
+                  <input class="fi" type="text" value="Hà Nội.">
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tp" id="dept-tp1">
+          <div class="card-wrapper" style="border-radius: 12px; padding: 24px;">
+            <p style="color:#718096; font-style:italic; text-align: center;">Chưa có dữ liệu lịch sử điều chuyển đơn vị</p>
+          </div>
+        </div>
+
+        <div class="tp" id="dept-tp2">
+          <div class="card-wrapper" style="border-radius: 12px; padding: 24px;">
+            <p style="color:#718096; font-style:italic; text-align: center;">Hiện tại nhân sự không đảm nhiệm vị trí kiêm nhiệm nào</p>
+          </div>
+        </div>
+
       </div>
-      <!-- ═══ HỒ SƠ CÁ NHÂN ═══ -->
+
       <div class="pg active" id="pg-profile">
         <div class="pg-title">Hồ sơ cá nhân</div>
+
         <div class="tabs">
           <button class="tab-b active" onclick="pgTab('profile',0,this)">Thông tin chung</button>
           <button class="tab-b" onclick="pgTab('profile',1,this)">Thông tin gia đình</button>
@@ -701,84 +675,107 @@
         </div>
 
         <div class="tp active" id="profile-tp0">
-          <div class="card-wrapper">
-            <div class="profile-layout">
-              <div class="avatar-section">
-                <div class="avatar-placeholder">+</div>
+          <div class="card-wrapper"
+            style="border-radius: 12px; padding: 24px; background: #fff; border: 1px solid #e2e8f0;">
+            <div class="form-container">
+
+              <div style="display: grid; grid-template-columns: 10% 1fr 1fr 1fr; gap: 16px 20px; align-items: end;">
+                <div class="avatar-section" style="grid-row: span 2; grid-column: span 1; width: 100%;">
+                  <div class="avatar-placeholder"
+                    style="width: 100%; aspect-ratio: 1 / 1; background: #f1f3f5; border: 1px dashed #ced4da; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #adb5bd; font-size: 24px;">
+                    +</div>
+                </div>
+                <div class="fg"><label class="fgl">Họ tên</label><input class="fi" type="text" value="Nguyễn Văn A">
+                </div>
+                <div class="fg"><label class="fgl">Giới tính</label><input class="fi" type="text" value="Nam"></div>
+                <div class="fg"><label class="fgl">Ngày sinh</label><input class="fi" type="text" value="01/01/2000">
+                </div>
+                <div class="fg"><label class="fgl">Quê quán</label><input class="fi" type="text" value="Hà Nội"></div>
+                <div class="fg"><label class="fgl">Email</label><input class="fi" type="text"
+                    value="nguyenvana@tlu.edu.vn"></div>
+                <div class="fg"><label class="fgl">Số điện thoại</label><input class="fi" type="text"
+                    value="0987654321"></div>
               </div>
-              <div class="form-container">
-                <div class="form-grid">
-                  <div class="fg"><label class="fgl">Họ tên</label><input class="fi" type="text" value="Nguyễn Văn A">
-                  </div>
-                  <div class="fg"><label class="fgl">Giới tính</label><input class="fi" type="text" value="Nam"></div>
-                  <div class="fg"><label class="fgl">Ngày sinh</label><input class="fi" type="text" value="01/01/2000">
-                  </div>
-                  <div class="fg"><label class="fgl">Quê quán</label><input class="fi" type="text" value="Hà Nội"></div>
-                  <div class="fg"><label class="fgl">Email</label><input class="fi" type="text"
-                      value="nguyenvana@tlu.edu.vn"></div>
-                  <div class="fg"><label class="fgl">Số điện thoại</label><input class="fi" type="text"
-                      value="0987654321"></div>
+
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 20px; margin-top: 16px;">
+                <div class="fg"><label class="fgl">Mã số thuế</label><input class="fi" type="text" value="1200001900">
                 </div>
-                <div class="form-grid-2" style="margin-top: 16px;">
-                  <div class="fg"><label class="fgl">Mã số thuế</label><input class="fi" type="text" value="1200001900">
-                  </div>
-                  <div class="fg"><label class="fgl">Số bảo hiểm xã hội</label><input class="fi" type="text"
-                      value="00120019"></div>
-                  <div class="fg"><label class="fgl">Số bảo hiểm y tế</label><input class="fi" type="text"
-                      value="00120019"></div>
-                  <div class="fg">
-                    <label class="fgl">CCCD</label>
-                    <div class="select-wrapper"><select class="fi fi-select">
-                        <option>001200001900</option>
-                      </select></div>
-                  </div>
-                </div>
-                <div class="form-grid" style="margin-top: 16px;">
-                  <div class="fg" style="grid-column: span 3;"><label class="fgl">Địa chỉ</label><input class="fi"
-                      type="text" value="Thanh Trì, Hà Nội"></div>
-                  <div class="fg"><label class="fgl">Số Visa</label><input class="fi" type="text" value=""></div>
-                  <div class="fg" style="grid-column: span 2;"><label class="fgl">Ngày hết hạn Visa</label><input
-                      class="fi" type="text" value=""></div>
-                  <div class="fg"><label class="fgl">Số Hộ chiếu</label><input class="fi" type="text" value=""></div>
-                  <div class="fg" style="grid-column: span 2;"><label class="fgl">Ngày hết hạn Hộ chiếu</label><input
-                      class="fi" type="text" value=""></div>
-                </div>
-                <div class="form-grid-2" style="margin-top: 16px; align-items: flex-end;">
-                  <div class="fg"><label class="fgl">Số giấy phép lao động</label><input class="fi" type="text"
-                      value=""></div>
-                  <div class="fg" style="position: relative;">
-                    <label class="fgl">Ngày hết hạn giấy phép lao động</label>
-                    <div style="display:flex; gap:8px;">
-                      <input class="fi" type="text" value="">
-                      <button class="btn-pdf" style="margin-top:0; white-space:nowrap; background:#f57c00;">Xem
-                        PDF</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-grid-2" style="margin-top: 16px;">
-                  <div class="fg"><label class="fgl">Thông tin Đảng/Đoàn</label><input class="fi" type="text"
-                      value="Đảng Cộng sản Việt Nam"></div>
-                  <div class="fg"><label class="fgl">Ngày vào Đảng/Đoàn</label><input class="fi" type="text"
-                      value="01/01/2020"></div>
-                  <div class="fg"><label class="fgl">Số tài khoản</label><input class="fi" type="text"
-                      value="00-120-019-999"></div>
-                  <div class="fg"><label class="fgl">Tên ngân hàng</label><input class="fi" type="text"
-                      value="Ngân hàng TMCP Quân đội"></div>
+                <div class="fg"><label class="fgl">Số bảo hiểm xã hội</label><input class="fi" type="text"
+                    value="00120019"></div>
+                <div class="fg"><label class="fgl">Số bảo hiểm y tế</label><input class="fi" type="text"
+                    value="00120019"></div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 20px; margin-top: 16px;">
+                <div class="fg"><label class="fgl">Địa chỉ</label><input class="fi" type="text"
+                    value="Thanh Trì, Hà Nội"></div>
+                <div class="fg">
+                  <label class="fgl">CCCD</label>
+                  <div class="select-wrapper"><select class="fi fi-select">
+                      <option>001200001900</option>
+                    </select></div>
                 </div>
               </div>
+
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 20px; margin-top: 16px;">
+                <div class="fg"><label class="fgl">Số Visa</label><input class="fi" type="text" value=""></div>
+                <div class="fg"><label class="fgl">Ngày hết hạn Visa</label><input class="fi" type="text" value="">
+                </div>
+                <div class="fg"><label class="fgl">Số Hộ chiếu</label><input class="fi" type="text" value=""></div>
+                <div class="fg"><label class="fgl">Ngày hết hạn Hộ chiếu</label><input class="fi" type="text" value="">
+                </div>
+                <div class="fg"><label class="fgl">Số giấy phép lao động</label><input class="fi" type="text" value="">
+                </div>
+                <div class="fg">
+                  <label class="fgl">Ngày hết hạn giấy phép lao động</label>
+                  <div style="display: flex; gap: 8px; width: 100%;">
+                    <input class="fi" type="text" value="" style="flex: 1;">
+                    <button class="btn-pdf"
+                      style="margin-top: 0; height: 40px; padding: 0 16px; white-space: nowrap; background: #ff8c1a; border-radius: 6px; color: #fff; border: none; font-size: 13px; font-weight: 500; cursor: pointer;">Xem
+                      PDF</button>
+                  </div>
+                </div>
+                <div class="fg"><label class="fgl">Thông tin Đảng/Đoàn</label><input class="fi" type="text"
+                    value="Đảng Cộng sản Việt Nam"></div>
+                <div class="fg"><label class="fgl">Ngày vào Đảng/Đoàn</label><input class="fi" type="text"
+                    value="01/01/2020"></div>
+                <div class="fg"><label class="fgl">Số tài khoản</label><input class="fi" type="text"
+                    value="00-120-019-999"></div>
+                <div class="fg"><label class="fgl">Tên ngân hàng</label><input class="fi" type="text"
+                    value="Ngân hàng TMCP Quân đội"></div>
+              </div>
+
             </div>
           </div>
         </div>
+
         <div class="tp" id="profile-tp1">
           <div class="card-wrapper">
             <p style="color:#718096; font-style:italic;">Không có dữ liệu</p>
           </div>
         </div>
+
         <div class="tp" id="profile-tp2">
-          <div class="card-wrapper">
-            <p style="color:#718096; font-style:italic;">Không có dữ liệu</p>
+          <div class="card-wrapper"
+            style="border-radius: 12px; padding: 24px; background: #fff; border: 1px solid #e2e8f0;">
+            <div class="form-container">
+              <div
+                style="font-size: 16px; font-weight: 600; color: #1e293b; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px dashed #e2e8f0;">
+                Thông tin đơn vị công tác hiện tại</div>
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 20px;">
+                <div class="fg"><label class="fgl">Đơn vị/Phòng ban</label><input class="fi" type="text"
+                    value="Phòng Phát triển Phần mềm"></div>
+                <div class="fg"><label class="fgl">Chức vụ/Vị trí công tác</label><input class="fi" type="text"
+                    value="Nhân viên chính thức"></div>
+                <div class="fg"><label class="fgl">Mã nhân viên</label><input class="fi" type="text" value="TLU-202604">
+                </div>
+                <div class="fg"><label class="fgl">Ngày bổ nhiệm/Vào đơn vị</label><input class="fi" type="text"
+                    value="15/04/2026"></div>
+              </div>
+            </div>
           </div>
         </div>
+
         <div class="tp" id="profile-tp3">
           <div class="card-wrapper">
             <p style="color:#718096; font-style:italic;">Không có dữ liệu</p>
@@ -801,53 +798,6 @@
         </div>
       </div>
 
-      <!-- ═══ ĐƠN VỊ CÔNG TÁC ═══ -->
-      <div class="pg" id="pg-dept">
-        <div class="pg-title">Đơn vị công tác</div>
-        <div class="tabs">
-          <button class="tab-b active" onclick="pgTab('dept',0,this)">Thông tin chung</button>
-          <button class="tab-b" onclick="pgTab('dept',1,this)">Nhân sự</button>
-          <button class="tab-b" onclick="pgTab('dept',2,this)">Đơn vị trực thuộc</button>
-        </div>
-        <div class="tp active" id="dept-tp0">
-          <div class="card-wrapper">
-            <div class="form-grid-2">
-              <div class="fg"><label class="fgl">Mã đơn vị</label><input class="fi" type="text" value="DV001" readonly
-                  style="background:#fff;"></div>
-              <div class="fg"><label class="fgl">Tên đơn vị</label><input class="fi" type="text" value="Ban Giám hiệu"
-                  readonly style="background:#fff;"></div>
-              <div class="fg"><label class="fgl">Loại đơn vị</label><input class="fi" type="text" value="Ban" readonly
-                  style="background:#fff;"></div>
-              <div class="fg"><label class="fgl">Đơn vị cha</label><input class="fi" type="text"
-                  value="Trường Đại học Thủy Lợi" readonly style="background:#fff;"></div>
-              <div class="fg"><label class="fgl">Email</label><input class="fi" type="text"
-                  value="bangiamhieu@tlu.edu.vn" readonly style="background:#fff;"></div>
-              <div class="fg"><label class="fgl">Số điện thoại</label><input class="fi" type="text" value="0999999999"
-                  readonly style="background:#fff;"></div>
-              <div class="fg" style="grid-column: span 2;"><label class="fgl">Link website</label><input class="fi"
-                  type="text" value="bangiamhieu.vn" readonly style="background:#fff;"></div>
-              <div class="fg" style="grid-column: span 2;"><label class="fgl">Địa chỉ</label><input class="fi"
-                  type="text" value="175 Tây Sơn" readonly style="background:#fff;"></div>
-              <div class="fg" style="grid-column: span 2;"><label class="fgl">Địa chỉ văn phòng</label><input class="fi"
-                  type="text" value="Tòa A1" readonly style="background:#fff;"></div>
-              <div class="fg" style="grid-column: span 2;"><label class="fgl">Trạng thái</label><input class="fi"
-                  type="text" value="Đang hoạt động" readonly style="background:#fff;"></div>
-            </div>
-          </div>
-        </div>
-        <div class="tp" id="dept-tp1">
-          <div class="card-wrapper">
-            <p style="color:#718096; font-style:italic;">Không có dữ liệu</p>
-          </div>
-        </div>
-        <div class="tp" id="dept-tp2">
-          <div class="card-wrapper">
-            <p style="color:#718096; font-style:italic;">Không có dữ liệu</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- ═══ KHÓA ĐÀO TẠO ═══ -->
       <div class="pg" id="pg-training">
         <div class="pg-title">Khóa đào tạo</div>
         <div class="tabs">
@@ -856,10 +806,7 @@
         </div>
 
         <div class="tp active" id="training-tp0">
-
-          <div class="card-wrapper"
-            style="background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
-
+          <div class="card-wrapper" style="border-radius: 16px; padding: 24px; margin-bottom: 24px;">
             <div class="tw" style="margin-bottom: 0; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden;">
               <table>
                 <thead>
@@ -873,105 +820,120 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td style="font-weight:500; cursor:pointer; ">Bồi dưỡng tiêu chuẩn Giảng viên chính
-                      (Hạng II)</td>
+                    <td style="font-weight:500;">Bồi dưỡng tiêu chuẩn Giảng viên chính (Hạng II)</td>
                     <td>Đào tạo chuyên môn</td>
                     <td>3.500.000</td>
                     <td>4/50</td>
                     <td><span class="bd bd-open">Đang mở đăng ký</span></td>
                   </tr>
                   <tr>
-                    <td style="font-weight:500; cursor:pointer; ">Đào tạo Công nghệ AI trong giảng dạy
-                    </td>
+                    <td style="font-weight:500;">Đào tạo Công nghệ AI trong giảng dạy</td>
                     <td>Đào tạo kỹ năng</td>
                     <td>2.000.000</td>
                     <td>13/20</td>
-                    <td><span class="bd bd-closed ; color:#ff8c1a;">Hết hạn đăng ký</span></td>
+                    <td><span class="bd bd-closed" style="color:#ff8c1a;">Hết hạn đăng ký</span></td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <div class="pagination-container"
-              style="display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: #4b5563; padding: 0 4px;">
+            <div class="pagination-container">
               <span>Hiển thị 2 / 2 khóa đào tạo</span>
-              <div class="pagination-buttons" style="display: flex; gap: 12px; align-items: center;">
+              <div class="pagination-buttons">
                 <button class="btn-page" disabled>Trước</button>
                 <span>Trang <b>1</b> / 1</span>
                 <button class="btn-page" disabled>Sau</button>
               </div>
             </div>
           </div>
+        </div>
 
-
+        <div class="tp" id="training-tp1">
+          <div class="tw">
+            <table>
+              <thead>
+                <tr>
+                  <th>Tên khóa đào tạo</th>
+                  <th>Loại khóa đào tạo</th>
+                  <th>Kinh phí</th>
+                  <th>Trạng thái</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="4" style="text-align:center; color:#718096; font-style:italic; padding: 20px;">Chưa đăng
+                    ký khóa nào</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
-      <div class="tp" id="training-tp1">
-        <div class="tw">
-          <table>
-            <thead>
-              <tr>
-                <th>Tên khóa đào tạo</th>
-                <th>Loại khóa đào tạo</th>
-                <th>Kinh phí</th>
-                <th>Trạng thái</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td colspan="4" style="text-align:center; color:#718096; font-style:italic; padding: 20px;">Chưa đăng ký
-                  khóa nào</td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="pg" id="pg-change-password"
+        style="min-height: calc(100vh - 120px); flex-direction: column; justify-content: center; align-items: center;">
+        <div class="pg-title">Đổi mật khẩu</div>
+        <div class="card-wrapper" style="width: 100%; max-width: 560px; padding: 40px;">
+          <h3 style="font-size: 16px; font-weight: 600; color: #333; margin-bottom: 28px;">Cập nhật mật khẩu mới</h3>
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="fg">
+              <label class="fgl">Mật khẩu cũ <span style="color: red;">*</span></label>
+              <input type="password" id="old-pass" class="fi" placeholder="Nhập mật khẩu cũ">
+              <div id="err-old-pass" class="err-msg"></div>
+            </div>
+            <div class="fg">
+              <label class="fgl">Mật khẩu mới <span style="color: red;">*</span></label>
+              <input type="password" id="new-pass" class="fi" placeholder="Nhập mật khẩu mới">
+              <div id="err-new-pass" class="err-msg"></div>
+            </div>
+            <div class="fg">
+              <label class="fgl">Xác nhận mật khẩu mới <span style="color: red;">*</span></label>
+              <input type="password" id="confirm-pass" class="fi" placeholder="Nhập lại mật khẩu mới">
+              <div id="err-confirm-pass" class="err-msg"></div>
+            </div>
+          </div>
+          <div style="margin-top: 32px; display: flex; gap: 12px;">
+            <button onclick="submitPassword()"
+              style="flex: 1; height: 44px; background: #ff8c1a; color: #fff; border: none; border-radius: 8px; font-weight: 500; cursor: pointer; font-size: 14px;">Lưu
+              thay đổi</button>
+            <button onclick="cancelChangePassword()"
+              style="padding: 0 20px; height: 44px; background: #f3f4f6; color: #4b5563; border: none; border-radius: 8px; font-weight: 500; cursor: pointer; font-size: 14px;">Hủy</button>
+          </div>
         </div>
       </div>
+
+    </main>
   </div>
 
-
-  </main>
-  </div>
-
-
-  <div class="ov-toast" id="ov-toast"></div>
-  <div class="pg" id="pg-change-password">
-    <div class="pg-title">Đổi mật khẩu</div>
-
-    <div class="card-wrapper"
-      style="max-width: 600px; background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);">
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-
-        <div class="fg">
-          <label class="fgl">Mật khẩu hiện tại <span style="color: red;">*</span></label>
-          <input type="password" id="old-pass" class="fi" placeholder="Nhập mật khẩu hiện tại">
-        </div>
-
-        <div class="fg">
-          <label class="fgl">Mật khẩu mới <span style="color: red;">*</span></label>
-          <input type="password" id="new-pass" class="fi" placeholder="Nhập mật khẩu mới">
-        </div>
-
-        <div class="fg">
-          <label class="fgl">Xác nhận mật khẩu mới <span style="color: red;">*</span></label>
-          <input type="password" id="confirm-pass" class="fi" placeholder="Nhập lại mật khẩu mới">
-        </div>
-
-      </div>
-
-      <div style="display: flex; gap: 12px; margin-top: 24px;">
-        <button onclick="submitPassword()"
-          style="padding: 10px 20px; background: #ff8c1a; color: #fff; border: none; border-radius: 8px; font-weight: 500; cursor: pointer; font-size: 14px;">Lưu
-          thay đổi</button>
-        <button onclick="cancelChangePassword()"
-          style="padding: 10px 18px; background: #f3f4f6; color: #4b5563; border: none; border-radius: 8px; font-weight: 500; cursor: pointer; font-size: 14px;">Hủy</button>
+  <div class="ov" id="ov-confirm-password" style="display: none;">
+    <div
+      style="background: #fff; width: 400px; border-radius: 16px; padding: 32px 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center;">
+      <h3 style="font-size: 18px; font-weight: 700; color: #111827; margin-bottom: 12px;">Xác nhận đổi mật khẩu</h3>
+      <p style="font-size: 14px; color: #4b5563; line-height: 1.5; margin-bottom: 28px;">Bạn có chắc chắn muốn đổi mật
+        khẩu?<br>Hành động này không thể hoàn tác.</p>
+      <div style="display: flex; justify-content: center; gap: 12px;">
+        <button onclick="closeConfirmPopup()"
+          style="padding: 10px 24px; min-width: 80px; background: #fff; color: #4b5563; border: 1px solid #d1d5db; border-radius: 8px; font-weight: 500; cursor: pointer; font-size: 14px;">Hủy</button>
+        <button onclick="doPwd()"
+          style="padding: 10px 24px; min-width: 80px; background: #ff8c1a; color: #fff; border: none; border-radius: 8px; font-weight: 500; cursor: pointer; font-size: 14px;">Xác
+          nhận</button>
       </div>
     </div>
+  </div>
+
+  <div class="ov-toast" id="ov-toast">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+    </svg>
+    <span id="toast-text">Đổi mật khẩu thành công</span>
   </div>
 
   <script>
     function toggleDd() {
       document.getElementById('hdr-dd').classList.toggle('open');
     }
+
     document.addEventListener('click', function (e) {
       if (!e.target.closest('.hdr-user')) {
         document.getElementById('hdr-dd').classList.remove('open');
@@ -982,18 +944,16 @@
       document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
       document.querySelectorAll('.pg').forEach(p => p.classList.remove('active'));
 
-      // Nếu chuyển trang từ thanh sidebar bên trái thì active menu đó lên
       if (el) {
         el.classList.add('active');
+      } else if (pg === 'change-password') {
+        // Nếu chọn đổi mật khẩu từ dropdown, không cần làm sáng sidebar
       }
 
-      // Hiển thị màn hình tương ứng
       const targetPage = document.getElementById('pg-' + pg);
       if (targetPage) {
         targetPage.classList.add('active');
       }
-
-      // Tự động đóng menu user dropdown
       document.getElementById('hdr-dd').classList.remove('open');
     }
 
@@ -1004,95 +964,92 @@
 
     function toast(msg) {
       const t = document.getElementById('ov-toast');
-      t.textContent = msg;
-      t.style.display = 'block';
+      const txt = document.getElementById('toast-text');
+      if (txt) txt.textContent = msg;
+      t.style.display = 'flex';
       setTimeout(() => {
         t.style.display = 'none';
-      }, 2000);
+      }, 2500);
     }
-    // Hàm mở popup Đổi mật khẩu và đóng luôn dropdown user
+
+    function openConfirmPopup() {
+      document.getElementById('ov-confirm-password').style.display = 'flex';
+    }
+
+    function closeConfirmPopup() {
+      document.getElementById('ov-confirm-password').style.display = 'none';
+    }
+
+    function submitPassword() {
+      const oldPass = document.getElementById('old-pass');
+      const newPass = document.getElementById('new-pass');
+      const confirmPass = document.getElementById('confirm-pass');
+
+      const errOld = document.getElementById('err-old-pass');
+      const errNew = document.getElementById('err-new-pass');
+      const errConfirm = document.getElementById('err-confirm-pass');
+
+      let hasError = false;
+      [errOld, errNew, errConfirm].forEach(el => {
+        if (el) {
+          el.textContent = '';
+          el.classList.remove('show');
+        }
+      });
+      [oldPass, newPass, confirmPass].forEach(el => {
+        if (el) el.classList.remove('input-err');
+      });
+
+      if (!oldPass.value.trim()) {
+        if (errOld) {
+          errOld.textContent = 'Mật khẩu cũ không được để trống';
+          errOld.classList.add('show');
+        }
+        oldPass.classList.add('input-err');
+        hasError = true;
+      }
+      if (!newPass.value.trim()) {
+        if (errNew) {
+          errNew.textContent = 'Mật khẩu mới không được để trống';
+          errNew.classList.add('show');
+        }
+        newPass.classList.add('input-err');
+        hasError = true;
+      }
+      if (!confirmPass.value.trim()) {
+        if (errConfirm) {
+          errConfirm.textContent = 'Xác nhận mật khẩu mới không được để trống';
+          errConfirm.classList.add('show');
+        }
+        confirmPass.classList.add('input-err');
+        hasError = true;
+      } else if (newPass.value !== confirmPass.value) {
+        if (errConfirm) {
+          errConfirm.textContent = 'Mật khẩu không trùng khớp';
+          errConfirm.classList.add('show');
+        }
+        confirmPass.classList.add('input-err');
+        hasError = true;
+      }
+
+      if (hasError) return;
+      openConfirmPopup();
+    }
+
+    function doPwd() {
+      closeConfirmPopup();
+      toast('Đổi mật khẩu thành công');
+      cancelChangePassword();
+    }
+
     function cancelChangePassword() {
-      // Trở về trang hồ sơ cá nhân và active lại menu trái
       const profileMenu = document.querySelector('.sb-item[onclick*="profile"]');
       navTo('profile', profileMenu);
 
-      // Xóa sạch dữ liệu đã nhập trong các ô input
       document.getElementById('old-pass').value = '';
       document.getElementById('new-pass').value = '';
       document.getElementById('confirm-pass').value = '';
     }
-
-
-
-    // Hàm xử lý khi bấm nút Xác nhận
-    // Hàm xử lý khi bấm nút Xác nhận (Lưu thay đổi)
-    // Hàm xử lý nút Hủy / Quay lại
-function cancelChangePassword() {
-    // Trở về trang hồ sơ cá nhân và active lại menu trái
-    const profileMenu = document.querySelector('.sb-item[onclick*="profile"]');
-    navTo('profile', profileMenu);
-
-    // Xóa sạch dữ liệu trong các ô input
-    document.getElementById('old-pass').value = '';
-    document.getElementById('new-pass').value = '';
-    document.getElementById('confirm-pass').value = '';
-
-    // Xóa bỏ toàn bộ vết viền đỏ và chữ báo lỗi cũ
-    document.querySelectorAll('.err-msg').forEach(el => { el.textContent = ''; el.classList.remove('show'); });
-    document.querySelectorAll('.fi').forEach(el => el.classList.remove('input-err'));
-}
-
-// Hàm xử lý khi bấm nút Lưu thay đổi
-function submitPassword() {
-    const oldPass = document.getElementById('old-pass');
-    const newPass = document.getElementById('new-pass');
-    const confirmPass = document.getElementById('confirm-pass');
-
-    const errOld = document.getElementById('err-old-pass');
-    const errNew = document.getElementById('err-new-pass');
-    const errConfirm = document.getElementById('err-confirm-pass');
-
-    // Reset lại trạng thái ban đầu trước khi kiểm tra lỗi mới
-    let hasError = false;
-    [errOld, errNew, errConfirm].forEach(el => { el.textContent = ''; el.classList.remove('show'); });
-    [oldPass, newPass, confirmPass].forEach(el => el.classList.remove('input-err'));
-
-    // 1. Kiểm tra trống Mật khẩu cũ
-    if (!oldPass.value.trim()) {
-        errOld.textContent = 'Mật khẩu cũ không được để trống';
-        errOld.classList.add('show');
-        oldPass.classList.add('input-err');
-        hasError = true;
-    }
-
-    // 2. Kiểm tra trống Mật khẩu mới
-    if (!newPass.value.trim()) {
-        errNew.textContent = 'Mật khẩu mới không được để trống';
-        errNew.classList.add('show');
-        newPass.classList.add('input-err');
-        hasError = true;
-    }
-
-    // 3. Kiểm tra trống Xác nhận mật khẩu mới hoặc không khớp
-    if (!confirmPass.value.trim()) {
-        errConfirm.textContent = 'Xác nhận mật khẩu mới không được để trống';
-        errConfirm.classList.add('show');
-        confirmPass.classList.add('input-err');
-        hasError = true;
-    } else if (newPass.value !== confirmPass.value) {
-        errConfirm.textContent = 'Mật khẩu mới và xác nhận mật khẩu không khớp!';
-        errConfirm.classList.add('show');
-        confirmPass.classList.add('input-err');
-        hasError = true;
-    }
-
-    // Nếu có lỗi thì dừng lại, không xử lý tiếp
-    if (hasError) return;
-
-    // Nếu tất cả hợp lệ, hiển thị thông báo thành công và chuyển trang
-    toast('Cập nhật mật khẩu mới thành công!');
-    cancelChangePassword();
-}
   </script>
 </body>
 
