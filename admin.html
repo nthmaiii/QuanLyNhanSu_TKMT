@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quản lý Nhân sự - Trường TKMT</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
       *,
       *::before,
@@ -455,7 +457,7 @@
         padding: 4px; /* Khoảng đệm giữa nền xám và nút bấm */
         border-radius: 8px; /* Bo góc cụm tab ngoài */
         margin-bottom: 24px;
-        width: max-content; /* Ép khung xám thu nhỏ vừa khít các tab bên trong */
+        width: 100%; /* Ép khung xám thu nhỏ vừa khít các tab bên trong */
         border-bottom: none; /* XÓA BỎ đường kẻ thô bên dưới cũ */
       }
 
@@ -481,11 +483,11 @@
 
       /* Trạng thái tab khi ĐANG ACTIVE - Biến thành khối cam chữ trắng */
       .tab-b.active {
-        color: #ffffff !important; /* Chữ trắng nổi bật */
-        background-color: #ff8920 !important; /* Nền cam thương hiệu giống ảnh */
+        color: #ff8920 !important; /* Chữ trắng nổi bật */
+        background-color: #ffe6cc !important; /* Nền cam thương hiệu giống ảnh */
         font-weight: 600;
         border-bottom-color: transparent; /* Xóa gạch chân cũ */
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ cho nút nổi lên */
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Đổ bóng nhẹ cho nút nổi lên */
       }
       /* Áp dụng vào khung bọc lớn của phần chi tiết */
       #org-detail-wrap {
@@ -541,9 +543,9 @@
       }
 
       .ig .il {
-        font-size: 13px; /* Tăng nhẹ từ 12px lên 13px cho dễ đọc giống mẫu */
+        font-size: 12px; /* Tăng nhẹ từ 12px lên 13px cho dễ đọc giống mẫu */
         color: #6b7280; /* Màu xám trung tính tinh tế hơn màu #9ca3af cũ */
-        margin-bottom: 6px; /* Khoảng cách từ label xuống ô input phẳng */
+        margin-bottom: 4px; /* Khoảng cách từ label xuống ô input phẳng */
         font-weight: 500;
       }
 
@@ -671,25 +673,25 @@
         background: #dc2626;
       }
       .bd-open {
-        background: #dbeafe;
-        color: #1d4ed8;
+        background: #dcfce7;
+        color: #16a34a;
       }
       .bd-open::before {
-        background: #3b82f6;
+        background: #16a34a;
       }
       .bd-closed {
+        background: #ffe6cc;
+        color: #ff8920;
+      }
+      .bd-closed::before {
+        background: #ff8920;
+      }
+      .bd-reg {
         background: #f3f4f6;
         color: #6b7280;
       }
-      .bd-closed::before {
-        background: #9ca3af;
-      }
-      .bd-reg {
-        background: #e0f2fe;
-        color: #0369a1;
-      }
       .bd-reg::before {
-        background: #0ea5e9;
+        background: #9ca3af;
       }
       .bd-done {
         background: #dcfce7;
@@ -1013,6 +1015,107 @@
         border-radius: 4px;
         margin-left: 8px;
         font-weight: 500;
+      }
+
+      /* --- BỔ SUNG CSS CHO TRANG HỒ SƠ CÁ NHÂN --- */
+
+      /* 1. Khối bọc Ảnh và Lưới 6 ô đầu */
+      .profile-main-block {
+        display: flex;
+        gap: 24px; /* Khoảng cách giữa ảnh và khối chữ */
+        padding: 20px; /* Padding trong card trắng */
+      }
+
+      /* 2. Style cho Placeholder Ảnh đại diện */
+      .profile-pic-placeholder {
+        width: 150px;
+        height: 200px;
+        background-color: #e5e7eb; /* Nền xám nhạt */
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0; /* Ngăn ảnh bị co lại */
+      }
+
+      .profile-pic-placeholder span {
+        font-size: 40px;
+        color: #9ca3af; /* Màu dấu + xám đậm */
+        font-weight: 300;
+      }
+
+      /* 3. Lưới 2 cột cho 6 thông tin đầu */
+      .profile-info-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 cột theo prototype */
+        gap: 16px;
+        width: 100%;
+      }
+
+      /* 4. Lưới 3 cột cho các thông tin còn lại phía dưới */
+      .profile-ig-rest {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Ép chia làm 2 cột bằng nhau đối xứng */
+        gap: 16px 24px; /* Khoảng cách hàng là 16px, khoảng cách cột là 24px */
+        padding: 0 20px 20px 20px;
+      }
+
+      /* 5. Căn lề nút Xem PDF sang bên phải */
+      .pdf-row-flex {
+        display: flex;
+        align-items: flex-end; /* Đảm bảo đáy của ô dữ liệu và đáy nút thẳng hàng */
+        gap: 12px;
+      }
+      .btn-pdf-orange {
+        background-color: #ff8920;
+        color: #ffffff;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 18px; /* Canh chỉnh vừa vặn chiều cao ô dữ liệu */
+        font-weight: 500;
+        cursor: pointer;
+        white-space: nowrap;
+        height: 40px; /* Bằng khít với min-height của .iv */
+      }
+
+      .full-width {
+        grid-column: span 2;
+      }
+
+      /* 1. Ẩn thanh cuộn trên toàn bộ trang nhưng vẫn giữ tính năng cuộn */
+      html,
+      body {
+        -ms-overflow-style: none; /* Ẩn trên Internet Explorer và Edge cũ */
+        scrollbar-width: none; /* Ẩn trên Firefox */
+      }
+
+      html::-webkit-scrollbar,
+      body::-webkit-scrollbar {
+        display: none; /* Ẩn trên Chrome, Safari và Edge mới */
+      }
+
+      /* 2. Đảm bảo container chính không bị tràn tạo ra cuộn ngang */
+      .pg {
+        overflow-x: hidden; /* Chặn hoàn toàn cuộn ngang */
+      }
+      .iv {
+        border: 1px solid #e5e7eb; /* Đường viền xám nhạt bao quanh */
+        border-radius: 8px; /* Bo tròn góc 8px */
+        background-color: #ffffff; /* Màu nền trắng (hoặc #fafafa nếu muốn xám nhẹ) */
+        padding: 10px 14px; /* Khoảng cách chữ bên trong ô */
+        margin-top: 6px; /* Khoảng cách giữa nhãn (il) và ô dữ liệu */
+        font-size: 14px;
+        color: #1f2937;
+        min-height: 40px; /* Đảm bảo ô trống vẫn giữ nguyên chiều cao */
+        display: flex; /* Giúp căn chữ thẳng hàng */
+        align-items: center;
+      }
+      .work-history-grid {
+        /* Ô đầu tiên rộng gấp đôi (2fr), hai ô ngày tháng chiếm tỷ lệ bằng nhau (1fr 1fr) */
+        grid-template-columns: 2fr 1fr 1fr !important;
+      }
+      .salary-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
       }
     </style>
   </head>
@@ -1423,31 +1526,40 @@
               </div>
               <div class="tp active" id="profile-tp0">
                 <div class="card">
-                  <div class="ig">
-                    <div>
-                      <div class="il">Họ tên</div>
-                      <div class="iv">Nguyễn Văn An</div>
+                  <div class="profile-main-block">
+                    <div class="profile-pic-placeholder">
+                      <span>+</span>
                     </div>
-                    <div>
-                      <div class="il">Giới tính</div>
-                      <div class="iv">Nam</div>
+
+                    <div class="profile-info-grid">
+                      <div>
+                        <div class="il">Họ tên</div>
+                        <div class="iv">Nguyễn Văn An</div>
+                      </div>
+                      <div>
+                        <div class="il">Giới tính</div>
+                        <div class="iv">Nam</div>
+                      </div>
+                      <div>
+                        <div class="il">Ngày sinh</div>
+                        <div class="iv">01/01/2000</div>
+                      </div>
+                      <div>
+                        <div class="il">Quê quán</div>
+                        <div class="iv">Hà Nội</div>
+                      </div>
+                      <div>
+                        <div class="il">Email</div>
+                        <div class="iv">an.nv@tlu.edu.vn</div>
+                      </div>
+                      <div>
+                        <div class="il">Số điện thoại</div>
+                        <div class="iv">0987654321</div>
+                      </div>
                     </div>
-                    <div>
-                      <div class="il">Ngày sinh</div>
-                      <div class="iv">01/01/2000</div>
-                    </div>
-                    <div>
-                      <div class="il">Quê quán</div>
-                      <div class="iv">Hà Nội</div>
-                    </div>
-                    <div>
-                      <div class="il">Email</div>
-                      <div class="iv">an.nv@tlu.edu.vn</div>
-                    </div>
-                    <div>
-                      <div class="il">Số điện thoại</div>
-                      <div class="iv">0987654321</div>
-                    </div>
+                  </div>
+
+                  <div class="profile-ig-rest">
                     <div>
                       <div class="il">Địa chỉ</div>
                       <div class="iv">Thanh Trì, Hà Nội</div>
@@ -1456,42 +1568,39 @@
                       <div class="il">CCCD</div>
                       <div class="iv">0012000001900</div>
                     </div>
-                    <div>
-                      <div class="il">Mã số thuế</div>
-                      <div class="iv">1200001900</div>
-                    </div>
-                    <div>
-                      <div class="il">Số bảo hiểm xã hội</div>
-                      <div class="iv">00120019</div>
-                    </div>
-                    <div>
-                      <div class="il">Số bảo hiểm y tế</div>
-                      <div class="iv">00120019</div>
-                    </div>
+
                     <div>
                       <div class="il">Số Visa</div>
-                      <div class="iv">—</div>
+                      <div class="iv"></div>
                     </div>
                     <div>
                       <div class="il">Ngày hết hạn Visa</div>
-                      <div class="iv">—</div>
+                      <div class="iv"></div>
                     </div>
+
                     <div>
                       <div class="il">Số Hộ chiếu</div>
-                      <div class="iv">—</div>
+                      <div class="iv"></div>
                     </div>
                     <div>
                       <div class="il">Ngày hết hạn Hộ chiếu</div>
-                      <div class="iv">—</div>
+                      <div class="iv"></div>
                     </div>
+
                     <div>
                       <div class="il">Số giấy phép lao động</div>
-                      <div class="iv">—</div>
+                      <div class="iv"></div>
                     </div>
-                    <div>
-                      <div class="il">Ngày hết hạn giấy phép lao động</div>
-                      <div class="iv">—</div>
+                    <div class="pdf-row-flex">
+                      <div style="flex-grow: 1">
+                        <div class="il">Ngày hết hạn GPLĐ</div>
+                        <div class="iv"></div>
+                      </div>
+                      <button class="btn-pdf-orange" onclick="alert('Xem PDF')">
+                        Xem PDF
+                      </button>
                     </div>
+
                     <div>
                       <div class="il">Thông tin Đảng/Đoàn</div>
                       <div class="iv">Đảng Cộng sản Việt Nam</div>
@@ -1500,6 +1609,7 @@
                       <div class="il">Ngày vào Đảng/Đoàn</div>
                       <div class="iv">01/01/2020</div>
                     </div>
+
                     <div>
                       <div class="il">Số tài khoản</div>
                       <div class="iv">00-120-019-999</div>
@@ -1509,58 +1619,58 @@
                       <div class="iv">Ngân hàng TMCP Quân đội</div>
                     </div>
                   </div>
-                  <div style="margin-top: 20px">
-                    <button class="btn-s" onclick="alert('Xem PDF')">
-                      Xem PDF
-                    </button>
+                </div>
+              </div>
+
+              <div class="tp" id="profile-tp1">
+                <div class="card">
+                  <div class="profile-ig-rest" style="padding-top: 20px">
+                    <div>
+                      <div class="il">Họ tên</div>
+                      <div class="iv">Nguyễn Thị B</div>
+                    </div>
+                    <div>
+                      <div class="il">Mối quan hệ</div>
+                      <div class="iv">Mẹ</div>
+                    </div>
+
+                    <div>
+                      <div class="il">Họ tên</div>
+                      <div class="iv">Nguyễn Thị C</div>
+                    </div>
+                    <div>
+                      <div class="il">Mối quan hệ</div>
+                      <div class="iv">Vợ</div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="tp" id="profile-tp1">
-                <div class="tw">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Họ tên</th>
-                        <th>Mối quan hệ</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Nguyễn Thị B</td>
-                        <td>Mẹ</td>
-                      </tr>
-                      <tr>
-                        <td>Nguyễn Thị C</td>
-                        <td>Vợ</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
               <div class="tp" id="profile-tp2">
-                <div class="tw">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Tên nơi công tác</th>
-                        <th>Từ ngày</th>
-                        <th>Đến ngày</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Công ty Fantastic</td>
-                        <td>1/1/2015</td>
-                        <td>1/1/2017</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <div class="card">
+                  <div
+                    class="profile-ig-rest work-history-grid"
+                    style="padding-top: 20px"
+                  >
+                    <div>
+                      <div class="il">Tên nơi công tác</div>
+                      <div class="iv">Công ty Fantastic</div>
+                    </div>
+
+                    <div>
+                      <div class="il">Từ ngày</div>
+                      <div class="iv">1/1/2015</div>
+                    </div>
+
+                    <div>
+                      <div class="il">Đến ngày</div>
+                      <div class="iv">1/1/2017</div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="tp" id="profile-tp3">
                 <div class="card">
-                  <div class="ig">
+                  <div class="profile-ig-rest" style="padding-top: 20px">
                     <div>
                       <div class="il">Trình độ văn hóa</div>
                       <div class="iv">12/12</div>
@@ -1571,70 +1681,74 @@
                     </div>
                   </div>
                 </div>
+
                 <div class="card">
-                  <div class="card-t">Thông tin bằng cấp</div>
-                  <div class="tw">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Tên bằng</th>
-                          <th>Nơi cấp</th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>Bằng Cử nhân chuyên ngành Kỹ thuật phần mềm</td>
-                          <td>Trường Đại học TKMT</td>
-                          <td>
-                            <button class="btn-lk" onclick="alert('Xem PDF')">
-                              Xem PDF
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Bằng Kỹ sư Khoa học máy tính</td>
-                          <td>Trường Đại học TKMT</td>
-                          <td>
-                            <button class="btn-lk" onclick="alert('Xem PDF')">
-                              Xem PDF
-                            </button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <div class="card-t">THÔNG TIN BẰNG CẤP</div>
+
+                  <div
+                    class="profile-ig-rest"
+                    style="border-bottom: 1px solid #f3f4f6"
+                  >
+                    <div>
+                      <div class="il">Tên bằng</div>
+                      <div class="iv">
+                        Bằng Cử nhân chuyên ngành Kỹ thuật phần mềm
+                      </div>
+                    </div>
+                    <div class="pdf-row-flex">
+                      <div style="flex-grow: 1">
+                        <div class="il">Nơi cấp</div>
+                        <div class="iv">Trường Đại học TKMT</div>
+                      </div>
+                      <button class="btn-pdf-orange" onclick="alert('Xem PDF')">
+                        Xem PDF
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="profile-ig-rest">
+                    <div>
+                      <div class="il">Tên bằng</div>
+                      <div class="iv">Bằng Kỹ sư Khoa học máy tính</div>
+                    </div>
+                    <div class="pdf-row-flex">
+                      <div style="flex-grow: 1">
+                        <div class="il">Nơi cấp</div>
+                        <div class="iv">Trường Đại học TKMT</div>
+                      </div>
+                      <button class="btn-pdf-orange" onclick="alert('Xem PDF')">
+                        Xem PDF
+                      </button>
+                    </div>
                   </div>
                 </div>
+
                 <div class="card">
-                  <div class="card-t">Thông tin chứng chỉ</div>
-                  <div class="tw">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Tên chứng chỉ</th>
-                          <th>Nơi cấp</th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>IELTS 7.5</td>
-                          <td>British Council</td>
-                          <td>
-                            <button class="btn-lk" onclick="alert('Xem PDF')">
-                              Xem PDF
-                            </button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <div class="card-t">THÔNG TIN CHỨNG CHỈ</div>
+                  <div class="profile-ig-rest">
+                    <div>
+                      <div class="il">Tên chứng chỉ</div>
+                      <div class="iv">IELTS 7.5</div>
+                    </div>
+                    <div class="pdf-row-flex">
+                      <div style="flex-grow: 1">
+                        <div class="il">Nơi cấp</div>
+                        <div class="iv">British Council</div>
+                      </div>
+                      <button class="btn-pdf-orange" onclick="alert('Xem PDF')">
+                        Xem PDF
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="tp" id="profile-tp4">
                 <div class="card">
-                  <div class="card-t">Thông tin hệ số lương</div>
-                  <div class="ig">
+                  <div class="card-t">THÔNG TIN HỆ SỐ LƯƠNG</div>
+                  <div
+                    class="profile-ig-rest work-history-grid"
+                    style="padding-top: 10px"
+                  >
                     <div>
                       <div class="il">Ngạch viên chức</div>
                       <div class="iv">Giảng viên</div>
@@ -1649,8 +1763,9 @@
                     </div>
                   </div>
                 </div>
+
                 <div class="card">
-                  <div class="card-t">Thông tin phụ cấp</div>
+                  <div class="card-t">THÔNG TIN PHỤ CẤP</div>
                   <div class="tw">
                     <table>
                       <thead>
@@ -1694,7 +1809,6 @@
                         <th>Ngày hết hạn</th>
                         <th>Đơn vị công tác</th>
                         <th>Trạng thái</th>
-                        <th>Thao tác</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1707,11 +1821,6 @@
                         <td>
                           <span class="bd bd-active">Đang hoạt động</span>
                         </td>
-                        <td>
-                          <button class="btn-lk" onclick="openContract(0)">
-                            Xem
-                          </button>
-                        </td>
                       </tr>
                       <tr>
                         <td>Hợp đồng thời vụ</td>
@@ -1720,11 +1829,6 @@
                         <td>01/06/2018</td>
                         <td>Khoa CNTT</td>
                         <td><span class="bd bd-unused">Ngừng sử dụng</span></td>
-                        <td>
-                          <button class="btn-lk" onclick="openContract(1)">
-                            Xem
-                          </button>
-                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -1732,16 +1836,16 @@
               </div>
               <div class="tp" id="profile-tp6">
                 <div class="card">
-                  <div class="card-t">Khen thưởng</div>
+                  <div class="card-t">KHEN THƯỞNG</div>
                   <div class="tw">
                     <table>
                       <thead>
                         <tr>
-                          <th>Loại khen thưởng</th>
-                          <th>Tên khen thưởng</th>
-                          <th>Ngày quyết định</th>
-                          <th>Số quyết định</th>
-                          <th>Thao tác</th>
+                          <th>LOẠI KHEN THƯỞNG</th>
+                          <th>TÊN KHEN THƯỞNG</th>
+                          <th>NGÀY QUYẾT ĐỊNH</th>
+                          <th>SỐ QUYẾT ĐỊNH</th>
+                          <th style="text-align: right">THAO TÁC</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -1750,9 +1854,9 @@
                           <td>Huân chương Lao động hạng Ba</td>
                           <td>20/11/2025</td>
                           <td>1234/QĐ-CTN</td>
-                          <td>
+                          <td style="text-align: right">
                             <button class="btn-lk" onclick="openReward(0)">
-                              Xem
+                              <i data-lucide="eye" class="w-4 h-4"></i>
                             </button>
                           </td>
                         </tr>
@@ -1761,9 +1865,9 @@
                           <td>Chiến sĩ thi đua cơ sở</td>
                           <td>30/06/2026</td>
                           <td>88/QĐ-ĐHTL</td>
-                          <td>
+                          <td style="text-align: right">
                             <button class="btn-lk" onclick="openReward(1)">
-                              Xem
+                              <i data-lucide="eye" class="w-4 h-4"></i>
                             </button>
                           </td>
                         </tr>
@@ -1771,17 +1875,18 @@
                     </table>
                   </div>
                 </div>
+
                 <div class="card">
-                  <div class="card-t">Kỷ luật</div>
+                  <div class="card-t">KỶ LUẬT</div>
                   <div class="tw">
                     <table>
                       <thead>
                         <tr>
-                          <th>Loại kỷ luật</th>
-                          <th>Tên kỷ luật</th>
-                          <th>Ngày quyết định</th>
-                          <th>Hình thức xử lý</th>
-                          <th>Thao tác</th>
+                          <th>LOẠI KỶ LUẬT</th>
+                          <th>TÊN KỶ LUẬT</th>
+                          <th>NGÀY QUYẾT ĐỊNH</th>
+                          <th>HÌNH THỨC XỬ LÝ</th>
+                          <th style="text-align: right">THAO TÁC</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -1790,9 +1895,9 @@
                           <td>Khiển trách</td>
                           <td>15/05/2026</td>
                           <td>Phê bình</td>
-                          <td>
+                          <td style="text-align: right">
                             <button class="btn-lk" onclick="openDisc(0)">
-                              Xem
+                              <i data-lucide="eye" class="w-4 h-4"></i>
                             </button>
                           </td>
                         </tr>
@@ -1807,65 +1912,347 @@
               <div class="ph" style="display: none">
                 <h1 class="ph-title">Đơn vị công tác</h1>
               </div>
-              <div class="tabs">
-                <button class="tab-b active" onclick="pgTab('dept', 0, this)">
+
+              <div
+                class="tabs"
+                style="
+                  display: flex;
+                  background-color: #f1f3f5;
+                  padding: 6px;
+                  border-radius: 10px;
+                  gap: 8px;
+                  margin-bottom: 20px;
+                "
+              >
+                <button
+                  class="tab-b active"
+                  onclick="pgTab('dept', 0, this)"
+                  style="
+                    flex: 1;
+                    border: none;
+                    padding: 10px;
+                    font-weight: 500;
+                    font-size: 14px;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                  "
+                >
                   Thông tin chung
                 </button>
-                <button class="tab-b" onclick="pgTab('dept', 1, this)">
+                <button
+                  class="tab-b"
+                  onclick="pgTab('dept', 1, this)"
+                  style="
+                    flex: 1;
+                    border: none;
+                    padding: 10px;
+                    font-weight: 500;
+                    font-size: 14px;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                    background: transparent;
+                    color: #495057;
+                  "
+                >
                   Nhân sự
                 </button>
-                <button class="tab-b" onclick="pgTab('dept', 2, this)">
+                <button
+                  class="tab-b"
+                  onclick="pgTab('dept', 2, this)"
+                  style="
+                    flex: 1;
+                    border: none;
+                    padding: 10px;
+                    font-weight: 500;
+                    font-size: 14px;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                    background: transparent;
+                    color: #495057;
+                  "
+                >
                   Đơn vị trực thuộc
                 </button>
               </div>
+
               <div class="tp active" id="dept-tp0">
-                <div class="card">
-                  <div class="ig">
+                <div
+                  class="card"
+                  style="border: none; background: transparent; padding: 0"
+                >
+                  <div
+                    style="
+                      display: grid;
+                      grid-template-columns: repeat(2, minmax(0, 1fr));
+                      gap: 16px 24px;
+                    "
+                  >
                     <div>
-                      <div class="il">Mã đơn vị</div>
-                      <div class="iv">DV001</div>
+                      <label
+                        style="
+                          display: block;
+                          font-size: 13px;
+                          color: #6c757d;
+                          margin-bottom: 6px;
+                          font-weight: 500;
+                        "
+                        >Mã đơn vị</label
+                      >
+                      <div
+                        style="
+                          width: 100%;
+                          padding: 12px 16px;
+                          background: #ffffff;
+                          border: 1px solid #e9ecef;
+                          border-radius: 10px;
+                          font-size: 14px;
+                          color: #212529;
+                        "
+                      >
+                        DV001
+                      </div>
                     </div>
+
                     <div>
-                      <div class="il">Tên đơn vị</div>
-                      <div class="iv">Ban Giám hiệu</div>
+                      <label
+                        style="
+                          display: block;
+                          font-size: 13px;
+                          color: #6c757d;
+                          margin-bottom: 6px;
+                          font-weight: 500;
+                        "
+                        >Tên đơn vị</label
+                      >
+                      <div
+                        style="
+                          width: 100%;
+                          padding: 12px 16px;
+                          background: #ffffff;
+                          border: 1px solid #e9ecef;
+                          border-radius: 10px;
+                          font-size: 14px;
+                          color: #212529;
+                        "
+                      >
+                        Ban Giám hiệu
+                      </div>
                     </div>
+
                     <div>
-                      <div class="il">Loại đơn vị</div>
-                      <div class="iv">Ban</div>
+                      <label
+                        style="
+                          display: block;
+                          font-size: 13px;
+                          color: #6c757d;
+                          margin-bottom: 6px;
+                          font-weight: 500;
+                        "
+                        >Loại đơn vị</label
+                      >
+                      <div
+                        style="
+                          width: 100%;
+                          padding: 12px 16px;
+                          background: #ffffff;
+                          border: 1px solid #e9ecef;
+                          border-radius: 10px;
+                          font-size: 14px;
+                          color: #212529;
+                        "
+                      >
+                        Ban
+                      </div>
                     </div>
+
                     <div>
-                      <div class="il">Đơn vị cha</div>
-                      <div class="iv">Trường Đại học TKMT</div>
+                      <label
+                        style="
+                          display: block;
+                          font-size: 13px;
+                          color: #6c757d;
+                          margin-bottom: 6px;
+                          font-weight: 500;
+                        "
+                        >Đơn vị cha</label
+                      >
+                      <div
+                        style="
+                          width: 100%;
+                          padding: 12px 16px;
+                          background: #ffffff;
+                          border: 1px solid #e9ecef;
+                          border-radius: 10px;
+                          font-size: 14px;
+                          color: #212529;
+                        "
+                      >
+                        Trường Đại học TKMT
+                      </div>
                     </div>
+
                     <div>
-                      <div class="il">Email</div>
-                      <div class="iv">bangiamhieu@tlu.edu.vn</div>
+                      <label
+                        style="
+                          display: block;
+                          font-size: 13px;
+                          color: #6c757d;
+                          margin-bottom: 6px;
+                          font-weight: 500;
+                        "
+                        >Email</label
+                      >
+                      <div
+                        style="
+                          width: 100%;
+                          padding: 12px 16px;
+                          background: #ffffff;
+                          border: 1px solid #e9ecef;
+                          border-radius: 10px;
+                          font-size: 14px;
+                          color: #212529;
+                        "
+                      >
+                        bangiamhieu@tlu.edu.vn
+                      </div>
                     </div>
+
                     <div>
-                      <div class="il">Số điện thoại</div>
-                      <div class="iv">0999999999</div>
+                      <label
+                        style="
+                          display: block;
+                          font-size: 13px;
+                          color: #6c757d;
+                          margin-bottom: 6px;
+                          font-weight: 500;
+                        "
+                        >Số điện thoại</label
+                      >
+                      <div
+                        style="
+                          width: 100%;
+                          padding: 12px 16px;
+                          background: #ffffff;
+                          border: 1px solid #e9ecef;
+                          border-radius: 10px;
+                          font-size: 14px;
+                          color: #212529;
+                        "
+                      >
+                        0999999999
+                      </div>
                     </div>
-                    <div>
-                      <div class="il">Link website</div>
-                      <div class="iv">bangiamhieu.vn</div>
+
+                    <div style="grid-column: span 2">
+                      <label
+                        style="
+                          display: block;
+                          font-size: 13px;
+                          color: #6c757d;
+                          margin-bottom: 6px;
+                          font-weight: 500;
+                        "
+                        >Link website</label
+                      >
+                      <div
+                        style="
+                          width: 100%;
+                          padding: 12px 16px;
+                          background: #ffffff;
+                          border: 1px solid #e9ecef;
+                          border-radius: 10px;
+                          font-size: 14px;
+                          color: #212529;
+                        "
+                      >
+                        bangiamhieu.vn
+                      </div>
                     </div>
-                    <div>
-                      <div class="il">Địa chỉ</div>
-                      <div class="iv">175 Tây Sơn</div>
+
+                    <div style="grid-column: span 2">
+                      <label
+                        style="
+                          display: block;
+                          font-size: 13px;
+                          color: #6c757d;
+                          margin-bottom: 6px;
+                          font-weight: 500;
+                        "
+                        >Địa chỉ</label
+                      >
+                      <div
+                        style="
+                          width: 100%;
+                          padding: 12px 16px;
+                          background: #ffffff;
+                          border: 1px solid #e9ecef;
+                          border-radius: 10px;
+                          font-size: 14px;
+                          color: #212529;
+                        "
+                      >
+                        175 Tây Sơn
+                      </div>
                     </div>
-                    <div>
-                      <div class="il">Địa chỉ văn phòng</div>
-                      <div class="iv">Tòa A1</div>
+
+                    <div style="grid-column: span 2">
+                      <label
+                        style="
+                          display: block;
+                          font-size: 13px;
+                          color: #6c757d;
+                          margin-bottom: 6px;
+                          font-weight: 500;
+                        "
+                        >Địa chỉ văn phòng</label
+                      >
+                      <div
+                        style="
+                          width: 100%;
+                          padding: 12px 16px;
+                          background: #ffffff;
+                          border: 1px solid #e9ecef;
+                          border-radius: 10px;
+                          font-size: 14px;
+                          color: #212529;
+                        "
+                      >
+                        Tòa A1
+                      </div>
                     </div>
-                    <div>
-                      <div class="il">Trạng thái</div>
-                      <div class="iv">
+
+                    <div style="grid-column: span 2">
+                      <label
+                        style="
+                          display: block;
+                          font-size: 13px;
+                          color: #6c757d;
+                          margin-bottom: 6px;
+                          font-weight: 500;
+                        "
+                        >Trạng thái</label
+                      >
+                      <div
+                        style="
+                          width: 100%;
+                          padding: 12px 16px;
+                          background: #ffffff;
+                          border: 1px solid #e9ecef;
+                          border-radius: 10px;
+                          font-size: 14px;
+                          color: #212529;
+                        "
+                      >
                         <span class="bd bd-active">Đang hoạt động</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+
               <div class="tp" id="dept-tp1">
                 <div class="tw">
                   <table>
@@ -1912,6 +2299,7 @@
                   </table>
                 </div>
               </div>
+
               <div class="tp" id="dept-tp2">
                 <div class="org-card" id="dept-subtree"></div>
               </div>
@@ -1921,14 +2309,50 @@
               <div class="ph" style="display: none">
                 <h1 class="ph-title">Đào tạo</h1>
               </div>
-              <div class="tabs">
+              <div
+                class="tabs"
+                style="
+                  display: flex;
+                  background-color: #f1f3f5;
+                  padding: 6px;
+                  border-radius: 10px;
+                  gap: 8px;
+                  margin-bottom: 20px;
+                "
+              >
                 <button
                   class="tab-b active"
                   onclick="pgTab('training', 0, this)"
+                  style="
+                    flex: 1;
+                    border: none;
+                    padding: 10px;
+                    font-weight: 500;
+                    font-size: 14px;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                  "
                 >
                   Đăng ký khóa đào tạo
                 </button>
-                <button class="tab-b" onclick="pgTab('training', 1, this)">
+
+                <button
+                  class="tab-b"
+                  onclick="pgTab('training', 1, this)"
+                  style="
+                    flex: 1;
+                    border: none;
+                    padding: 10px;
+                    font-weight: 500;
+                    font-size: 14px;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                    background: transparent;
+                    color: #495057;
+                  "
+                >
                   Các khóa đào tạo đã đăng ký
                 </button>
               </div>
@@ -2328,7 +2752,7 @@
           <button
             class="btn-p"
             id="tr-reg-btn"
-            style="display: none"
+            style="margin-left: 0"
             onclick="doRegTraining()"
           >
             Đăng ký
@@ -2862,6 +3286,9 @@
         document
           .querySelectorAll("#pg-" + ns + " .tp")
           .forEach((p, i) => p.classList.toggle("active", i === idx));
+        if (typeof lucide !== "undefined") {
+          lucide.createIcons();
+        }
       }
       function orgTab(idx, btn) {
         document
