@@ -1,296 +1,238 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Đăng nhập - Quản lý Nhân sự</title>
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập - Cửa hàng sách TKMT</title>
 
-  body {
-    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
-    background: #ffffff;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  /* ── CARD ── */
-  .login-card {
-    background: #FDDEC8;
-    border-radius: 24px;
-    width: 660px;
-    padding: 52px 88px 60px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
-    position: relative;
-  }
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
 
-  /* ── LOGO ── */
-  .logo-wrap {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  .logo-circle {
-    width: 92px;
-    height: 92px;
-    border-radius: 50%;
-    border: 4px solid #1C3B5A;
-    background: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-  /* ── TITLE ── */
-  .login-title {
-    text-align: center;
-    font-size: 24px;
-    font-weight: 700;
-    color: #1C3B5A;
-    margin-bottom: 30px;
-    letter-spacing: 0.3px;
-  }
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      /* Mẹo ép ô mật khẩu hiển thị dấu * thay vì dấu chấm đen theo prototype */
+      .asterisk-password {
+        -webkit-text-security: asterisk;
+        -moz-text-security: asterisk;
+      }
+    </style>
+  </head>
+  <body class="bg-white min-h-screen flex items-center justify-center p-4">
+    <!-- CARD ĐĂNG NHẬP (Màu nền #FFDFC3) -->
+    <div
+      class="bg-[#FFDFC3] rounded-[24px] w-full max-w-[540px] px-8 py-10 md:px-16 md:py-12 shadow-md relative"
+    >
+      <!-- LOGO CORNER -->
+      <div class="flex justify-center mb-5">
+        <div
+          class="w-24 height-24 w-[92px] h-[92px] rounded-full border-4 border-[#1C3B5A] bg-white flex items-center justify-center overflow-hidden p-1"
+        >
+          <!-- Sử dụng trực tiếp ảnh logo từ hệ thống của bạn -->
+          <img
+            src="Images/logo.jpg"
+            alt="Logo TKMT"
+            class="w-full h-full object-contain"
+          />
+        </div>
+      </div>
 
-  /* ── FORM GROUP ── */
-  .form-group {
-    margin-bottom: 20px;
-  }
-  .form-label {
-    display: block;
-    font-size: 14px;
-    font-weight: 500;
-    color: #333333;
-    margin-bottom: 8px;
-  }
-  .form-input {
-    display: block;
-    width: 100%;
-    height: 52px;
-    padding: 0 18px;
-    background: #ffffff;
-    border: none;
-    border-radius: 8px;
-    font-size: 15px;
-    color: #333333;
-    outline: none;
-    transition: box-shadow 0.15s;
-  }
-  .form-input:focus {
-    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.25);
-  }
-  .form-input::placeholder {
-    color: #c0c0c0;
-  }
+      <!-- TIÊU ĐỀ -->
+      <h1
+        class="text-center text-xl md:text-2xl font-bold text-[#1C3B5A] mb-6 tracking-wide"
+      >
+        Đăng nhập
+      </h1>
 
-  /* ── ERROR MESSAGE ── */
-  .error-wrap {
-    min-height: 26px;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .error-msg {
-    font-size: 14px;
-    color: #F97316;
-    text-align: center;
-    line-height: 1.4;
-    font-weight: 400;
-  }
-  .error-msg.hidden {
-    display: none;
-  }
+      <!-- FORM GROUP: TÊN ĐĂNG NHẬP -->
+      <div class="mb-4">
+        <label
+          class="block text-xs md:text-sm font-medium text-gray-700 mb-1.5"
+          for="inp-user"
+          >Tên đăng nhập</label
+        >
+        <input
+          type="text"
+          id="inp-user"
+          class="block w-full h-11 px-4 bg-white border border-transparent rounded-lg text-sm text-gray-800 outline-none focus:border-[#FF8920] transition-all placeholder-gray-300"
+          autocomplete="username"
+          onkeydown="if (event.key === 'Enter') doLogin();"
+        />
+      </div>
 
-  /* ── BUTTON ── */
-  .login-btn {
-    display: block;
-    width: 100%;
-    height: 52px;
-    background: #F97316;
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: 0.4px;
-    cursor: pointer;
-    transition: background 0.15s, transform 0.1s;
-  }
-  .login-btn:hover  { background: #e86d10; }
-  .login-btn:active { transform: scale(0.995); background: #d86208; }
+      <!-- FORM GROUP: MẬT KHẨU -->
+      <div class="mb-3">
+        <label
+          class="block text-xs md:text-sm font-medium text-gray-700 mb-1.5"
+          for="inp-pass"
+          >Mật khẩu</label
+        >
+        <div class="relative">
+          <input
+            type="password"
+            id="inp-pass"
+            class="asterisk-password block w-full h-11 pl-4 pr-10 bg-white border border-transparent rounded-lg text-sm text-gray-800 outline-none focus:border-[#FF8920] transition-all"
+            autocomplete="current-password"
+            onkeydown="if (event.key === 'Enter') doLogin();"
+          />
+          <!-- Lucide Icon mắt ẩn/hiện mật khẩu -->
+          <button
+            type="button"
+            onclick="togglePassword()"
+            class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none"
+          >
+            <i data-lucide="eye" id="eye-icon" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
 
+      <!-- ERROR MESSAGE (Đã đổi thành màu đỏ chuẩn prototype) -->
+      <div class="min-h-[24px] mb-4 flex items-center justify-center">
+        <span
+          class="text-xs md:text-sm text-red-500 font-medium text-center hidden"
+          id="error-msg"
+        ></span>
+      </div>
 
-</style>
-</head>
-<body>
-
-<div class="login-card">
-
-  <!-- LOGO -->
-  <div class="logo-wrap">
-    <div class="logo-circle">
-      <!-- Icon: 3 người + sách mở + gear -->
-      <svg width="62" height="58" viewBox="0 0 62 58" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-        <!-- === NGƯỜI TRÁI === -->
-        <circle cx="15" cy="18" r="6" fill="#1C3B5A"/>
-        <path d="M6 37 C6 29.5 10.5 25.5 15 25.5 C18 25.5 20.5 27 22 29.5" fill="#1C3B5A"/>
-
-        <!-- === NGƯỜI PHẢI === -->
-        <circle cx="47" cy="18" r="6" fill="#1C3B5A"/>
-        <path d="M40 29.5 C41.5 27 44 25.5 47 25.5 C51.5 25.5 56 29.5 56 37" fill="#1C3B5A"/>
-
-        <!-- === NGƯỜI GIỮA (cao hơn, nổi bật hơn) === -->
-        <circle cx="31" cy="13" r="8" fill="#1C3B5A"/>
-        <path d="M19 40 C19 29.5 24.5 24.5 31 24.5 C37.5 24.5 43 29.5 43 40 Z" fill="#1C3B5A"/>
-
-        <!-- === SÁCH MỞ === -->
-        <!-- Trang trái -->
-        <path d="M1 44 L31 39.5 L31 56 L1 58.5 Z" fill="#F97316"/>
-        <!-- Trang phải -->
-        <path d="M31 39.5 L61 44 L61 58.5 L31 56 Z" fill="#D86010"/>
-        <!-- Gáy sách -->
-        <line x1="31" y1="39.5" x2="31" y2="56" stroke="white" stroke-width="1.5"/>
-        <!-- Dòng kẻ trang trái -->
-        <line x1="8"  y1="50" x2="27" y2="46.5" stroke="white" stroke-width="0.8" opacity="0.5"/>
-        <line x1="8"  y1="54" x2="27" y2="51"   stroke="white" stroke-width="0.8" opacity="0.5"/>
-        <!-- Dòng kẻ trang phải -->
-        <line x1="35" y1="46.5" x2="54" y2="50" stroke="white" stroke-width="0.8" opacity="0.5"/>
-        <line x1="35" y1="51"   x2="54" y2="54" stroke="white" stroke-width="0.8" opacity="0.5"/>
-
-        <!-- === GEAR (bánh răng) === -->
-        <g transform="translate(49.5, 50)">
-          <!-- Răng bánh răng (8 răng) -->
-          <rect x="-2"  y="-9.5" width="4" height="3.5" rx="0.8" fill="#F97316"/>
-          <rect x="-2"  y="6"    width="4" height="3.5" rx="0.8" fill="#F97316"/>
-          <rect x="6"   y="-2"   width="3.5" height="4" rx="0.8" fill="#F97316"/>
-          <rect x="-9.5" y="-2"  width="3.5" height="4" rx="0.8" fill="#F97316"/>
-          <!-- Thân bánh răng -->
-          <circle r="7" fill="#F97316"/>
-          <!-- Lỗ giữa -->
-          <circle r="3.2" fill="#FDDEC8"/>
-        </g>
-
-      </svg>
+      <!-- BUTTON ĐĂNG NHẬP (Màu nền #FF8920) -->
+      <button
+        class="block w-full h-11 bg-[#FF8920] hover:bg-[#e27212] active:scale-[0.995] text-white rounded-lg text-sm md:text-base font-semibold tracking-wide transition-all shadow-sm"
+        id="login-btn"
+        onclick="doLogin()"
+      >
+        Đăng nhập
+      </button>
     </div>
-  </div>
 
-  <!-- TIÊU ĐỀ -->
-  <h1 class="login-title">Đăng nhập</h1>
+    <script>
+      /* Khởi tạo thư viện Lucide Icons */
+      lucide.createIcons();
 
-  <!-- FORM -->
-  <div class="form-group">
-    <label class="form-label" for="inp-user">Tên đăng nhập</label>
-    <input
-      type="text"
-      id="inp-user"
-      class="form-input"
-      placeholder=""
-      autocomplete="username"
-      onkeydown="if(event.key==='Enter') doLogin()"
-    >
-  </div>
+      /* ── DỮ LIỆU NGƯỜI DÙNG GIẢ LẬP ── */
+      const USERS = [
+        {
+          username: "admin",
+          password: "admin123",
+          role: "admin",
+          name: "Nguyễn Văn Admin",
+          status: "active",
+        },
+        {
+          username: "tccb",
+          password: "tccb123",
+          role: "tccb",
+          name: "Trần Thị Hương",
+          status: "active",
+        },
+        {
+          username: "gv",
+          password: "gv123",
+          role: "employee",
+          name: "Lê Văn An",
+          status: "active",
+        },
+        {
+          username: "locked",
+          password: "locked123",
+          role: "employee",
+          name: "Người dùng bị khóa",
+          status: "locked",
+        },
+      ];
 
-  <div class="form-group">
-    <label class="form-label" for="inp-pass">Mật khẩu</label>
-    <input
-      type="password"
-      id="inp-pass"
-      class="form-input"
-      placeholder=""
-      autocomplete="current-password"
-      onkeydown="if(event.key==='Enter') doLogin()"
-    >
-  </div>
+      /* ── ẨN/HIỆN MẬT KHẨU VÀ ĐỔI ICON ── */
+      function togglePassword() {
+        const passwordInput = document.getElementById("inp-pass");
+        const eyeIcon = document.getElementById("eye-icon");
 
-  <!-- ERROR -->
-  <div class="error-wrap">
-    <span class="error-msg hidden" id="error-msg"></span>
-  </div>
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          // Khi hiện text thì bỏ tạm thời class ép dấu asterisk đi
+          passwordInput.classList.remove("asterisk-password");
+          eyeIcon.setAttribute("data-lucide", "eye-off");
+        } else {
+          passwordInput.type = "password";
+          passwordInput.classList.add("asterisk-password");
+          eyeIcon.setAttribute("data-lucide", "eye");
+        }
+        // Re-render lại icon của lucide
+        lucide.createIcons();
+      }
 
-  <!-- BUTTON -->
-  <button class="login-btn" id="login-btn" onclick="doLogin()">Đăng nhập</button>
+      /* ── HIỂN THỊ / ẨN LỖI ── */
+      function showError(msg) {
+        const el = document.getElementById("error-msg");
+        el.textContent = msg;
+        el.classList.remove("hidden");
+      }
 
+      function hideError() {
+        document.getElementById("error-msg").classList.add("hidden");
+      }
 
-</div>
+      /* ── LOGIC XỬ LÝ ĐĂNG NHẬP ── */
+      function doLogin() {
+        const username = document.getElementById("inp-user").value.trim();
+        const password = document.getElementById("inp-pass").value;
+        hideError();
 
-<script>
-  /* ── DỮ LIỆU NGƯỜI DÙNG ── */
-  const USERS = [
-    { username: 'admin',  password: 'admin123',  role: 'admin',    name: 'Nguyễn Văn Admin',   status: 'active' },
-    { username: 'tccb',   password: 'tccb123',   role: 'tccb',     name: 'Trần Thị Hương',     status: 'active' },
-    { username: 'gv',     password: 'gv123',     role: 'employee', name: 'Lê Văn An',           status: 'active' },
-    { username: 'locked', password: 'locked123', role: 'employee', name: 'Người dùng bị khóa', status: 'locked' },
-  ];
+        if (!username || !password) {
+          showError("Vui lòng nhập đầy đủ thông tin");
+          return;
+        }
 
-  /* ── HIỂN THỊ / ẨN LỖI ── */
-  function showError(msg) {
-    const el = document.getElementById('error-msg');
-    el.textContent = msg;
-    el.classList.remove('hidden');
-  }
-  function hideError() {
-    document.getElementById('error-msg').classList.add('hidden');
-  }
+        const user = USERS.find((u) => u.username === username);
 
-  /* ── ĐĂNG NHẬP ── */
-  function doLogin() {
-    const username = document.getElementById('inp-user').value.trim();
-    const password = document.getElementById('inp-pass').value;
-    hideError();
+        if (!user || user.password !== password) {
+          showError("Tên đăng nhập hoặc mật khẩu không đúng");
+          return;
+        }
 
-    /* Case 1: Thiếu thông tin */
-    if (!username || !password) {
-      showError('Vui lòng nhập đầy đủ thông tin');
-      return;
-    }
+        if (user.status === "locked") {
+          showError(
+            "Tài khoản của bạn đã bị khóa. Vui lòng liên hệ Quản trị viên",
+          );
+          return;
+        }
 
-    const user = USERS.find(u => u.username === username);
+        // Lưu trạng thái session
+        sessionStorage.setItem("currentUser", JSON.stringify(user));
 
-    /* Case 2: Sai tên / mật khẩu */
-    if (!user || user.password !== password) {
-      showError('Tên đăng nhập hoặc mật khẩu không đúng');
-      return;
-    }
+        // Định tuyến trang
+        const routes = {
+          admin: "admin.html",
+          tccb: "employee-office.html",
+          employee: "employee.html",
+        };
+        const next = routes[user.role] || "dashboard.html";
 
-    /* Case 3: Tài khoản bị khóa */
-    if (user.status === 'locked') {
-      showError('Tài khoản của bạn đã bị khóa. Vui lòng liên hệ Quản trị viên');
-      return;
-    }
+        // Phản hồi nút bấm khi thành công
+        const btn = document.getElementById("login-btn");
+        btn.textContent = "✓ Đang vào hệ thống...";
+        btn.style.background = "#16a34a"; // Chuyển xanh lá khi thành công
+        btn.disabled = true;
 
-    /* ── Đăng nhập thành công ── */
-    // Lưu session
-    sessionStorage.setItem('currentUser', JSON.stringify(user));
+        setTimeout(() => {
+          window.location.href = next;
+        }, 800);
+      }
 
-    // Chuyển hướng theo role (khi có trang tương ứng)
-    const routes = {
-      admin:    'admin.html',
-      tccb:     'employee-office.html',
-      employee: 'employee.html',
-    };
-    const next = routes[user.role] || 'dashboard.html';
-
-    // Hiển thị thông báo thành công (tạm thời)
-    const btn = document.getElementById('login-btn');
-    btn.textContent = '✓ Đang vào hệ thống...';
-    btn.style.background = '#16a34a';
-    btn.disabled = true;
-
-    setTimeout(() => { window.location.href = next; }, 800);
-  }
-
-  function roleLabel(role) {
-    return { admin: 'Quản trị viên', tccb: 'Cán bộ TCCB', employee: 'Cán bộ / Giảng viên' }[role] || role;
-  }
-
-  /* ── Ẩn lỗi khi người dùng bắt đầu nhập ── */
-  ['inp-user', 'inp-pass'].forEach(id => {
-    document.getElementById(id).addEventListener('input', hideError);
-  });
-</script>
-</body>
+      /* Tự động ẩn thông báo lỗi khi người dùng gõ lại */
+      ["inp-user", "inp-pass"].forEach((id) => {
+        document.getElementById(id).addEventListener("input", hideError);
+      });
+    </script>
+  </body>
 </html>
