@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nhân sự TCCB - Quản lý Nhân sự</title>
+<title>Cán bộ - Quản lý Nhân sự</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;background:#f5f7fb;min-height:100vh}
@@ -29,21 +29,13 @@ body{font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;backgrou
 .pg{display:none}.pg.active{display:block}
 .ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:10px}
 .ph-title{font-size:20px;font-weight:700;color:#1C3B5A}
-.tb{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
-.inp-s{flex:1;min-width:200px;height:40px;padding:0 12px 0 38px;border:1px solid #e5e7eb;border-radius:8px;font-size:14px;color:#374151;outline:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") no-repeat 11px center;transition:border-color .15s}
-.inp-s:focus{border-color:#F97316;box-shadow:0 0 0 3px rgba(249,115,22,.1)}
-.sel-f{height:40px;padding:0 28px 0 12px;border:1px solid #e5e7eb;border-radius:8px;font-size:14px;color:#374151;background:#fff;cursor:pointer;outline:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center}
-.btn-p{height:40px;padding:0 16px;background:#F97316;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;transition:background .15s}
-.btn-p:hover{background:#e86d10}
-.btn-p.sm{height:34px;font-size:13px;padding:0 13px}
 .btn-s{height:40px;padding:0 16px;background:#fff;color:#374151;border:1px solid #e5e7eb;border-radius:8px;font-size:14px;cursor:pointer;transition:background .1s;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
 .btn-s:hover{background:#f9fafb}
-.btn-s.sm{height:34px;font-size:13px;padding:0 13px}
+.btn-p{height:40px;padding:0 16px;background:#F97316;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;transition:background .15s}
+.btn-p:hover{background:#e86d10}
 .btn-ic{width:30px;height:30px;border-radius:6px;border:none;background:#f3f4f6;color:#6b7280;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:background .1s}
 .btn-ic:hover{background:#e5e7eb;color:#374151}
 .btn-lk{background:none;border:none;color:#F97316;font-size:13px;font-weight:600;cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:2px}
-.btn-red{background:none;border:1px solid #ef4444;color:#ef4444;height:40px;padding:0 16px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;transition:background .15s}
-.btn-red:hover{background:#fef2f2}
 .tw{background:#fff;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.06);overflow:hidden}
 table{width:100%;border-collapse:collapse}
 thead th{background:#f9fafb;padding:12px 16px;text-align:left;font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid #e5e7eb}
@@ -53,22 +45,13 @@ tbody tr:hover td{background:#fafafa}
 .bd{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600}
 .bd::before{content:'';width:6px;height:6px;border-radius:50%}
 .bd-active{background:#dcfce7;color:#16a34a}.bd-active::before{background:#16a34a}
-.bd-locked{background:#fee2e2;color:#dc2626}.bd-locked::before{background:#dc2626}
 .bd-working{background:#dcfce7;color:#16a34a}.bd-working::before{background:#16a34a}
 .bd-left{background:#f3f4f6;color:#6b7280}.bd-left::before{background:#9ca3af}
-.bd-open{background:#dbeafe;color:#1d4ed8}.bd-open::before{background:#3b82f6}
-.bd-closed{background:#f3f4f6;color:#6b7280}.bd-closed::before{background:#9ca3af}
-.bd-done{background:#dcfce7;color:#16a34a}.bd-done::before{background:#16a34a}
-.bd-reg{background:#e0f2fe;color:#0369a1}.bd-reg::before{background:#0ea5e9}
-.bd-fail{background:#fee2e2;color:#dc2626}.bd-fail::before{background:#dc2626}
 .bd-unused{background:#fef3c7;color:#92400e}.bd-unused::before{background:#f59e0b}
-.bd-pending{background:#fef9c3;color:#854d0e}.bd-pending::before{background:#eab308}
-.bd-diss{font-size:11px;font-weight:600;background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:20px}
-.pag{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-top:1px solid #e5e7eb;font-size:13px;color:#6b7280}
-.pag-nav{display:flex;align-items:center;gap:8px}
-.pag-btn{padding:4px 12px;border:1px solid #e5e7eb;border-radius:6px;background:#fff;font-size:13px;color:#374151;cursor:pointer;transition:background .1s}
-.pag-btn:hover:not(:disabled){background:#f9fafb}
-.pag-btn:disabled{opacity:.45;cursor:default}
+.bd-open{background:#dbeafe;color:#1d4ed8}.bd-open::before{background:#3b82f6}
+.bd-done{background:#dcfce7;color:#16a34a}.bd-done::before{background:#16a34a}
+.bd-closed{background:#f3f4f6;color:#6b7280}.bd-closed::before{background:#9ca3af}
+.bd-fail{background:#fee2e2;color:#dc2626}.bd-fail::before{background:#dc2626}
 .tabs{display:flex;border-bottom:2px solid #e5e7eb;margin-bottom:24px;flex-wrap:wrap}
 .tab-b{padding:10px 20px;font-size:14px;font-weight:500;color:#6b7280;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color .15s;white-space:nowrap}
 .tab-b:hover{color:#374151}
@@ -80,21 +63,10 @@ tbody tr:hover td{background:#fafafa}
 .ig .il{font-size:12px;color:#9ca3af;margin-bottom:3px}
 .ig .iv{font-size:14px;color:#1C3B5A;font-weight:500}
 .span2{grid-column:span 2}
-.org-card{background:#fff;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.06);padding:20px}
-.on{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:6px}
-.on:hover{background:#f9fafb}
-.on-name{font-size:14px;color:#1C3B5A;font-weight:500;flex:1}
-.on-acts{display:flex;gap:6px;margin-left:auto}
-.oc{margin-left:28px;border-left:2px solid #e5e7eb;padding-left:8px;padding-top:2px}
-.bc{font-size:13px;color:#6b7280;margin-bottom:16px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
-.bc-lk{color:#F97316;cursor:pointer;font-weight:500}
-.bc-lk:hover{text-decoration:underline}
-.bc-sep{color:#d1d5db;font-size:16px}
 .ov{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:300;padding:16px}
 .ov.open{display:flex}
 .modal{background:#fff;border-radius:16px;padding:32px;width:480px;max-width:96vw;max-height:90vh;overflow-y:auto;box-shadow:0 8px 40px rgba(0,0,0,.18)}
 .modal-lg{width:600px}
-.modal-xl{width:720px}
 .mt{font-size:18px;font-weight:700;color:#1C3B5A;margin-bottom:4px}
 .ms{font-size:13px;color:#6b7280;margin-bottom:20px}
 .mf{display:flex;justify-content:flex-end;gap:10px;margin-top:24px}
@@ -106,20 +78,11 @@ tbody tr:hover td{background:#fafafa}
 .fg{margin-bottom:16px}
 .fgl{display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:5px}
 .req{color:#ef4444}
-.fi,.fsel{display:block;width:100%;height:42px;padding:0 12px;border:1px solid #e5e7eb;border-radius:8px;font-size:14px;color:#374151;outline:none;transition:border-color .15s;background:#fff;font-family:inherit}
-.fi:focus,.fsel:focus{border-color:#F97316;box-shadow:0 0 0 3px rgba(249,115,22,.1)}
-.fi.err,.fsel.err{border-color:#ef4444}
+.fi{display:block;width:100%;height:42px;padding:0 12px;border:1px solid #e5e7eb;border-radius:8px;font-size:14px;color:#374151;outline:none;transition:border-color .15s;background:#fff;font-family:inherit}
+.fi:focus{border-color:#F97316;box-shadow:0 0 0 3px rgba(249,115,22,.1)}
+.fi.err{border-color:#ef4444}
 .fe{font-size:12px;color:#ef4444;margin-top:4px;display:none}
 .fe.show{display:block}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.sec-hdr{font-size:12px;font-weight:700;color:#1C3B5A;text-transform:uppercase;letter-spacing:.6px;margin:20px 0 12px;padding-bottom:8px;border-bottom:2px solid #f3f4f6}
-.sec-hdr:first-child{margin-top:0}
-.hsl-grp{margin-bottom:8px;border-radius:8px;overflow:hidden;border:1px solid #e5e7eb}
-.hsl-hdr{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;background:#FDDEC8;color:#1C3B5A;cursor:pointer;font-size:14px;font-weight:600;user-select:none}
-.hsl-hdr.coll .chev{transform:rotate(-90deg)}
-.chev{transition:transform .2s;font-size:10px;color:#F97316;opacity:.9}
-.hsl-body{overflow:hidden;background:#fff}
-.hsl-body.hidden{display:none}
 .result-none{color:#9ca3af;font-style:italic}
 .result-pass{color:#16a34a;font-weight:600}
 .result-fail{color:#dc2626;font-weight:600}
@@ -160,8 +123,8 @@ tbody tr:hover td{background:#fafafa}
   </div>
   <div class="hdr-user">
     <button class="hdr-btn" onclick="toggleDd()">
-      <div class="avatar" id="hdr-av">H</div>
-      <span id="hdr-name">Trần Thị Hương - Nhân sự phòng TCCB</span>
+      <div class="avatar" id="hdr-av">L</div>
+      <span id="hdr-name">Lê Văn An - Cán bộ / Giảng viên</span>
       <svg width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round"/></svg>
     </button>
     <div class="hdr-dd" id="hdr-dd">
@@ -179,25 +142,8 @@ tbody tr:hover td{background:#fafafa}
 
 <div class="layout">
   <nav class="sb">
-    <div class="sb-lbl">Nghiệp vụ</div>
-    <div class="sb-item active" onclick="navTo('ns',this)">
-      <svg class="sb-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      Hồ sơ nhân sự
-    </div>
-    <div class="sb-item" onclick="navTo('org',this)">
-      <svg class="sb-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="2" width="8" height="4" rx="1"/><rect x="1" y="14" width="6" height="4" rx="1"/><rect x="9" y="14" width="6" height="4" rx="1"/><rect x="17" y="14" width="6" height="4" rx="1"/><path d="M4 14v-3h16v3"/><path d="M12 6v5"/></svg>
-      Sơ đồ tổ chức
-    </div>
-    <div class="sb-item" onclick="navTo('hsl',this)">
-      <svg class="sb-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-      Hệ số lương
-    </div>
-    <div class="sb-item" onclick="navTo('kdt',this)">
-      <svg class="sb-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-      Khóa đào tạo
-    </div>
     <div class="sb-lbl">Cá nhân</div>
-    <div class="sb-item" onclick="navTo('profile',this)">
+    <div class="sb-item active" onclick="navTo('profile',this)">
       <svg class="sb-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       Hồ sơ cá nhân
     </div>
@@ -205,236 +151,16 @@ tbody tr:hover td{background:#fafafa}
       <svg class="sb-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       Đơn vị công tác
     </div>
-    <div class="sb-item" onclick="navTo('mytraining',this)">
+    <div class="sb-item" onclick="navTo('training',this)">
       <svg class="sb-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-      Đào tạo
+      Khóa đào tạo
     </div>
   </nav>
 
   <main class="main">
 
-    <!-- ═══ HỒ SƠ NHÂN SỰ ═══ -->
-    <div class="pg active" id="pg-ns">
-      <div id="ns-list-wrap">
-        <div class="ph">
-          <h1 class="ph-title">Hồ sơ nhân sự</h1>
-          <button class="btn-p" onclick="openAddNs()">+ Thêm hồ sơ</button>
-        </div>
-        <div class="tb">
-          <input class="inp-s" id="ns-q" placeholder="Tìm kiếm theo mã NS hoặc tên..." oninput="nsFilter()">
-          <select class="sel-f" id="ns-dept" onchange="nsFilter()">
-            <option value="">Đơn vị công tác</option>
-            <option>Ban Giám hiệu</option><option>Khoa CNTT</option><option>Khoa Kinh tế</option>
-            <option>Phòng TCCB</option><option>Phòng TCKT</option><option>Ban Quản trị</option>
-          </select>
-          <select class="sel-f" id="ns-st" onchange="nsFilter()">
-            <option value="">Trạng thái</option>
-            <option value="working">Đang công tác</option>
-            <option value="left">Đã thôi việc</option>
-          </select>
-        </div>
-        <div class="tw">
-          <table>
-            <thead><tr><th>Mã NS</th><th>Họ tên</th><th>Đơn vị công tác</th><th>Học hàm/Học vị</th><th>Chức vụ</th><th>T.T hợp đồng</th><th>Trạng thái</th><th>Thao tác</th></tr></thead>
-            <tbody id="ns-body"></tbody>
-          </table>
-          <div class="pag">
-            <span id="ns-info">Hiển thị 10 / 20 nhân sự</span>
-            <div class="pag-nav">
-              <button class="pag-btn" id="ns-prev" onclick="nsPg(-1)">Trước</button>
-              <span id="ns-pg-lbl">Trang 1 / 2</span>
-              <button class="pag-btn" id="ns-next" onclick="nsPg(1)">Sau</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="ns-detail-wrap" style="display:none">
-        <div class="bc">
-          <span class="bc-lk" onclick="backNsList()">Hồ sơ nhân sự</span>
-          <span class="bc-sep">›</span>
-          <span id="ns-detail-bc"></span>
-        </div>
-        <div class="ph">
-          <h2 class="ph-title" id="ns-detail-title"></h2>
-          <div style="display:flex;gap:8px">
-            <button class="btn-s" onclick="openEditNs()">Sửa hồ sơ</button>
-            <button class="btn-red" id="ns-quit-btn" onclick="openQuitNs()">Đánh dấu thôi việc</button>
-          </div>
-        </div>
-        <div class="tabs">
-          <button class="tab-b active" onclick="nsTab(0,this)">Thông tin chung</button>
-          <button class="tab-b" onclick="nsTab(1,this)">Thông tin gia đình</button>
-          <button class="tab-b" onclick="nsTab(2,this)">Lịch sử công tác</button>
-          <button class="tab-b" onclick="nsTab(3,this)">Trình độ học vấn</button>
-          <button class="tab-b" onclick="nsTab(4,this)">Lương và phụ cấp</button>
-          <button class="tab-b" onclick="nsTab(5,this)">Hợp đồng</button>
-          <button class="tab-b" onclick="nsTab(6,this)">Khen thưởng/Kỷ luật</button>
-        </div>
-        <div class="tp active" id="nsd-tp0">
-          <div class="card"><div class="ig" id="nsd-info"></div><div style="margin-top:20px"><button class="btn-s" onclick="alert('Xem PDF')">Xem PDF</button></div></div>
-        </div>
-        <div class="tp" id="nsd-tp1">
-          <div class="tw"><table>
-            <thead><tr><th>Họ tên</th><th>Mối quan hệ</th></tr></thead>
-            <tbody><tr><td>Nguyễn Thị B</td><td>Mẹ</td></tr><tr><td>Nguyễn Thị C</td><td>Vợ/Chồng</td></tr></tbody>
-          </table></div>
-        </div>
-        <div class="tp" id="nsd-tp2">
-          <div class="tw"><table>
-            <thead><tr><th>Tên nơi công tác</th><th>Từ ngày</th><th>Đến ngày</th></tr></thead>
-            <tbody><tr><td>Công ty Fantastic</td><td>01/01/2015</td><td>01/01/2017</td></tr></tbody>
-          </table></div>
-        </div>
-        <div class="tp" id="nsd-tp3">
-          <div class="card">
-            <div class="ig">
-              <div><div class="il">Trình độ văn hóa</div><div class="iv">12/12</div></div>
-              <div><div class="il">Học hàm/Học vị</div><div class="iv" id="nsd-title"></div></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-t">Thông tin bằng cấp</div>
-            <div class="tw"><table>
-              <thead><tr><th>Tên bằng</th><th>Nơi cấp</th><th></th></tr></thead>
-              <tbody><tr><td>Bằng Tiến sĩ chuyên ngành Khoa học máy tính</td><td>Trường Đại học TKMT</td><td><button class="btn-lk" onclick="alert('Xem PDF')">Xem PDF</button></td></tr></tbody>
-            </table></div>
-          </div>
-        </div>
-        <div class="tp" id="nsd-tp4">
-          <div class="card">
-            <div class="card-t">Thông tin hệ số lương</div>
-            <div class="ig">
-              <div><div class="il">Ngạch viên chức</div><div class="iv">Giảng viên</div></div>
-              <div><div class="il">Bậc lương</div><div class="iv">Bậc 3</div></div>
-              <div><div class="il">Hệ số lương</div><div class="iv">2.98</div></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-t">Thông tin phụ cấp</div>
-            <div class="tw"><table>
-              <thead><tr><th>Tên loại phụ cấp</th><th>Trạng thái</th></tr></thead>
-              <tbody>
-                <tr><td>Phụ cấp thâm niên</td><td><span class="bd bd-active">Đang hoạt động</span></td></tr>
-                <tr><td>Phụ cấp nghiên cứu</td><td><span class="bd bd-unused">Ngừng sử dụng</span></td></tr>
-              </tbody>
-            </table></div>
-          </div>
-        </div>
-        <div class="tp" id="nsd-tp5">
-          <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
-            <button class="btn-p sm" onclick="openAddContract()">+ Thêm hợp đồng</button>
-          </div>
-          <div class="tw"><table>
-            <thead><tr><th>Loại hợp đồng</th><th>Ngày ký</th><th>Ngày hiệu lực</th><th>Ngày hết hạn</th><th>Đơn vị</th><th>Trạng thái</th><th>Thao tác</th></tr></thead>
-            <tbody>
-              <tr><td>Hợp đồng không xác định thời gian</td><td>01/01/2015</td><td>01/01/2015</td><td>01/01/2027</td><td>Khoa CNTT</td><td><span class="bd bd-active">Đang hoạt động</span></td><td><button class="btn-lk" onclick="openContract(0)">Xem</button></td></tr>
-              <tr><td>Hợp đồng thời vụ</td><td>01/06/2018</td><td>01/06/2018</td><td>01/06/2018</td><td>Khoa CNTT</td><td><span class="bd bd-unused">Ngừng sử dụng</span></td><td><button class="btn-lk" onclick="openContract(1)">Xem</button></td></tr>
-            </tbody>
-          </table></div>
-        </div>
-        <div class="tp" id="nsd-tp6">
-          <div class="card">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-              <div class="card-t" style="margin:0;border:none;padding:0">Khen thưởng</div>
-              <button class="btn-p sm" onclick="openAddReward()">+ Thêm</button>
-            </div>
-            <div class="tw"><table>
-              <thead><tr><th>Loại khen thưởng</th><th>Tên khen thưởng</th><th>Ngày quyết định</th><th>Số quyết định</th><th>Thao tác</th></tr></thead>
-              <tbody>
-                <tr><td>Cấp Nhà nước</td><td>Huân chương Lao động hạng Ba</td><td>20/11/2025</td><td>1234/QĐ-CTN</td><td><button class="btn-lk" onclick="openReward(0)">Xem</button></td></tr>
-                <tr><td>Cấp Trường</td><td>Chiến sĩ thi đua cơ sở</td><td>30/06/2026</td><td>88/QĐ-ĐHTL</td><td><button class="btn-lk" onclick="openReward(1)">Xem</button></td></tr>
-              </tbody>
-            </table></div>
-          </div>
-          <div class="card">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-              <div class="card-t" style="margin:0;border:none;padding:0">Kỷ luật</div>
-              <button class="btn-p sm" onclick="openAddDisc()">+ Thêm</button>
-            </div>
-            <div class="tw"><table>
-              <thead><tr><th>Loại kỷ luật</th><th>Tên kỷ luật</th><th>Ngày quyết định</th><th>Hình thức xử lý</th><th>Thao tác</th></tr></thead>
-              <tbody>
-                <tr><td>Cấp Trường</td><td>Khiển trách</td><td>15/05/2026</td><td>Phê bình</td><td><button class="btn-lk" onclick="openDisc(0)">Xem</button></td></tr>
-              </tbody>
-            </table></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ SƠ ĐỒ TỔ CHỨC ═══ -->
-    <div class="pg" id="pg-org">
-      <div id="org-tree-wrap">
-        <div class="ph"><h1 class="ph-title">Sơ đồ tổ chức</h1></div>
-        <div class="org-card" id="org-tree"></div>
-      </div>
-      <div id="org-detail-wrap" style="display:none">
-        <div class="bc">
-          <span class="bc-lk" onclick="backOrgTree()">Sơ đồ tổ chức</span>
-          <span class="bc-sep">›</span><span id="org-detail-bc"></span>
-        </div>
-        <div class="ph" style="margin-bottom:16px">
-          <h2 class="ph-title" id="org-detail-title"></h2>
-          <button class="btn-p" onclick="openAppoint()">+ Bổ nhiệm</button>
-        </div>
-        <div class="tabs">
-          <button class="tab-b active" onclick="orgTab(0,this)">Thông tin chung</button>
-          <button class="tab-b" onclick="orgTab(1,this)">Nhân sự</button>
-          <button class="tab-b" onclick="orgTab(2,this)">Đơn vị trực thuộc</button>
-        </div>
-        <div class="tp active" id="org-tp0"><div class="card"><div class="ig" id="org-info"></div></div></div>
-        <div class="tp" id="org-tp1"><div class="tw"><table>
-          <thead><tr><th>Mã NS</th><th>Họ tên</th><th>Đơn vị công tác</th><th>Chức vụ</th><th>Ngày bổ nhiệm</th><th>Trạng thái</th></tr></thead>
-          <tbody id="org-staff"></tbody>
-        </table></div></div>
-        <div class="tp" id="org-tp2"><div class="org-card" id="org-subtree"></div></div>
-      </div>
-    </div>
-
-    <!-- ═══ HỆ SỐ LƯƠNG ═══ -->
-    <div class="pg" id="pg-hsl">
-      <div class="ph">
-        <h1 class="ph-title">Hệ số lương</h1>
-        <button class="btn-p" onclick="openAddHsl()">+ Thêm hệ số lương</button>
-      </div>
-      <div id="hsl-wrap"></div>
-    </div>
-
-    <!-- ═══ KHÓA ĐÀO TẠO ═══ -->
-    <div class="pg" id="pg-kdt">
-      <div id="kdt-list-wrap">
-        <div class="ph"><h1 class="ph-title">Khóa đào tạo</h1></div>
-        <div class="tw">
-          <table>
-            <thead><tr><th>Mã KĐT</th><th>Tên khóa đào tạo</th><th>Trạng thái</th><th>Thao tác</th></tr></thead>
-            <tbody id="kdt-body"></tbody>
-          </table>
-        </div>
-      </div>
-      <div id="kdt-detail-wrap" style="display:none">
-        <div class="bc">
-          <span class="bc-lk" onclick="backKdtList()">Khóa đào tạo</span>
-          <span class="bc-sep">›</span><span id="kdt-detail-bc"></span>
-        </div>
-        <div class="ph" style="margin-bottom:16px">
-          <h2 class="ph-title" id="kdt-detail-title"></h2>
-        </div>
-        <div class="tabs">
-          <button class="tab-b active" onclick="kdtTab(0,this)">Thông tin chung</button>
-          <button class="tab-b" onclick="kdtTab(1,this)">Thông tin đăng ký</button>
-          <button class="tab-b" onclick="kdtTab(2,this)">Danh sách tham gia</button>
-        </div>
-        <div class="tp active" id="kdt-tp0"><div class="card"><div class="ig" id="kdt-gen"></div></div></div>
-        <div class="tp" id="kdt-tp1"><div class="card"><div class="ig" id="kdt-reg"></div></div></div>
-        <div class="tp" id="kdt-tp2"><div class="tw"><table>
-          <thead><tr><th>Mã NS</th><th>Họ tên</th><th>Đơn vị</th><th>Ngày đăng ký</th><th>Kết quả</th><th>Thao tác</th></tr></thead>
-          <tbody id="kdt-parts"></tbody>
-        </table></div></div>
-      </div>
-    </div>
-
     <!-- ═══ HỒ SƠ CÁ NHÂN ═══ -->
-    <div class="pg" id="pg-profile">
+    <div class="pg active" id="pg-profile">
       <div class="ph"><h1 class="ph-title">Hồ sơ cá nhân</h1></div>
       <div class="tabs">
         <button class="tab-b active" onclick="pgTab('profile',0,this)">Thông tin chung</button>
@@ -448,21 +174,21 @@ tbody tr:hover td{background:#fafafa}
       <div class="tp active" id="profile-tp0">
         <div class="card">
           <div class="ig">
-            <div><div class="il">Họ tên</div><div class="iv">Trần Thị Hương</div></div>
-            <div><div class="il">Giới tính</div><div class="iv">Nữ</div></div>
-            <div><div class="il">Ngày sinh</div><div class="iv">15/05/1985</div></div>
-            <div><div class="il">Quê quán</div><div class="iv">Hà Nội</div></div>
-            <div><div class="il">Email</div><div class="iv">huong.tt@tlu.edu.vn</div></div>
-            <div><div class="il">Số điện thoại</div><div class="iv">0912345678</div></div>
-            <div><div class="il">Địa chỉ</div><div class="iv">Đống Đa, Hà Nội</div></div>
-            <div><div class="il">CCCD</div><div class="iv">0011985005678</div></div>
-            <div><div class="il">Mã số thuế</div><div class="iv">1100150678</div></div>
-            <div><div class="il">Số BHXH</div><div class="iv">00150850678</div></div>
-            <div><div class="il">Số BHYT</div><div class="iv">00150850678</div></div>
+            <div><div class="il">Họ tên</div><div class="iv">Lê Văn An</div></div>
+            <div><div class="il">Giới tính</div><div class="iv">Nam</div></div>
+            <div><div class="il">Ngày sinh</div><div class="iv">10/02/1988</div></div>
+            <div><div class="il">Quê quán</div><div class="iv">Nam Định</div></div>
+            <div><div class="il">Email</div><div class="iv">an.lv@tlu.edu.vn</div></div>
+            <div><div class="il">Số điện thoại</div><div class="iv">0987654321</div></div>
+            <div><div class="il">Địa chỉ</div><div class="iv">Cầu Giấy, Hà Nội</div></div>
+            <div><div class="il">CCCD</div><div class="iv">0011988102345</div></div>
+            <div><div class="il">Mã số thuế</div><div class="iv">1100188102345</div></div>
+            <div><div class="il">Số BHXH</div><div class="iv">00198810234</div></div>
+            <div><div class="il">Số BHYT</div><div class="iv">00198810234</div></div>
             <div><div class="il">Thông tin Đảng/Đoàn</div><div class="iv">Đảng Cộng sản Việt Nam</div></div>
-            <div><div class="il">Ngày vào Đảng/Đoàn</div><div class="iv">10/03/2010</div></div>
-            <div><div class="il">Số tài khoản</div><div class="iv">19001985567</div></div>
-            <div><div class="il">Tên ngân hàng</div><div class="iv">Vietcombank</div></div>
+            <div><div class="il">Ngày vào Đảng/Đoàn</div><div class="iv">15/05/2015</div></div>
+            <div><div class="il">Số tài khoản</div><div class="iv">19001988234</div></div>
+            <div><div class="il">Tên ngân hàng</div><div class="iv">BIDV</div></div>
           </div>
           <div style="margin-top:20px"><button class="btn-s" onclick="alert('Xem PDF')">Xem PDF</button></div>
         </div>
@@ -470,27 +196,38 @@ tbody tr:hover td{background:#fafafa}
       <div class="tp" id="profile-tp1">
         <div class="tw"><table>
           <thead><tr><th>Họ tên</th><th>Mối quan hệ</th></tr></thead>
-          <tbody><tr><td>Trần Văn Minh</td><td>Bố</td></tr><tr><td>Nguyễn Thị Loan</td><td>Mẹ</td></tr><tr><td>Lê Văn Hùng</td><td>Chồng</td></tr></tbody>
+          <tbody>
+            <tr><td>Lê Văn Thành</td><td>Bố</td></tr>
+            <tr><td>Nguyễn Thị Mai</td><td>Mẹ</td></tr>
+            <tr><td>Trần Thị Lan</td><td>Vợ</td></tr>
+          </tbody>
         </table></div>
       </div>
       <div class="tp" id="profile-tp2">
         <div class="tw"><table>
           <thead><tr><th>Tên nơi công tác</th><th>Từ ngày</th><th>Đến ngày</th></tr></thead>
-          <tbody><tr><td>Sở Nội vụ Hà Nội</td><td>01/08/2008</td><td>01/07/2012</td></tr></tbody>
+          <tbody>
+            <tr><td>Công ty Cổ phần Phần mềm ABC</td><td>01/09/2010</td><td>01/08/2013</td></tr>
+            <tr><td>Trường Đại học TKMT</td><td>01/09/2013</td><td>Hiện tại</td></tr>
+          </tbody>
         </table></div>
       </div>
       <div class="tp" id="profile-tp3">
         <div class="card">
           <div class="ig">
             <div><div class="il">Trình độ văn hóa</div><div class="iv">12/12</div></div>
-            <div><div class="il">Học hàm/Học vị</div><div class="iv">Thạc sĩ</div></div>
+            <div><div class="il">Học hàm/Học vị</div><div class="iv">Tiến sĩ</div></div>
           </div>
         </div>
         <div class="card">
           <div class="card-t">Thông tin bằng cấp</div>
           <div class="tw"><table>
             <thead><tr><th>Tên bằng</th><th>Nơi cấp</th><th></th></tr></thead>
-            <tbody><tr><td>Thạc sĩ Quản trị Nhân lực</td><td>Trường Đại học TKMT</td><td><button class="btn-lk" onclick="alert('Xem PDF')">Xem PDF</button></td></tr></tbody>
+            <tbody>
+              <tr><td>Cử nhân Công nghệ thông tin</td><td>Trường Đại học Bách Khoa Hà Nội</td><td><button class="btn-lk" onclick="alert('Xem PDF')">Xem PDF</button></td></tr>
+              <tr><td>Thạc sĩ Khoa học máy tính</td><td>Trường Đại học TKMT</td><td><button class="btn-lk" onclick="alert('Xem PDF')">Xem PDF</button></td></tr>
+              <tr><td>Tiến sĩ Khoa học máy tính</td><td>Trường Đại học TKMT</td><td><button class="btn-lk" onclick="alert('Xem PDF')">Xem PDF</button></td></tr>
+            </tbody>
           </table></div>
         </div>
       </div>
@@ -498,16 +235,18 @@ tbody tr:hover td{background:#fafafa}
         <div class="card">
           <div class="card-t">Thông tin hệ số lương</div>
           <div class="ig">
-            <div><div class="il">Ngạch viên chức</div><div class="iv">Chuyên viên</div></div>
-            <div><div class="il">Bậc lương</div><div class="iv">Bậc 5</div></div>
-            <div><div class="il">Hệ số lương</div><div class="iv">3.65</div></div>
+            <div><div class="il">Ngạch viên chức</div><div class="iv">Giảng viên</div></div>
+            <div><div class="il">Bậc lương</div><div class="iv">Bậc 3</div></div>
+            <div><div class="il">Hệ số lương</div><div class="iv">2.98</div></div>
           </div>
         </div>
         <div class="card">
           <div class="card-t">Thông tin phụ cấp</div>
           <div class="tw"><table>
             <thead><tr><th>Tên loại phụ cấp</th><th>Trạng thái</th></tr></thead>
-            <tbody><tr><td>Phụ cấp thâm niên</td><td><span class="bd bd-active">Đang hoạt động</span></td></tr></tbody>
+            <tbody>
+              <tr><td>Phụ cấp thâm niên</td><td><span class="bd bd-active">Đang hoạt động</span></td></tr>
+            </tbody>
           </table></div>
         </div>
       </div>
@@ -515,7 +254,8 @@ tbody tr:hover td{background:#fafafa}
         <div class="tw"><table>
           <thead><tr><th>Loại hợp đồng</th><th>Ngày ký</th><th>Ngày hiệu lực</th><th>Ngày hết hạn</th><th>Đơn vị</th><th>Trạng thái</th><th>Thao tác</th></tr></thead>
           <tbody>
-            <tr><td>Hợp đồng không xác định thời gian</td><td>01/07/2012</td><td>01/07/2012</td><td>01/07/2028</td><td>Phòng TCCB</td><td><span class="bd bd-active">Đang hoạt động</span></td><td><button class="btn-lk" onclick="openContract(2)">Xem</button></td></tr>
+            <tr><td>Hợp đồng không xác định thời gian</td><td>01/09/2013</td><td>01/09/2013</td><td>01/09/2029</td><td>Khoa CNTT</td><td><span class="bd bd-active">Đang hoạt động</span></td><td><button class="btn-lk" onclick="openContract(0)">Xem</button></td></tr>
+            <tr><td>Hợp đồng xác định thời gian</td><td>01/09/2013</td><td>01/09/2013</td><td>31/08/2016</td><td>Khoa CNTT</td><td><span class="bd bd-unused">Ngừng sử dụng</span></td><td><button class="btn-lk" onclick="openContract(1)">Xem</button></td></tr>
           </tbody>
         </table></div>
       </div>
@@ -524,7 +264,10 @@ tbody tr:hover td{background:#fafafa}
           <div class="card-t">Khen thưởng</div>
           <div class="tw"><table>
             <thead><tr><th>Loại khen thưởng</th><th>Tên khen thưởng</th><th>Ngày quyết định</th><th>Số quyết định</th><th>Thao tác</th></tr></thead>
-            <tbody><tr><td>Cấp Trường</td><td>Chiến sĩ thi đua cơ sở</td><td>30/06/2025</td><td>55/QĐ-ĐHTL</td><td><button class="btn-lk" onclick="openReward(2)">Xem</button></td></tr></tbody>
+            <tbody>
+              <tr><td>Cấp Trường</td><td>Chiến sĩ thi đua cơ sở</td><td>30/06/2025</td><td>102/QĐ-ĐHTL</td><td><button class="btn-lk" onclick="openReward(0)">Xem</button></td></tr>
+              <tr><td>Cấp Khoa</td><td>Giảng viên tiêu biểu</td><td>20/01/2026</td><td>15/QĐ-CNTT</td><td><button class="btn-lk" onclick="openReward(1)">Xem</button></td></tr>
+            </tbody>
           </table></div>
         </div>
         <div class="card">
@@ -547,14 +290,14 @@ tbody tr:hover td{background:#fafafa}
       </div>
       <div class="tp active" id="dept-tp0">
         <div class="card"><div class="ig">
-          <div><div class="il">Mã đơn vị</div><div class="iv">DV007</div></div>
-          <div><div class="il">Tên đơn vị</div><div class="iv">Phòng Tổ chức cán bộ</div></div>
-          <div><div class="il">Loại đơn vị</div><div class="iv">Phòng</div></div>
+          <div><div class="il">Mã đơn vị</div><div class="iv">DV002</div></div>
+          <div><div class="il">Tên đơn vị</div><div class="iv">Khoa Công nghệ thông tin</div></div>
+          <div><div class="il">Loại đơn vị</div><div class="iv">Khoa</div></div>
           <div><div class="il">Đơn vị cha</div><div class="iv">Trường Đại học TKMT</div></div>
-          <div><div class="il">Email</div><div class="iv">tccb@tlu.edu.vn</div></div>
-          <div><div class="il">Số điện thoại</div><div class="iv">0999333333</div></div>
+          <div><div class="il">Email</div><div class="iv">cntt@tlu.edu.vn</div></div>
+          <div><div class="il">Số điện thoại</div><div class="iv">0999888888</div></div>
           <div><div class="il">Địa chỉ</div><div class="iv">175 Tây Sơn, Hà Nội</div></div>
-          <div><div class="il">Địa chỉ văn phòng</div><div class="iv">Tòa A1, Phòng 101</div></div>
+          <div><div class="il">Địa chỉ văn phòng</div><div class="iv">Tòa B2</div></div>
           <div><div class="il">Trạng thái</div><div class="iv"><span class="bd bd-active">Đang hoạt động</span></div></div>
         </div></div>
       </div>
@@ -562,47 +305,57 @@ tbody tr:hover td{background:#fafafa}
         <div class="tw"><table>
           <thead><tr><th>Mã NS</th><th>Họ tên</th><th>Đơn vị công tác</th><th>Chức vụ</th><th>Ngày bổ nhiệm</th><th>Trạng thái</th></tr></thead>
           <tbody>
-            <tr><td>NS008</td><td>Vũ Thị Hạnh</td><td>Phòng TCCB</td><td>Trưởng phòng</td><td>01/01/2022</td><td><span class="bd bd-working">Đang công tác</span></td></tr>
-            <tr><td>NS013</td><td>Lê Thị Quyên</td><td>Phòng TCCB</td><td>Chuyên viên</td><td>15/07/2018</td><td><span class="bd bd-working">Đang công tác</span></td></tr>
-            <tr><td>NS017</td><td>Đỗ Thị Vân</td><td>Phòng TCCB</td><td>Chuyên viên</td><td>01/09/2019</td><td><span class="bd bd-working">Đang công tác</span></td></tr>
-            <tr><td>NS020</td><td>Lý Văn Dũng</td><td>Phòng TCCB</td><td>Chuyên viên</td><td>05/01/2021</td><td><span class="bd bd-working">Đang công tác</span></td></tr>
+            <tr><td>NS002</td><td>Trần Thị Bình</td><td>Khoa CNTT</td><td>Trưởng khoa</td><td>01/09/2020</td><td><span class="bd bd-working">Đang công tác</span></td></tr>
+            <tr><td>NS005</td><td>Hoàng Văn Em</td><td>Khoa CNTT</td><td>Giảng viên</td><td>01/09/2017</td><td><span class="bd bd-working">Đang công tác</span></td></tr>
+            <tr><td>NS006</td><td>Ngô Thị Phương</td><td>Khoa CNTT</td><td>Giảng viên chính</td><td>01/09/2018</td><td><span class="bd bd-working">Đang công tác</span></td></tr>
+            <tr><td>NS011</td><td>Nguyễn Thị Ngọc</td><td>Khoa CNTT</td><td>Giảng viên</td><td>01/09/2019</td><td><span class="bd bd-working">Đang công tác</span></td></tr>
+            <tr><td>NS014</td><td>Phạm Văn Sơn</td><td>Khoa CNTT</td><td>Giảng viên</td><td>01/02/2020</td><td><span class="bd bd-working">Đang công tác</span></td></tr>
+            <tr><td>NS018</td><td>Vũ Văn Xuân</td><td>Khoa CNTT</td><td>Giảng viên cao cấp</td><td>01/09/2015</td><td><span class="bd bd-working">Đang công tác</span></td></tr>
           </tbody>
         </table></div>
       </div>
       <div class="tp" id="dept-tp2">
-        <div class="org-card"><p style="color:#9ca3af;font-size:14px;padding:8px">Không có đơn vị trực thuộc</p></div>
+        <div style="background:#fff;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.06);padding:20px">
+          <div style="display:flex;align-items:center;gap:8px;padding:8px 10px">
+            <span style="width:16px;font-size:11px;color:#9ca3af">▼</span>
+            <span style="font-size:14px;color:#1C3B5A;font-weight:600">Khoa Công nghệ thông tin</span>
+          </div>
+          <div style="margin-left:28px;border-left:2px solid #e5e7eb;padding-left:8px;padding-top:2px">
+            <div style="display:flex;align-items:center;gap:8px;padding:8px 10px">
+              <span style="width:16px"></span>
+              <span style="font-size:14px;color:#1C3B5A">Bộ môn Công nghệ Phần mềm</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;padding:8px 10px">
+              <span style="width:16px"></span>
+              <span style="font-size:14px;color:#1C3B5A">Bộ môn Mạng máy tính</span>
+              <span style="font-size:11px;font-weight:600;background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:20px">Giải thể</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;padding:8px 10px">
+              <span style="width:16px"></span>
+              <span style="font-size:14px;color:#1C3B5A">Bộ môn Hệ thống thông tin</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- ═══ ĐÀO TẠO (CÁ NHÂN) ═══ -->
-    <div class="pg" id="pg-mytraining">
-      <div class="ph"><h1 class="ph-title">Đào tạo</h1></div>
+    <!-- ═══ KHÓA ĐÀO TẠO ═══ -->
+    <div class="pg" id="pg-training">
+      <div class="ph"><h1 class="ph-title">Khóa đào tạo</h1></div>
       <div class="tabs">
-        <button class="tab-b active" onclick="pgTab('mytraining',0,this)">Đăng ký khóa đào tạo</button>
-        <button class="tab-b" onclick="pgTab('mytraining',1,this)">Các khóa đào tạo đã đăng ký</button>
+        <button class="tab-b active" onclick="pgTab('training',0,this)">Đăng ký khóa đào tạo</button>
+        <button class="tab-b" onclick="pgTab('training',1,this)">Các khóa đào tạo đã đăng ký</button>
       </div>
-      <div class="tp active" id="mytraining-tp0">
+      <div class="tp active" id="training-tp0">
         <div class="tw"><table>
-          <thead><tr><th>Tên khóa đào tạo</th><th>Loại</th><th>Kinh phí</th><th>Số lượng</th><th>Trạng thái</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><button class="btn-lk" onclick="openMyTr(0)">Bồi dưỡng tiêu chuẩn Giảng viên chính (Hạng I)</button></td>
-              <td>Đào tạo chuyên môn</td><td>3.500.000</td><td>4/50</td>
-              <td><span class="bd bd-open">Đang mở đăng ký</span></td>
-            </tr>
-          </tbody>
+          <thead><tr><th>Tên khóa đào tạo</th><th>Loại</th><th>Kinh phí (VNĐ)</th><th>Số lượng</th><th>Trạng thái</th><th>Thao tác</th></tr></thead>
+          <tbody id="training-avail-body"></tbody>
         </table></div>
       </div>
-      <div class="tp" id="mytraining-tp1">
+      <div class="tp" id="training-tp1">
         <div class="tw"><table>
-          <thead><tr><th>Tên khóa đào tạo</th><th>Loại</th><th>Kinh phí</th><th>Số lượng</th><th>Trạng thái</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><button class="btn-lk" onclick="openMyTr(1)">Bồi dưỡng Quản lý nhân sự</button></td>
-              <td>Đào tạo kỹ năng</td><td>4.500.000</td><td>15/20</td>
-              <td><span class="bd bd-done">Đã hoàn thành</span></td>
-            </tr>
-          </tbody>
+          <thead><tr><th>Tên khóa đào tạo</th><th>Loại</th><th>Kinh phí (VNĐ)</th><th>Trạng thái</th><th>Kết quả</th><th>Thao tác</th></tr></thead>
+          <tbody id="training-reg-body"></tbody>
         </table></div>
       </div>
     </div>
@@ -640,106 +393,6 @@ tbody tr:hover td{background:#fafafa}
   </div>
 </div>
 
-<!-- Thêm hồ sơ nhân sự -->
-<div class="ov" id="ov-addns">
-  <div class="modal modal-xl">
-    <div class="mt">Thêm hồ sơ nhân sự</div><div style="height:4px"></div>
-    <div class="sec-hdr">Thông tin cơ bản</div>
-    <div class="frow">
-      <div class="fg"><label class="fgl">Họ tên <span class="req">*</span></label><input class="fi" id="an-name"><div class="fe" id="an-name-e">Vui lòng nhập họ tên</div></div>
-      <div class="fg"><label class="fgl">Giới tính <span class="req">*</span></label><select class="fsel" id="an-gender"><option value="">Chọn giới tính</option><option>Nam</option><option>Nữ</option></select><div class="fe" id="an-gender-e">Vui lòng chọn giới tính</div></div>
-    </div>
-    <div class="frow">
-      <div class="fg"><label class="fgl">Ngày sinh <span class="req">*</span></label><input class="fi" type="date" id="an-dob"><div class="fe" id="an-dob-e">Vui lòng nhập ngày sinh</div></div>
-      <div class="fg"><label class="fgl">Quê quán</label><input class="fi" id="an-hometown"></div>
-    </div>
-    <div class="sec-hdr">Thông tin liên hệ</div>
-    <div class="frow">
-      <div class="fg"><label class="fgl">Email <span class="req">*</span></label><input class="fi" type="email" id="an-email"><div class="fe" id="an-email-e">Vui lòng nhập email</div></div>
-      <div class="fg"><label class="fgl">Số điện thoại</label><input class="fi" type="tel" id="an-phone"></div>
-    </div>
-    <div class="fg"><label class="fgl">Địa chỉ thường trú</label><input class="fi" id="an-addr"></div>
-    <div class="sec-hdr">Giấy tờ tùy thân</div>
-    <div class="frow">
-      <div class="fg"><label class="fgl">Số CCCD</label><input class="fi" id="an-cccd"></div>
-      <div class="fg"><label class="fgl">Mã số thuế</label><input class="fi" id="an-mst"></div>
-    </div>
-    <div class="frow">
-      <div class="fg"><label class="fgl">Số BHXH</label><input class="fi" id="an-bhxh"></div>
-      <div class="fg"><label class="fgl">Số BHYT</label><input class="fi" id="an-bhyt"></div>
-    </div>
-    <div class="sec-hdr">Thông tin Đảng/Đoàn</div>
-    <div class="frow">
-      <div class="fg"><label class="fgl">Tổ chức Đảng/Đoàn</label><input class="fi" id="an-party"></div>
-      <div class="fg"><label class="fgl">Ngày tham gia</label><input class="fi" type="date" id="an-party-date"></div>
-    </div>
-    <div class="sec-hdr">Tài khoản ngân hàng</div>
-    <div class="frow">
-      <div class="fg"><label class="fgl">Số tài khoản</label><input class="fi" id="an-bank-no"></div>
-      <div class="fg"><label class="fgl">Tên ngân hàng</label><input class="fi" id="an-bank-name"></div>
-    </div>
-    <div class="sec-hdr">Thông tin công tác</div>
-    <div class="frow">
-      <div class="fg"><label class="fgl">Đơn vị công tác <span class="req">*</span></label><select class="fsel" id="an-dept"><option value="">Chọn đơn vị</option><option>Ban Giám hiệu</option><option>Khoa CNTT</option><option>Khoa Kinh tế</option><option>Phòng TCCB</option><option>Phòng TCKT</option><option>Ban Quản trị</option></select><div class="fe" id="an-dept-e">Vui lòng chọn đơn vị</div></div>
-      <div class="fg"><label class="fgl">Chức vụ <span class="req">*</span></label><input class="fi" id="an-pos"><div class="fe" id="an-pos-e">Vui lòng nhập chức vụ</div></div>
-    </div>
-    <div class="frow">
-      <div class="fg"><label class="fgl">Học hàm/Học vị</label><select class="fsel" id="an-title"><option value="">Chọn</option><option>Cử nhân</option><option>Thạc sĩ</option><option>Tiến sĩ</option><option>Phó Giáo sư</option><option>Giáo sư</option></select></div>
-      <div class="fg"><label class="fgl">Ngạch viên chức</label><select class="fsel" id="an-ngach"><option value="">Chọn</option><option>Giảng viên</option><option>Giảng viên chính</option><option>Giảng viên cao cấp</option><option>Chuyên viên</option><option>Trưởng khoa</option><option>Trưởng bộ môn</option></select></div>
-    </div>
-    <div class="mf"><button class="btn-s" onclick="closeOv('ov-addns')">Hủy</button><button class="btn-p" onclick="submitAddNs()">Lưu hồ sơ</button></div>
-  </div>
-</div>
-
-<!-- Sửa hồ sơ -->
-<div class="ov" id="ov-editns">
-  <div class="modal">
-    <div class="mt">Sửa hồ sơ nhân sự</div>
-    <div class="ms" id="ens-sub"></div>
-    <div class="frow">
-      <div class="fg"><label class="fgl">Họ tên <span class="req">*</span></label><input class="fi" id="ens-name"><div class="fe" id="ens-name-e">Vui lòng nhập họ tên</div></div>
-      <div class="fg"><label class="fgl">Giới tính</label><select class="fsel" id="ens-gender"><option>Nam</option><option>Nữ</option></select></div>
-    </div>
-    <div class="frow">
-      <div class="fg"><label class="fgl">Đơn vị công tác <span class="req">*</span></label><select class="fsel" id="ens-dept"><option value="">Chọn</option><option>Ban Giám hiệu</option><option>Khoa CNTT</option><option>Khoa Kinh tế</option><option>Phòng TCCB</option><option>Phòng TCKT</option><option>Ban Quản trị</option></select><div class="fe" id="ens-dept-e">Vui lòng chọn đơn vị</div></div>
-      <div class="fg"><label class="fgl">Chức vụ</label><input class="fi" id="ens-pos"></div>
-    </div>
-    <div class="frow">
-      <div class="fg"><label class="fgl">Học hàm/Học vị</label><select class="fsel" id="ens-title"><option value="">Chọn</option><option>Cử nhân</option><option>Thạc sĩ</option><option>Tiến sĩ</option><option>Phó Giáo sư</option><option>Giáo sư</option></select></div>
-      <div class="fg"><label class="fgl">Email <span class="req">*</span></label><input class="fi" type="email" id="ens-email"><div class="fe" id="ens-email-e">Vui lòng nhập email</div></div>
-    </div>
-    <div class="mf"><button class="btn-s" onclick="closeOv('ov-editns')">Hủy</button><button class="btn-p" onclick="submitEditNs()">Lưu thay đổi</button></div>
-  </div>
-</div>
-
-<!-- Xác nhận thôi việc -->
-<div class="ov" id="ov-quitns">
-  <div class="cb">
-    <div class="cb-t">Đánh dấu thôi việc</div>
-    <div class="cb-b" id="quit-ns-name">Bạn có chắc chắn muốn đánh dấu nhân sự này đã thôi việc?</div>
-    <div class="cb-n">Hành động này không thể hoàn tác</div>
-    <div class="cb-a"><button class="btn-s" onclick="closeOv('ov-quitns')">Hủy</button><button class="btn-red" style="height:40px;padding:0 16px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer" onclick="doQuitNs()">Xác nhận thôi việc</button></div>
-  </div>
-</div>
-
-<!-- Thêm hợp đồng -->
-<div class="ov" id="ov-addcontract">
-  <div class="modal">
-    <div class="mt">Thêm hợp đồng</div><div style="height:16px"></div>
-    <div class="fg"><label class="fgl">Loại hợp đồng <span class="req">*</span></label><select class="fsel" id="ac-type"><option value="">Chọn loại hợp đồng</option><option>Hợp đồng không xác định thời gian</option><option>Hợp đồng xác định thời gian</option><option>Hợp đồng thời vụ</option></select><div class="fe" id="ac-type-e">Vui lòng chọn loại hợp đồng</div></div>
-    <div class="frow">
-      <div class="fg"><label class="fgl">Ngày ký <span class="req">*</span></label><input class="fi" type="date" id="ac-sign"><div class="fe" id="ac-sign-e">Vui lòng nhập ngày ký</div></div>
-      <div class="fg"><label class="fgl">Ngày hiệu lực <span class="req">*</span></label><input class="fi" type="date" id="ac-eff"><div class="fe" id="ac-eff-e">Vui lòng nhập ngày hiệu lực</div></div>
-    </div>
-    <div class="frow">
-      <div class="fg"><label class="fgl">Ngày hết hạn</label><input class="fi" type="date" id="ac-exp"></div>
-      <div class="fg"><label class="fgl">Đơn vị công tác <span class="req">*</span></label><select class="fsel" id="ac-dept"><option value="">Chọn đơn vị</option><option>Ban Giám hiệu</option><option>Khoa CNTT</option><option>Khoa Kinh tế</option><option>Phòng TCCB</option></select><div class="fe" id="ac-dept-e">Vui lòng chọn đơn vị</div></div>
-    </div>
-    <div class="mf"><button class="btn-s" onclick="closeOv('ov-addcontract')">Hủy</button><button class="btn-p" onclick="submitAddContract()">Lưu hợp đồng</button></div>
-  </div>
-</div>
-
-<!-- Chi tiết hợp đồng -->
 <div class="ov" id="ov-contract">
   <div class="modal">
     <div class="mt">Chi tiết hợp đồng</div><div style="height:16px"></div>
@@ -748,23 +401,6 @@ tbody tr:hover td{background:#fafafa}
   </div>
 </div>
 
-<!-- Thêm khen thưởng -->
-<div class="ov" id="ov-addreward">
-  <div class="modal">
-    <div class="mt">Thêm khen thưởng</div><div style="height:16px"></div>
-    <div class="frow">
-      <div class="fg"><label class="fgl">Loại khen thưởng <span class="req">*</span></label><select class="fsel" id="ar-cat"><option value="">Chọn loại</option><option>Cấp Nhà nước</option><option>Cấp Bộ</option><option>Cấp Trường</option><option>Cấp Khoa</option></select><div class="fe" id="ar-cat-e">Vui lòng chọn loại</div></div>
-      <div class="fg"><label class="fgl">Ngày quyết định <span class="req">*</span></label><input class="fi" type="date" id="ar-date"><div class="fe" id="ar-date-e">Vui lòng nhập ngày</div></div>
-    </div>
-    <div class="fg"><label class="fgl">Tên khen thưởng <span class="req">*</span></label><input class="fi" id="ar-name"><div class="fe" id="ar-name-e">Vui lòng nhập tên</div></div>
-    <div class="fg"><label class="fgl">Số quyết định <span class="req">*</span></label><input class="fi" id="ar-dec"><div class="fe" id="ar-dec-e">Vui lòng nhập số quyết định</div></div>
-    <div class="fg"><label class="fgl">Nội dung</label><input class="fi" id="ar-content"></div>
-    <div class="fg"><label class="fgl">Số tiền thưởng</label><input class="fi" type="number" id="ar-amount" placeholder="0"></div>
-    <div class="mf"><button class="btn-s" onclick="closeOv('ov-addreward')">Hủy</button><button class="btn-p" onclick="submitAddReward()">Lưu khen thưởng</button></div>
-  </div>
-</div>
-
-<!-- Chi tiết khen thưởng -->
 <div class="ov" id="ov-reward">
   <div class="modal">
     <div class="mt">Xem chi tiết khen thưởng</div>
@@ -774,263 +410,69 @@ tbody tr:hover td{background:#fafafa}
   </div>
 </div>
 
-<!-- Thêm kỷ luật -->
-<div class="ov" id="ov-adddisc">
-  <div class="modal">
-    <div class="mt">Thêm kỷ luật</div><div style="height:16px"></div>
-    <div class="frow">
-      <div class="fg"><label class="fgl">Loại kỷ luật <span class="req">*</span></label><select class="fsel" id="ad-cat"><option value="">Chọn loại</option><option>Cấp Nhà nước</option><option>Cấp Bộ</option><option>Cấp Trường</option></select><div class="fe" id="ad-cat-e">Vui lòng chọn loại</div></div>
-      <div class="fg"><label class="fgl">Ngày quyết định <span class="req">*</span></label><input class="fi" type="date" id="ad-date"><div class="fe" id="ad-date-e">Vui lòng nhập ngày</div></div>
-    </div>
-    <div class="fg"><label class="fgl">Tên kỷ luật <span class="req">*</span></label><input class="fi" id="ad-name"><div class="fe" id="ad-name-e">Vui lòng nhập tên kỷ luật</div></div>
-    <div class="fg"><label class="fgl">Hình thức xử lý <span class="req">*</span></label><select class="fsel" id="ad-action"><option value="">Chọn hình thức</option><option>Phê bình</option><option>Cảnh cáo</option><option>Hạ bậc lương</option><option>Buộc thôi việc</option></select><div class="fe" id="ad-action-e">Vui lòng chọn hình thức</div></div>
-    <div class="fg"><label class="fgl">Lý do</label><input class="fi" id="ad-reason"></div>
-    <div class="mf"><button class="btn-s" onclick="closeOv('ov-adddisc')">Hủy</button><button class="btn-p" onclick="submitAddDisc()">Lưu kỷ luật</button></div>
-  </div>
-</div>
-
-<!-- Chi tiết kỷ luật -->
-<div class="ov" id="ov-disc">
-  <div class="modal">
-    <div class="mt">Xem chi tiết kỷ luật</div>
-    <div class="ms" id="disc-sub"></div>
-    <div class="ig" id="disc-grid"></div>
-    <div class="mf"><button class="btn-s" onclick="closeOv('ov-disc')">Đóng</button></div>
-  </div>
-</div>
-
-<!-- Bổ nhiệm -->
-<div class="ov" id="ov-appoint">
-  <div class="modal">
-    <div class="mt">Bổ nhiệm nhân sự</div>
-    <div class="ms" id="appoint-sub"></div>
-    <div class="fg"><label class="fgl">Nhân sự <span class="req">*</span></label><select class="fsel" id="apt-ns"><option value="">Chọn nhân sự</option></select><div class="fe" id="apt-ns-e">Vui lòng chọn nhân sự</div></div>
-    <div class="fg"><label class="fgl">Chức vụ <span class="req">*</span></label><input class="fi" id="apt-pos" placeholder="Trưởng khoa, Phó khoa..."><div class="fe" id="apt-pos-e">Vui lòng nhập chức vụ</div></div>
-    <div class="fg"><label class="fgl">Ngày bổ nhiệm <span class="req">*</span></label><input class="fi" type="date" id="apt-date"><div class="fe" id="apt-date-e">Vui lòng nhập ngày bổ nhiệm</div></div>
-    <div class="mf"><button class="btn-s" onclick="closeOv('ov-appoint')">Hủy</button><button class="btn-p" onclick="submitAppoint()">Xác nhận bổ nhiệm</button></div>
-  </div>
-</div>
-
-<!-- Thêm hệ số lương -->
-<div class="ov" id="ov-addhsl">
-  <div class="modal">
-    <div class="mt">Thêm hệ số lương</div><div style="height:16px"></div>
-    <div class="fg"><label class="fgl">Nhóm ngạch <span class="req">*</span></label><select class="fsel" id="ah-grp"><option value="">Chọn nhóm</option><option value="0">Trưởng khoa</option><option value="1">Trưởng bộ môn</option><option value="2">Giảng viên</option></select><div class="fe" id="ah-grp-e">Vui lòng chọn nhóm</div></div>
-    <div class="frow">
-      <div class="fg"><label class="fgl">Bậc lương <span class="req">*</span></label><input class="fi" type="number" min="1" id="ah-bac" placeholder="VD: 8"><div class="fe" id="ah-bac-e">Vui lòng nhập bậc lương</div></div>
-      <div class="fg"><label class="fgl">Hệ số lương <span class="req">*</span></label><input class="fi" type="number" step="0.01" id="ah-val" placeholder="VD: 4.50"><div class="fe" id="ah-val-e">Vui lòng nhập hệ số hợp lệ</div></div>
-    </div>
-    <div class="fg"><label class="fgl">Trạng thái</label><select class="fsel" id="ah-st"><option value="active">Đang sử dụng</option><option value="unused">Ngừng sử dụng</option></select></div>
-    <div class="mf"><button class="btn-s" onclick="closeOv('ov-addhsl')">Hủy</button><button class="btn-p" onclick="submitAddHsl()">Lưu hệ số lương</button></div>
-  </div>
-</div>
-
-<!-- Sửa hệ số lương -->
-<div class="ov" id="ov-edithsl">
-  <div class="modal">
-    <div class="mt">Sửa hệ số lương</div>
-    <div class="ms" id="hsl-sub"></div>
-    <div class="fg"><label class="fgl">Hệ số lương <span class="req">*</span></label><input class="fi" type="number" step="0.01" id="hsl-val"><div class="fe" id="hsl-val-e">Vui lòng nhập hệ số lương hợp lệ</div></div>
-    <div class="fg"><label class="fgl">Trạng thái</label><select class="fsel" id="hsl-st"><option value="active">Đang sử dụng</option><option value="unused">Ngừng sử dụng</option></select></div>
-    <div class="mf"><button class="btn-s" onclick="closeOv('ov-edithsl')">Hủy</button><button class="btn-p" onclick="submitEditHsl()">Lưu thay đổi</button></div>
-  </div>
-</div>
-
-<!-- Xác nhận xóa hệ số lương -->
-<div class="ov" id="ov-delhsl">
-  <div class="cb">
-    <div class="cb-t">Xác nhận xóa</div>
-    <div class="cb-b" id="delhsl-name">Bạn có chắc chắn muốn xóa hệ số lương này?</div>
-    <div class="cb-n">Hành động này không thể hoàn tác</div>
-    <div class="cb-a"><button class="btn-s" onclick="closeOv('ov-delhsl')">Hủy</button><button class="btn-red" style="height:40px;padding:0 16px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:1px solid #ef4444;color:#ef4444;background:none" onclick="doDelHsl()">Xác nhận xóa</button></div>
-  </div>
-</div>
-
-<!-- Sửa khóa đào tạo -->
-<div class="ov" id="ov-editkdt">
+<div class="ov" id="ov-reg-kdt">
   <div class="modal modal-lg">
-    <div class="mt">Sửa khóa đào tạo</div>
-    <div class="ms" id="ekdt-sub"></div>
-    <div class="fg"><label class="fgl">Tên khóa đào tạo <span class="req">*</span></label><input class="fi" id="ek-name"><div class="fe" id="ek-name-e">Vui lòng nhập tên</div></div>
-    <div class="frow">
-      <div class="fg"><label class="fgl">Loại khóa đào tạo</label><select class="fsel" id="ek-type"><option>Đào tạo chuyên môn</option><option>Đào tạo kỹ năng</option><option>Đào tạo chính trị</option></select></div>
-      <div class="fg"><label class="fgl">Kinh phí (VNĐ)</label><input class="fi" type="number" id="ek-fee"></div>
-    </div>
-    <div class="frow">
-      <div class="fg"><label class="fgl">Ngày bắt đầu</label><input class="fi" type="date" id="ek-from"></div>
-      <div class="fg"><label class="fgl">Ngày kết thúc</label><input class="fi" type="date" id="ek-to"></div>
-    </div>
-    <div class="frow">
-      <div class="fg"><label class="fgl">Mở đăng ký từ ngày</label><input class="fi" type="date" id="ek-rfrom"></div>
-      <div class="fg"><label class="fgl">Đến ngày</label><input class="fi" type="date" id="ek-rto"></div>
-    </div>
-    <div class="fg"><label class="fgl">Địa điểm</label><input class="fi" id="ek-loc"></div>
-    <div class="fg"><label class="fgl">Cam kết sau đào tạo</label><input class="fi" id="ek-commit"></div>
-    <div class="mf"><button class="btn-s" onclick="closeOv('ov-editkdt')">Hủy</button><button class="btn-p" onclick="submitEditKdt()">Lưu thay đổi</button></div>
-  </div>
-</div>
-
-<!-- Ghi nhận kết quả -->
-<div class="ov" id="ov-kdt-result">
-  <div class="modal">
-    <div class="mt">Ghi nhận kết quả</div>
-    <div class="ms" id="kr-sub"></div>
-    <div class="fg"><label class="fgl">Kết quả <span class="req">*</span></label><select class="fsel" id="kr-result"><option value="">Chọn kết quả</option><option value="pass">Hoàn thành</option><option value="fail">Không đạt</option></select><div class="fe" id="kr-result-e">Vui lòng chọn kết quả</div></div>
-    <div class="fg"><label class="fgl">Ghi chú</label><input class="fi" id="kr-note" placeholder="Ghi chú thêm..."></div>
-    <div class="mf"><button class="btn-s" onclick="closeOv('ov-kdt-result')">Hủy</button><button class="btn-p" onclick="submitKdtResult()">Xác nhận</button></div>
-  </div>
-</div>
-
-<!-- Chi tiết kết quả tham gia -->
-<div class="ov" id="ov-kdt-view">
-  <div class="modal">
-    <div class="mt">Chi tiết tham gia khóa đào tạo</div><div style="height:16px"></div>
-    <div class="ig" id="kdt-view-grid"></div>
-    <div class="mf"><button class="btn-s" onclick="closeOv('ov-kdt-view')">Đóng</button></div>
-  </div>
-</div>
-
-<!-- Chi tiết khóa đào tạo (cá nhân) -->
-<div class="ov" id="ov-mytr">
-  <div class="modal modal-lg">
-    <div class="mt" id="mytr-title"></div>
-    <div class="ms" id="mytr-sub"></div>
-    <div class="ig" id="mytr-grid"></div>
+    <div class="mt" id="reg-kdt-title"></div>
+    <div class="ms" id="reg-kdt-sub"></div>
+    <div class="ig" id="reg-kdt-grid"></div>
     <div class="mf">
-      <button class="btn-s" onclick="closeOv('ov-mytr')">Hủy</button>
-      <button class="btn-p" id="mytr-reg-btn" style="display:none" onclick="doRegMyTr()">Đăng ký</button>
+      <button class="btn-s" onclick="closeOv('ov-reg-kdt')">Hủy</button>
+      <button class="btn-p" onclick="doRegKdt()">Đăng ký</button>
     </div>
   </div>
 </div>
 
-<!-- Toast -->
+<div class="ov" id="ov-view-kdt">
+  <div class="modal modal-lg">
+    <div class="mt" id="view-kdt-title"></div>
+    <div class="ms" id="view-kdt-sub"></div>
+    <div class="ig" id="view-kdt-grid"></div>
+    <div class="mf"><button class="btn-s" onclick="closeOv('ov-view-kdt')">Đóng</button></div>
+  </div>
+</div>
+
 <div class="toast" id="toast"><span id="toast-ic" style="display:flex;align-items:center;flex-shrink:0"></span><span id="toast-msg"></span></div>
 
 <script>
 /* ── SESSION ── */
 const CU = JSON.parse(sessionStorage.getItem('currentUser') || 'null');
-if (!CU || CU.role !== 'tccb') { window.location.href = 'login.html'; }
+if (!CU || CU.role !== 'employee') { window.location.href = 'login.html'; }
 if (CU) {
-  document.getElementById('hdr-name').textContent = CU.name + ' - Nhân sự phòng TCCB';
+  document.getElementById('hdr-name').textContent = CU.name + ' - Cán bộ / Giảng viên';
   document.getElementById('hdr-av').textContent = CU.name[0].toUpperCase();
 }
 
 /* ── DATA ── */
-const NS_LIST = [
-  {id:'NS001',name:'Nguyễn Văn An',   dept:'Ban Giám hiệu', title:'Giáo sư',     pos:'Hiệu trưởng',        cst:'active',  st:'working'},
-  {id:'NS002',name:'Trần Thị Bình',   dept:'Khoa CNTT',     title:'Thạc sĩ',     pos:'Trưởng khoa',        cst:'active',  st:'working'},
-  {id:'NS003',name:'Lê Văn Cường',    dept:'Phòng TCCB',    title:'Phó Giáo sư', pos:'Trợ lý',             cst:'left',    st:'left'},
-  {id:'NS004',name:'Phạm Thị Dung',   dept:'Ban Giám hiệu', title:'Tiến sĩ',     pos:'Trợ lý Hiệu trưởng', cst:'pending', st:'working'},
-  {id:'NS005',name:'Hoàng Văn Em',    dept:'Khoa CNTT',     title:'Thạc sĩ',     pos:'Giảng viên',         cst:'active',  st:'working'},
-  {id:'NS006',name:'Ngô Thị Phương',  dept:'Khoa CNTT',     title:'Tiến sĩ',     pos:'Giảng viên chính',   cst:'active',  st:'working'},
-  {id:'NS007',name:'Đỗ Văn Giang',    dept:'Khoa Kinh tế',  title:'Thạc sĩ',     pos:'Giảng viên',         cst:'active',  st:'working'},
-  {id:'NS008',name:'Vũ Thị Hạnh',     dept:'Phòng TCCB',    title:'Tiến sĩ',     pos:'Trưởng phòng',       cst:'active',  st:'working'},
-  {id:'NS009',name:'Bùi Văn Khôi',    dept:'Ban Giám hiệu', title:'Giáo sư',     pos:'Phó Hiệu trưởng',    cst:'active',  st:'left'},
-  {id:'NS010',name:'Lý Thị Mai',      dept:'Ban Quản trị',  title:'Thạc sĩ',     pos:'Trợ lý',             cst:'active',  st:'working'},
-  {id:'NS011',name:'Nguyễn Thị Ngọc', dept:'Khoa CNTT',     title:'Tiến sĩ',     pos:'Giảng viên',         cst:'active',  st:'working'},
-  {id:'NS012',name:'Trần Văn Phát',   dept:'Khoa Kinh tế',  title:'Thạc sĩ',     pos:'Giảng viên',         cst:'active',  st:'working'},
-  {id:'NS013',name:'Lê Thị Quyên',    dept:'Phòng TCCB',    title:'Tiến sĩ',     pos:'Chuyên viên',        cst:'active',  st:'working'},
-  {id:'NS014',name:'Phạm Văn Sơn',    dept:'Khoa CNTT',     title:'Thạc sĩ',     pos:'Giảng viên',         cst:'active',  st:'working'},
-  {id:'NS015',name:'Hoàng Thị Tâm',   dept:'Khoa Kinh tế',  title:'Tiến sĩ',     pos:'Giảng viên chính',   cst:'active',  st:'working'},
-  {id:'NS016',name:'Ngô Văn Uy',      dept:'Phòng TCKT',    title:'Thạc sĩ',     pos:'Chuyên viên',        cst:'active',  st:'working'},
-  {id:'NS017',name:'Đỗ Thị Vân',      dept:'Phòng TCCB',    title:'Tiến sĩ',     pos:'Chuyên viên',        cst:'active',  st:'working'},
-  {id:'NS018',name:'Vũ Văn Xuân',     dept:'Khoa CNTT',     title:'Giáo sư',     pos:'Giảng viên cao cấp', cst:'active',  st:'working'},
-  {id:'NS019',name:'Bùi Thị Yến',     dept:'Khoa Kinh tế',  title:'Thạc sĩ',     pos:'Giảng viên',         cst:'active',  st:'working'},
-  {id:'NS020',name:'Lý Văn Dũng',     dept:'Phòng TCCB',    title:'Tiến sĩ',     pos:'Chuyên viên',        cst:'active',  st:'working'},
-];
-
-const ORGS = {
-  DV000:{id:'DV000',name:'Trường TKMT',fullName:'Trường Đại học Thủy Lợi',type:'Trường',parent:null,email:'tkmt@tlu.edu.vn',phone:'0999000000',web:'tlu.edu.vn',addr:'175 Tây Sơn, Hà Nội',office:'Tòa Nhà Chính',st:'active',children:['DV001','DV002','DV006','DV007']},
-  DV001:{id:'DV001',name:'Ban Giám hiệu',type:'Ban',parent:'DV000',email:'bangiamhieu@tlu.edu.vn',phone:'0999999999',web:'bangiamhieu.vn',addr:'175 Tây Sơn',office:'Tòa A1',st:'active',children:[]},
-  DV002:{id:'DV002',name:'Khoa Công nghệ thông tin',type:'Khoa',parent:'DV000',email:'cntt@tlu.edu.vn',phone:'0999888888',web:'cntt.tlu.edu.vn',addr:'175 Tây Sơn',office:'Tòa B2',st:'active',children:['DV003','DV004','DV005']},
-  DV003:{id:'DV003',name:'Bộ môn Công nghệ Phần mềm',type:'Bộ môn',parent:'DV002',email:'cnpm@tlu.edu.vn',phone:'0999777777',web:'',addr:'175 Tây Sơn',office:'Tòa B2, Phòng 201',st:'active',children:[]},
-  DV004:{id:'DV004',name:'Bộ môn Mạng máy tính',type:'Bộ môn',parent:'DV002',email:'mmt@tlu.edu.vn',phone:'0999666666',web:'',addr:'175 Tây Sơn',office:'Tòa B2, Phòng 202',st:'dissolved',children:[]},
-  DV005:{id:'DV005',name:'Bộ môn Hệ thống thông tin',type:'Bộ môn',parent:'DV002',email:'httt@tlu.edu.vn',phone:'0999555555',web:'',addr:'175 Tây Sơn',office:'Tòa B2, Phòng 203',st:'active',children:[]},
-  DV006:{id:'DV006',name:'Khoa Kinh tế',type:'Khoa',parent:'DV000',email:'kinhte@tlu.edu.vn',phone:'0999444444',web:'',addr:'175 Tây Sơn',office:'Tòa C3',st:'active',children:[]},
-  DV007:{id:'DV007',name:'Phòng Tổ chức cán bộ',type:'Phòng',parent:'DV000',email:'tccb@tlu.edu.vn',phone:'0999333333',web:'',addr:'175 Tây Sơn',office:'Tòa A1, Phòng 101',st:'active',children:[]},
-};
-const ORG_STAFF = {
-  DV001:[{id:'NS001',name:'Nguyễn Văn An',dept:'Ban Giám hiệu',pos:'Hiệu trưởng',date:'01/01/2024',st:'working'},{id:'NS009',name:'Bùi Văn Khôi',dept:'Ban Giám hiệu',pos:'Phó Hiệu trưởng',date:'06/01/2024',st:'left'}],
-  DV002:[{id:'NS002',name:'Trần Thị Bình',dept:'Khoa CNTT',pos:'Trưởng khoa',date:'01/09/2020',st:'working'},{id:'NS006',name:'Ngô Thị Phương',dept:'Khoa CNTT',pos:'Giảng viên chính',date:'01/09/2018',st:'working'},{id:'NS018',name:'Vũ Văn Xuân',dept:'Khoa CNTT',pos:'Giảng viên cao cấp',date:'01/09/2015',st:'working'}],
-};
-
 const CONTRACTS = [
-  {type:'Hợp đồng không xác định thời gian',signed:'01/01/2015',eff:'01/01/2015',exp:'01/01/2027',dept:'Khoa CNTT',st:'active'},
-  {type:'Hợp đồng thời vụ',signed:'01/06/2018',eff:'01/06/2018',exp:'01/06/2018',dept:'Khoa CNTT',st:'unused'},
-  {type:'Hợp đồng không xác định thời gian',signed:'01/07/2012',eff:'01/07/2012',exp:'01/07/2028',dept:'Phòng TCCB',st:'active'},
+  {type:'Hợp đồng không xác định thời gian',signed:'01/09/2013',eff:'01/09/2013',exp:'01/09/2029',dept:'Khoa CNTT',st:'active'},
+  {type:'Hợp đồng xác định thời gian',signed:'01/09/2013',eff:'01/09/2013',exp:'31/08/2016',dept:'Khoa CNTT',st:'unused'},
 ];
 const REWARDS = [
-  {cat:'Cấp Nhà nước',name:'Huân chương Lao động hạng Ba',date:'20/11/2025',decision:'1234/QĐ-CTN',content:'Có thành tích xuất sắc trong công tác giáo dục và đào tạo từ năm 2020-2025',amount:'0'},
-  {cat:'Cấp Trường',name:'Chiến sĩ thi đua cơ sở',date:'30/06/2026',decision:'88/QĐ-ĐHTL',content:'Hoàn thành xuất sắc nhiệm vụ năm học 2025-2026',amount:'0'},
-  {cat:'Cấp Trường',name:'Chiến sĩ thi đua cơ sở',date:'30/06/2025',decision:'55/QĐ-ĐHTL',content:'Hoàn thành xuất sắc nhiệm vụ năm học 2024-2025',amount:'0'},
+  {cat:'Cấp Trường',name:'Chiến sĩ thi đua cơ sở',date:'30/06/2025',decision:'102/QĐ-ĐHTL',content:'Hoàn thành xuất sắc nhiệm vụ năm học 2024-2025',amount:'0'},
+  {cat:'Cấp Khoa',name:'Giảng viên tiêu biểu',date:'20/01/2026',decision:'15/QĐ-CNTT',content:'Giảng viên được sinh viên bình chọn tốt nhất học kỳ I năm học 2025-2026',amount:'500000'},
 ];
-const DISCS = [
-  {cat:'Cấp Trường',name:'Khiển trách',date:'15/05/2026',reason:'Vì phạm quy chế chuyên môn, tự ý bỏ tiết dạy không lý do',action:'Phê bình'},
+const AVAIL_KDTS = [
+  {id:'KĐT001',name:'Bồi dưỡng tiêu chuẩn Giảng viên chính (Hạng I)',type:'Đào tạo chuyên môn',from:'01/03/2026',to:'01/06/2026',loc:'Trường TKMT',fee:'3.500.000',commit:'Công tác tại trường tối thiểu 03 năm',cert:'Chứng chỉ bồi dưỡng GV chính (Hạng I)',regFrom:'01/01/2026',regTo:'01/02/2026',count:'4/50',st:'open'},
+  {id:'KĐT004',name:'Đào tạo Công nghệ AI trong giảng dạy',type:'Đào tạo kỹ năng',from:'15/04/2026',to:'15/06/2026',loc:'Trường TKMT',fee:'2.000.000',commit:'Không yêu cầu',cert:'Chứng chỉ AI trong giảng dạy',regFrom:'01/03/2026',regTo:'31/03/2026',count:'8/30',st:'open'},
 ];
-
-const HSL_GROUPS = [
-  {key:'tk',  label:'Trưởng khoa',   open:true,  rows:[
-    {code:'HSLTK01',ngach:'Trưởng khoa',bac:1,hs:2.34,st:'active'},
-    {code:'HSLTK02',ngach:'Trưởng khoa',bac:2,hs:2.56,st:'unused'},
-    {code:'HSLTK03',ngach:'Trưởng khoa',bac:3,hs:2.98,st:'active'},
-    {code:'HSLTK04',ngach:'Trưởng khoa',bac:4,hs:3.32,st:'active'},
-    {code:'HSLTK05',ngach:'Trưởng khoa',bac:5,hs:3.56,st:'active'},
-    {code:'HSLTK06',ngach:'Trưởng khoa',bac:6,hs:4.02,st:'active'},
-    {code:'HSLTK07',ngach:'Trưởng khoa',bac:7,hs:4.21,st:'active'},
-  ]},
-  {key:'tbm', label:'Trưởng bộ môn', open:false, rows:[
-    {code:'HSLTBM01',ngach:'Trưởng bộ môn',bac:1,hs:2.34,st:'active'},
-    {code:'HSLTBM02',ngach:'Trưởng bộ môn',bac:2,hs:2.56,st:'active'},
-    {code:'HSLTBM03',ngach:'Trưởng bộ môn',bac:3,hs:2.98,st:'active'},
-    {code:'HSLTBM04',ngach:'Trưởng bộ môn',bac:4,hs:3.32,st:'active'},
-    {code:'HSLTBM05',ngach:'Trưởng bộ môn',bac:5,hs:3.56,st:'active'},
-    {code:'HSLTBM06',ngach:'Trưởng bộ môn',bac:6,hs:4.02,st:'active'},
-    {code:'HSLTBM07',ngach:'Trưởng bộ môn',bac:7,hs:4.21,st:'active'},
-  ]},
-  {key:'gv',  label:'Giảng viên',    open:false, rows:[
-    {code:'HSLGV01',ngach:'Giảng viên',bac:1,hs:2.34,st:'active'},
-    {code:'HSLGV02',ngach:'Giảng viên',bac:2,hs:2.56,st:'unused'},
-    {code:'HSLGV03',ngach:'Giảng viên',bac:3,hs:2.98,st:'active'},
-    {code:'HSLGV04',ngach:'Giảng viên',bac:4,hs:3.32,st:'active'},
-    {code:'HSLGV05',ngach:'Giảng viên',bac:5,hs:3.56,st:'active'},
-    {code:'HSLGV06',ngach:'Giảng viên',bac:6,hs:4.02,st:'active'},
-    {code:'HSLGV07',ngach:'Giảng viên',bac:7,hs:4.21,st:'active'},
-  ]},
-];
-
-const KDTS = [
-  {id:'KĐT001',name:'Bồi dưỡng tiêu chuẩn Giảng viên chính (Hạng I)', type:'Đào tạo chuyên môn',from:'01/03/2026',to:'01/06/2026',loc:'Trường TKMT',fee:'3.500.000',commit:'Công tác tại trường tối thiểu 03 năm',cert:'Chứng chỉ bồi dưỡng GV chính (Hạng I)',certType:'Chứng chỉ CDNN',regFrom:'01/01/2026',regTo:'01/02/2026',count:'4/50',st:'open',canEdit:true},
-  {id:'KĐT002',name:'Bồi dưỡng tiêu chuẩn Giảng viên chính (Hạng II)',type:'Đào tạo chuyên môn',from:'01/09/2025',to:'01/12/2025',loc:'Trường TKMT',fee:'3.500.000',commit:'Công tác tại trường tối thiểu 03 năm',cert:'Chứng chỉ bồi dưỡng GV chính (Hạng II)',certType:'Chứng chỉ CDNN',regFrom:'01/07/2025',regTo:'01/08/2025',count:'3/50',st:'done',canEdit:false},
-  {id:'KĐT003',name:'Bồi dưỡng Quản lý',type:'Đào tạo kỹ năng',from:'01/01/2026',to:'01/03/2026',loc:'Trường TKMT',fee:'4.500.000',commit:'Không yêu cầu',cert:'Chứng chỉ Quản lý',certType:'Chứng chỉ bồi dưỡng',regFrom:'01/11/2025',regTo:'30/11/2025',count:'17/20',st:'closed',canEdit:true},
-  {id:'KĐT004',name:'Đào tạo Công nghệ AI trong giảng dạy',type:'Đào tạo kỹ năng',from:'15/04/2026',to:'15/06/2026',loc:'Trường TKMT',fee:'2.000.000',commit:'Không yêu cầu',cert:'Chứng chỉ AI trong giảng dạy',certType:'Chứng chỉ bồi dưỡng',regFrom:'01/03/2026',regTo:'31/03/2026',count:'8/30',st:'open',canEdit:true},
-];
-const KDT_PARTS = {
-  'KĐT002':[
-    {id:'NS006',name:'Ngô Thị Phương',dept:'Khoa CNTT',   date:'01/01/2026',result:'none'},
-    {id:'NS009',name:'Bùi Văn Khôi',  dept:'Khoa CNTT',   date:'06/01/2026',result:'fail'},
-    {id:'NS010',name:'Lý Thị Mai',    dept:'Khoa Kinh tế',date:'17/01/2026',result:'pass'},
-  ],
-};
-const MY_TR_LIST = [
-  {id:'KDT001',name:'Bồi dưỡng tiêu chuẩn Giảng viên chính (Hạng I)',type:'Đào tạo chuyên môn',from:'01/03/2026',to:'01/06/2026',loc:'Trường TKMT',fee:'3.500.000',commit:'Công tác tại trường tối thiểu 03 năm',cert:'Chứng chỉ bồi dưỡng GV chính (Hạng I)',certType:'Chứng chỉ CDNN',count:'4/50',st:'open'},
-  {id:'KDT005',name:'Bồi dưỡng Quản lý nhân sự',type:'Đào tạo kỹ năng',from:'01/10/2025',to:'01/12/2025',loc:'Trường TKMT',fee:'4.500.000',commit:'Không yêu cầu',cert:'Chứng chỉ Quản lý nhân sự',certType:'Chứng chỉ bồi dưỡng',count:'15/20',st:'done'},
+const MY_KDTS = [
+  {id:'KĐT002',name:'Bồi dưỡng tiêu chuẩn Giảng viên chính (Hạng II)',type:'Đào tạo chuyên môn',from:'01/09/2025',to:'01/12/2025',loc:'Trường TKMT',fee:'3.500.000',regDate:'15/07/2025',result:'pass',st:'done'},
+  {id:'KĐT003',name:'Bồi dưỡng Quản lý',type:'Đào tạo kỹ năng',from:'01/01/2026',to:'01/03/2026',loc:'Trường TKMT',fee:'4.500.000',regDate:'10/11/2025',result:'none',st:'closed'},
 ];
 
 /* ── NAVIGATION ── */
-function navTo(pg, el) {
-  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
-  document.querySelectorAll('.pg').forEach(p => p.classList.remove('active'));
+function navTo(pg,el){
+  document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('active'));
   el.classList.add('active');
-  document.getElementById('pg-' + pg).classList.add('active');
+  document.getElementById('pg-'+pg).classList.add('active');
   closeDd();
 }
-
-function toggleDd() { document.getElementById('hdr-dd').classList.toggle('open'); }
-function closeDd()  { document.getElementById('hdr-dd').classList.remove('open'); }
-document.addEventListener('click', e => { if (!e.target.closest('.hdr-user')) closeDd(); });
-
-function openOv(id)  { document.getElementById(id).classList.add('open'); }
-function closeOv(id) { document.getElementById(id).classList.remove('open'); }
+function toggleDd(){document.getElementById('hdr-dd').classList.toggle('open');}
+function closeDd(){document.getElementById('hdr-dd').classList.remove('open');}
+document.addEventListener('click',e=>{if(!e.target.closest('.hdr-user'))closeDd();});
+function openOv(id){document.getElementById(id).classList.add('open');}
+function closeOv(id){document.getElementById(id).classList.remove('open');}
 
 /* ── TOAST ── */
 let _tt;
@@ -1049,7 +491,7 @@ function toast(msg,type){
   document.getElementById('toast-msg').textContent=msg;
   el.classList.add('show');
   clearTimeout(_tt);
-  if(type!=='loading') _tt=setTimeout(()=>el.classList.remove('show'),3000);
+  if(type!=='loading')_tt=setTimeout(()=>el.classList.remove('show'),3000);
 }
 
 /* ── TABS ── */
@@ -1057,148 +499,18 @@ function pgTab(ns,idx,btn){
   document.querySelectorAll('#pg-'+ns+' .tab-b').forEach((b,i)=>b.classList.toggle('active',i===idx));
   document.querySelectorAll('#pg-'+ns+' .tp').forEach((p,i)=>p.classList.toggle('active',i===idx));
 }
-function nsTab(idx,btn){
-  document.querySelectorAll('#ns-detail-wrap .tab-b').forEach((b,i)=>b.classList.toggle('active',i===idx));
-  ['nsd-tp0','nsd-tp1','nsd-tp2','nsd-tp3','nsd-tp4','nsd-tp5','nsd-tp6'].forEach((id,i)=>document.getElementById(id).classList.toggle('active',i===idx));
-}
-function orgTab(idx,btn){
-  document.querySelectorAll('#org-detail-wrap .tab-b').forEach((b,i)=>b.classList.toggle('active',i===idx));
-  ['org-tp0','org-tp1','org-tp2'].forEach((id,i)=>document.getElementById(id).classList.toggle('active',i===idx));
-}
-function kdtTab(idx,btn){
-  document.querySelectorAll('#kdt-detail-wrap .tab-b').forEach((b,i)=>b.classList.toggle('active',i===idx));
-  ['kdt-tp0','kdt-tp1','kdt-tp2'].forEach((id,i)=>document.getElementById(id).classList.toggle('active',i===idx));
-}
 
 /* ── FORM HELPERS ── */
-function shE(id,msg){const el=document.getElementById(id);if(!el)return;if(msg)el.textContent=msg;el.classList.add('show');const inp=el.previousElementSibling;if(inp&&(inp.tagName==='INPUT'||inp.tagName==='SELECT'))inp.classList.add('err');}
+function shE(id,msg){const el=document.getElementById(id);if(!el)return;if(msg)el.textContent=msg;el.classList.add('show');const inp=el.previousElementSibling;if(inp&&inp.tagName==='INPUT')inp.classList.add('err');}
 function hdE(id){const el=document.getElementById(id);if(!el)return;el.classList.remove('show');const inp=el.previousElementSibling;if(inp)inp.classList.remove('err');}
 function clrE(ids){ids.forEach(hdE);}
-
-/* ── NS LIST ── */
-let _nsPg=1,_nsPS=10,_curNs=null;
-function nsFilter(){_nsPg=1;renderNs();}
-function nsPg(d){_nsPg+=d;renderNs();}
-function cstBadge(c){if(c==='active')return'<span class="bd bd-active">Có hợp đồng</span>';if(c==='pending')return'<span class="bd bd-pending">Chờ ký</span>';return'<span class="bd bd-left">Đã thôi việc</span>';}
-function stBadge(s){if(s==='working')return'<span class="bd bd-working">Đang công tác</span>';return'<span class="bd bd-left">Đã thôi việc</span>';}
-
-function renderNs(){
-  const q=(document.getElementById('ns-q').value||'').trim().toLowerCase();
-  const dp=document.getElementById('ns-dept').value;
-  const st=document.getElementById('ns-st').value;
-  let list=NS_LIST.filter(n=>(!q||n.id.toLowerCase().includes(q)||n.name.toLowerCase().includes(q))&&(!dp||n.dept===dp)&&(!st||n.st===st));
-  const total=list.length,pages=Math.max(1,Math.ceil(total/_nsPS));
-  _nsPg=Math.min(_nsPg,pages);
-  const slice=list.slice((_nsPg-1)*_nsPS,_nsPg*_nsPS);
-  document.getElementById('ns-body').innerHTML=slice.map(n=>`<tr>
-    <td>${n.id}</td><td>${n.name}</td><td>${n.dept}</td><td>${n.title}</td><td>${n.pos}</td>
-    <td>${cstBadge(n.cst)}</td><td>${stBadge(n.st)}</td>
-    <td><button class="btn-ic" onclick="viewNs('${n.id}')" title="Xem">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-    </button></td>
-  </tr>`).join('');
-  document.getElementById('ns-info').textContent=`Hiển thị ${slice.length} / ${total} nhân sự`;
-  document.getElementById('ns-pg-lbl').textContent=`Trang ${_nsPg} / ${pages}`;
-  document.getElementById('ns-prev').disabled=_nsPg<=1;
-  document.getElementById('ns-next').disabled=_nsPg>=pages;
-}
-
-function viewNs(id){
-  _curNs=NS_LIST.find(n=>n.id===id);if(!_curNs)return;
-  document.getElementById('ns-list-wrap').style.display='none';
-  document.getElementById('ns-detail-wrap').style.display='block';
-  document.getElementById('ns-detail-bc').textContent=_curNs.id+' - '+_curNs.name;
-  document.getElementById('ns-detail-title').textContent=_curNs.id+' - '+_curNs.name;
-  document.getElementById('ns-quit-btn').style.display=_curNs.st==='working'?'inline-flex':'none';
-  document.getElementById('nsd-title').textContent=_curNs.title;
-  document.getElementById('nsd-info').innerHTML=`
-    <div><div class="il">Mã nhân sự</div><div class="iv">${_curNs.id}</div></div>
-    <div><div class="il">Họ tên</div><div class="iv">${_curNs.name}</div></div>
-    <div><div class="il">Giới tính</div><div class="iv">Nam</div></div>
-    <div><div class="il">Ngày sinh</div><div class="iv">01/01/1985</div></div>
-    <div><div class="il">Đơn vị công tác</div><div class="iv">${_curNs.dept}</div></div>
-    <div><div class="il">Chức vụ</div><div class="iv">${_curNs.pos}</div></div>
-    <div><div class="il">Học hàm/Học vị</div><div class="iv">${_curNs.title}</div></div>
-    <div><div class="il">Email</div><div class="iv">${_curNs.id.toLowerCase()}@tlu.edu.vn</div></div>
-    <div><div class="il">CCCD</div><div class="iv">001${_curNs.id.replace('NS','').padStart(10,'0')}</div></div>
-    <div><div class="il">Số BHXH</div><div class="iv">00${_curNs.id.replace('NS','').padStart(8,'0')}</div></div>
-    <div><div class="il">Trạng thái hợp đồng</div><div class="iv">${cstBadge(_curNs.cst)}</div></div>
-    <div><div class="il">Trạng thái</div><div class="iv">${stBadge(_curNs.st)}</div></div>`;
-  nsTab(0,null);
-}
-function backNsList(){_curNs=null;document.getElementById('ns-list-wrap').style.display='block';document.getElementById('ns-detail-wrap').style.display='none';}
-
-function openAddNs(){
-  ['an-name','an-email','an-phone','an-addr','an-cccd','an-mst','an-bhxh','an-bhyt','an-party','an-bank-no','an-bank-name','an-pos'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  ['an-gender','an-dept','an-title','an-ngach'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  clrE(['an-name-e','an-gender-e','an-dob-e','an-email-e','an-dept-e','an-pos-e']);
-  openOv('ov-addns');
-}
-function submitAddNs(){
-  const name=document.getElementById('an-name').value.trim();
-  const gender=document.getElementById('an-gender').value;
-  const dob=document.getElementById('an-dob').value;
-  const email=document.getElementById('an-email').value.trim();
-  const dept=document.getElementById('an-dept').value;
-  const pos=document.getElementById('an-pos').value.trim();
-  let ok=true;
-  if(!name){shE('an-name-e');ok=false;}else hdE('an-name-e');
-  if(!gender){shE('an-gender-e');ok=false;}else hdE('an-gender-e');
-  if(!dob){shE('an-dob-e');ok=false;}else hdE('an-dob-e');
-  if(!email){shE('an-email-e');ok=false;}else hdE('an-email-e');
-  if(!dept){shE('an-dept-e');ok=false;}else hdE('an-dept-e');
-  if(!pos){shE('an-pos-e');ok=false;}else hdE('an-pos-e');
-  if(!ok)return;
-  closeOv('ov-addns');
-  toast('Thêm hồ sơ nhân sự thành công');
-  renderNs();
-}
-
-function openEditNs(){
-  if(!_curNs)return;
-  document.getElementById('ens-sub').textContent='Mã nhân sự: '+_curNs.id;
-  document.getElementById('ens-name').value=_curNs.name;
-  document.getElementById('ens-dept').value=_curNs.dept;
-  document.getElementById('ens-pos').value=_curNs.pos;
-  document.getElementById('ens-title').value=_curNs.title;
-  document.getElementById('ens-email').value=_curNs.id.toLowerCase()+'@tlu.edu.vn';
-  clrE(['ens-name-e','ens-dept-e','ens-email-e']);
-  openOv('ov-editns');
-}
-function submitEditNs(){
-  const name=document.getElementById('ens-name').value.trim();
-  const dept=document.getElementById('ens-dept').value;
-  const email=document.getElementById('ens-email').value.trim();
-  let ok=true;
-  if(!name){shE('ens-name-e');ok=false;}else hdE('ens-name-e');
-  if(!dept){shE('ens-dept-e');ok=false;}else hdE('ens-dept-e');
-  if(!email){shE('ens-email-e');ok=false;}else hdE('ens-email-e');
-  if(!ok)return;
-  if(_curNs){_curNs.name=name;_curNs.dept=dept;}
-  closeOv('ov-editns');
-  toast('Cập nhật hồ sơ thành công');
-  renderNs();
-}
-
-function openQuitNs(){
-  if(!_curNs)return;
-  document.getElementById('quit-ns-name').textContent='Bạn có chắc chắn muốn đánh dấu "'+_curNs.name+'" đã thôi việc?';
-  openOv('ov-quitns');
-}
-function doQuitNs(){
-  if(_curNs){_curNs.st='left';_curNs.cst='left';}
-  closeOv('ov-quitns');
-  document.getElementById('ns-quit-btn').style.display='none';
-  toast('Đã đánh dấu thôi việc thành công');
-  renderNs();
-}
 
 /* ── PWD & LOGOUT ── */
 function openChangePwd(){closeDd();['p-old','p-new','p-cf'].forEach(id=>document.getElementById(id).value='');clrE(['p-old-e','p-new-e','p-cf-e']);openOv('ov-pwd');}
 function submitPwd(){
   const old=document.getElementById('p-old').value,nw=document.getElementById('p-new').value,cf=document.getElementById('p-cf').value;
   let ok=true;
-  if(!old||old!=='tccb123'){shE('p-old-e','Mật khẩu cũ không chính xác');ok=false;}else hdE('p-old-e');
+  if(!old||old!=='gv123'){shE('p-old-e','Mật khẩu cũ không chính xác');ok=false;}else hdE('p-old-e');
   if(!nw||nw.length<8){shE('p-new-e','Mật khẩu phải có ít nhất 8 ký tự');ok=false;}else hdE('p-new-e');
   if(!cf||cf!==nw){shE('p-cf-e','Mật khẩu không trùng khớp');ok=false;}else hdE('p-cf-e');
   if(!ok)return;
@@ -1208,248 +520,7 @@ function doPwd(){closeOv('ov-cpwd');toast('Đổi mật khẩu thành công');}
 function openLogout(){closeDd();openOv('ov-logout');}
 function doLogout(){sessionStorage.removeItem('currentUser');window.location.href='login.html';}
 
-/* ── ORG TREE ── */
-let _curOrg=null;
-function renderOrgTree(){document.getElementById('org-tree').innerHTML=buildOrgNode('DV000',0);}
-function buildOrgNode(id,depth){
-  const o=ORGS[id];if(!o)return'';
-  const hasCh=o.children&&o.children.length>0,diss=o.st==='dissolved';
-  let h=`<div class="on" style="padding-left:${depth*20}px">
-    <span style="width:16px;font-size:11px;color:#9ca3af">${hasCh?'▼':''}</span>
-    <span class="on-name">${o.name}</span>${diss?'<span class="bd-diss">Giải thể</span>':''}
-    <div class="on-acts">${!diss?`<button class="btn-ic" onclick="viewOrg('${id}')" title="Xem">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-    </button>`:''}</div>
-  </div>`;
-  if(hasCh){h+='<div class="oc">';o.children.forEach(cid=>{h+=buildOrgNode(cid,0);});h+='</div>';}
-  return h;
-}
-function viewOrg(id){
-  _curOrg=id;const o=ORGS[id];
-  document.getElementById('org-tree-wrap').style.display='none';
-  document.getElementById('org-detail-wrap').style.display='block';
-  document.getElementById('org-detail-bc').textContent=id+' - '+o.name;
-  document.getElementById('org-detail-title').textContent=id+' - '+o.name;
-  orgTab(0,null);
-  const par=o.parent?ORGS[o.parent]:null;
-  document.getElementById('org-info').innerHTML=`
-    <div><div class="il">Mã đơn vị</div><div class="iv">${o.id}</div></div>
-    <div><div class="il">Tên đơn vị</div><div class="iv">${o.name}</div></div>
-    <div><div class="il">Loại đơn vị</div><div class="iv">${o.type}</div></div>
-    <div><div class="il">Đơn vị cha</div><div class="iv">${par?(par.fullName||par.name):'—'}</div></div>
-    <div><div class="il">Email</div><div class="iv">${o.email}</div></div>
-    <div><div class="il">Số điện thoại</div><div class="iv">${o.phone}</div></div>
-    <div><div class="il">Link website</div><div class="iv">${o.web||'—'}</div></div>
-    <div><div class="il">Địa chỉ</div><div class="iv">${o.addr}</div></div>
-    <div><div class="il">Địa chỉ văn phòng</div><div class="iv">${o.office}</div></div>
-    <div><div class="il">Trạng thái</div><div class="iv">${o.st==='dissolved'?'<span class="bd-diss">Giải thể</span>':'<span class="bd bd-active">Đang hoạt động</span>'}</div></div>`;
-  const staff=ORG_STAFF[id]||[];
-  document.getElementById('org-staff').innerHTML=staff.length
-    ?staff.map(s=>`<tr><td>${s.id}</td><td>${s.name}</td><td>${s.dept}</td><td>${s.pos}</td><td>${s.date}</td><td>${s.st==='working'?'<span class="bd bd-working">Đang công tác</span>':'<span class="bd bd-left">Đã thôi việc</span>'}</td></tr>`).join('')
-    :'<tr><td colspan="6" style="text-align:center;color:#9ca3af;padding:20px">Không có nhân sự</td></tr>';
-  document.getElementById('org-subtree').innerHTML=buildSubtree(id);
-}
-function buildSubtree(rootId){
-  const root=ORGS[rootId];
-  function node(id){const o=ORGS[id];if(!o)return'';let h=`<div class="on"><span style="width:16px;font-size:11px;color:#9ca3af">${o.children&&o.children.length?'▼':''}</span><span class="on-name">${o.name}</span>${o.st==='dissolved'?'<span class="bd-diss">Giải thể</span>':''}</div>`;if(o.children&&o.children.length){h+='<div class="oc">';o.children.forEach(c=>{h+=node(c);});h+='</div>';}return h;}
-  if(!root.children||!root.children.length)return'<p style="color:#9ca3af;font-size:14px;padding:8px">Không có đơn vị trực thuộc</p>';
-  let h=`<div class="on"><span style="width:16px"></span><span class="on-name" style="font-weight:600">${root.fullName||root.name}</span></div><div class="oc">`;
-  root.children.forEach(c=>{h+=node(c);});h+='</div>';return h;
-}
-function backOrgTree(){_curOrg=null;document.getElementById('org-tree-wrap').style.display='block';document.getElementById('org-detail-wrap').style.display='none';}
-function openAppoint(){
-  if(!_curOrg)return;
-  document.getElementById('appoint-sub').textContent='Đơn vị: '+ORGS[_curOrg].name;
-  document.getElementById('apt-ns').innerHTML='<option value="">Chọn nhân sự</option>'+NS_LIST.filter(n=>n.st==='working').map(n=>`<option value="${n.id}">${n.id} - ${n.name}</option>`).join('');
-  document.getElementById('apt-pos').value='';document.getElementById('apt-date').value='';
-  clrE(['apt-ns-e','apt-pos-e','apt-date-e']);openOv('ov-appoint');
-}
-function submitAppoint(){
-  const ns=document.getElementById('apt-ns').value,pos=document.getElementById('apt-pos').value.trim(),date=document.getElementById('apt-date').value;
-  let ok=true;
-  if(!ns){shE('apt-ns-e');ok=false;}else hdE('apt-ns-e');
-  if(!pos){shE('apt-pos-e');ok=false;}else hdE('apt-pos-e');
-  if(!date){shE('apt-date-e');ok=false;}else hdE('apt-date-e');
-  if(!ok)return;closeOv('ov-appoint');toast('Bổ nhiệm thành công');
-}
-
-/* ── HSL ── */
-const _EDIT_IC=`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`;
-const _DEL_IC=`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>`;
-function renderHsl(){
-  document.getElementById('hsl-wrap').innerHTML=HSL_GROUPS.map((g,gi)=>`
-    <div class="hsl-grp">
-      <div class="hsl-hdr${g.open?'':' coll'}" onclick="toggleHsl(${gi})">
-        <span>${g.label}</span><span class="chev">▼</span>
-      </div>
-      <div class="hsl-body${g.open?'':' hidden'}" id="hsl-body-${gi}">
-        <table>
-          <thead><tr><th>Mã HSL</th><th>Ngạch viên chức</th><th>Bậc lương</th><th>Hệ số lương</th><th>Trạng thái</th><th>Thao tác</th></tr></thead>
-          <tbody>${g.rows.map((r,ri)=>`<tr>
-            <td>${r.code}</td><td>${r.ngach}</td><td>Bậc ${r.bac}</td><td>${r.hs.toFixed(2)}</td>
-            <td>${r.st==='active'?'<span class="bd bd-active">Đang sử dụng</span>':'<span class="bd bd-unused">Ngừng sử dụng</span>'}</td>
-            <td><div style="display:flex;gap:6px">
-              <button class="btn-ic" onclick="openEditHsl(${gi},${ri})" title="Sửa">${_EDIT_IC}</button>
-              <button class="btn-ic" onclick="openDelHsl(${gi},${ri})" title="Xóa" style="color:#ef4444">${_DEL_IC}</button>
-            </div></td>
-          </tr>`).join('')}</tbody>
-        </table>
-      </div>
-    </div>`).join('');
-}
-function toggleHsl(gi){
-  const g=HSL_GROUPS[gi];g.open=!g.open;
-  document.querySelectorAll('.hsl-hdr')[gi].classList.toggle('coll',!g.open);
-  document.getElementById('hsl-body-'+gi).classList.toggle('hidden',!g.open);
-}
-
-let _editHsl=null,_delHsl=null;
-
-function openAddHsl(){
-  ['ah-grp','ah-st'].forEach(id=>document.getElementById(id).value='');
-  ['ah-bac','ah-val'].forEach(id=>document.getElementById(id).value='');
-  clrE(['ah-grp-e','ah-bac-e','ah-val-e']);
-  openOv('ov-addhsl');
-}
-function submitAddHsl(){
-  const grp=document.getElementById('ah-grp').value,bac=parseInt(document.getElementById('ah-bac').value),val=parseFloat(document.getElementById('ah-val').value),st=document.getElementById('ah-st').value;
-  let ok=true;
-  if(!grp){shE('ah-grp-e');ok=false;}else hdE('ah-grp-e');
-  if(!bac||bac<1){shE('ah-bac-e');ok=false;}else hdE('ah-bac-e');
-  if(!val||val<=0){shE('ah-val-e');ok=false;}else hdE('ah-val-e');
-  if(!ok)return;
-  const gi=parseInt(grp),g=HSL_GROUPS[gi];
-  const prefix=['HSLTK','HSLTBM','HSLGV'][gi];
-  const code=prefix+(String(bac).padStart(2,'0'));
-  g.rows.push({code,ngach:g.label,bac,hs:val,st:st||'active'});
-  g.open=true;
-  closeOv('ov-addhsl');toast('Thêm hệ số lương thành công');renderHsl();
-}
-function openEditHsl(gi,ri){
-  _editHsl={gi,ri};const r=HSL_GROUPS[gi].rows[ri];
-  document.getElementById('hsl-sub').textContent=r.code+' - '+r.ngach+' Bậc '+r.bac;
-  document.getElementById('hsl-val').value=r.hs.toFixed(2);
-  document.getElementById('hsl-st').value=r.st;
-  clrE(['hsl-val-e']);openOv('ov-edithsl');
-}
-function submitEditHsl(){
-  const val=parseFloat(document.getElementById('hsl-val').value),st=document.getElementById('hsl-st').value;
-  if(!val||val<=0){shE('hsl-val-e');return;}hdE('hsl-val-e');
-  const r=HSL_GROUPS[_editHsl.gi].rows[_editHsl.ri];r.hs=val;r.st=st;
-  closeOv('ov-edithsl');toast('Cập nhật hệ số lương thành công');renderHsl();
-}
-function openDelHsl(gi,ri){
-  _delHsl={gi,ri};const r=HSL_GROUPS[gi].rows[ri];
-  document.getElementById('delhsl-name').textContent='Xóa '+r.code+' - '+r.ngach+' Bậc '+r.bac+'?';
-  openOv('ov-delhsl');
-}
-function doDelHsl(){
-  if(!_delHsl)return;
-  HSL_GROUPS[_delHsl.gi].rows.splice(_delHsl.ri,1);
-  closeOv('ov-delhsl');toast('Xóa hệ số lương thành công');renderHsl();
-}
-
-/* ── KDT ── */
-let _curKdt=null;
-function kdtStBadge(st){const m={open:'<span class="bd bd-open">Đang mở đăng ký</span>',done:'<span class="bd bd-done">Hoàn thành</span>',closed:'<span class="bd bd-closed">Hết hạn đăng ký</span>'};return m[st]||st;}
-function renderKdt(){
-  document.getElementById('kdt-body').innerHTML=KDTS.map((k,i)=>`<tr>
-    <td>${k.id}</td>
-    <td><button class="btn-lk" onclick="viewKdt(${i})">${k.name}</button></td>
-    <td>${kdtStBadge(k.st)}</td>
-    <td>
-      <button class="btn-ic" onclick="viewKdt(${i})" title="Xem"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-      ${k.canEdit?`<button class="btn-ic" onclick="openEditKdt(${i})" title="Sửa"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>`:''}
-    </td>
-  </tr>`).join('');
-}
-function viewKdt(idx){
-  _curKdt=KDTS[idx];
-  document.getElementById('kdt-list-wrap').style.display='none';
-  document.getElementById('kdt-detail-wrap').style.display='block';
-  document.getElementById('kdt-detail-bc').textContent=_curKdt.id+' - '+_curKdt.name;
-  document.getElementById('kdt-detail-title').textContent=_curKdt.id+' - '+_curKdt.name;
-  kdtTab(0,null);
-  document.getElementById('kdt-gen').innerHTML=`
-    <div><div class="il">Mã KĐT</div><div class="iv">${_curKdt.id}</div></div>
-    <div><div class="il">Tên khóa đào tạo</div><div class="iv">${_curKdt.name}</div></div>
-    <div><div class="il">Loại khóa đào tạo</div><div class="iv">${_curKdt.type}</div></div>
-    <div><div class="il">Trạng thái</div><div class="iv">${kdtStBadge(_curKdt.st)}</div></div>
-    <div><div class="il">Thời gian từ ngày</div><div class="iv">${_curKdt.from}</div></div>
-    <div><div class="il">Đến ngày</div><div class="iv">${_curKdt.to}</div></div>
-    <div><div class="il">Địa điểm</div><div class="iv">${_curKdt.loc}</div></div>
-    <div><div class="il">Kinh phí (VNĐ)</div><div class="iv">${_curKdt.fee}</div></div>
-    <div class="span2"><div class="il">Cam kết sau đào tạo</div><div class="iv">${_curKdt.commit}</div></div>
-    <div><div class="il">Tên chứng chỉ</div><div class="iv">${_curKdt.cert}</div></div>
-    <div><div class="il">Loại chứng chỉ</div><div class="iv">${_curKdt.certType}</div></div>`;
-  document.getElementById('kdt-reg').innerHTML=`
-    <div><div class="il">Mở đăng ký từ ngày</div><div class="iv">${_curKdt.regFrom}</div></div>
-    <div><div class="il">Đến ngày</div><div class="iv">${_curKdt.regTo}</div></div>
-    <div><div class="il">Số lượng đăng ký</div><div class="iv">${_curKdt.count}</div></div>`;
-  const parts=KDT_PARTS[_curKdt.id]||[];
-  document.getElementById('kdt-parts').innerHTML=parts.length
-    ?parts.map((p,i)=>`<tr>
-      <td>${p.id}</td><td>${p.name}</td><td>${p.dept}</td><td>${p.date}</td>
-      <td>${p.result==='none'?'<span class="result-none">Chưa có kết quả</span>':p.result==='pass'?'<span class="result-pass">Hoàn thành</span>':'<span class="result-fail">Không đạt</span>'}</td>
-      <td>
-        ${p.result==='none'?`<button class="btn-s sm" onclick="openKdtResult(${i})">Ghi nhận kết quả</button>`:''}
-        <button class="btn-ic" onclick="openKdtView(${i})" title="Xem"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-      </td>
-    </tr>`).join('')
-    :'<tr><td colspan="6" style="text-align:center;color:#9ca3af;padding:20px">Không có người tham gia</td></tr>';
-}
-function backKdtList(){_curKdt=null;document.getElementById('kdt-list-wrap').style.display='block';document.getElementById('kdt-detail-wrap').style.display='none';}
-function openEditKdt(idx){
-  const k=KDTS[idx];
-  document.getElementById('ekdt-sub').textContent='Mã: '+k.id;
-  document.getElementById('ek-name').value=k.name;
-  document.getElementById('ek-type').value=k.type;
-  document.getElementById('ek-fee').value=k.fee.replace(/\./g,'');
-  document.getElementById('ek-loc').value=k.loc;
-  document.getElementById('ek-commit').value=k.commit;
-  clrE(['ek-name-e']);openOv('ov-editkdt');
-}
-function submitEditKdt(){
-  const name=document.getElementById('ek-name').value.trim();
-  if(!name){shE('ek-name-e');return;}hdE('ek-name-e');
-  closeOv('ov-editkdt');toast('Cập nhật khóa đào tạo thành công');renderKdt();
-}
-let _krIdx=null;
-function openKdtResult(partIdx){
-  _krIdx=partIdx;const p=(KDT_PARTS[_curKdt.id]||[])[partIdx];
-  document.getElementById('kr-sub').textContent=p.name+' - '+p.dept;
-  document.getElementById('kr-result').value='';document.getElementById('kr-note').value='';
-  clrE(['kr-result-e']);openOv('ov-kdt-result');
-}
-function submitKdtResult(){
-  const result=document.getElementById('kr-result').value;
-  if(!result){shE('kr-result-e');return;}hdE('kr-result-e');
-  if(_curKdt&&_krIdx!==null)(KDT_PARTS[_curKdt.id]||[])[_krIdx].result=result;
-  closeOv('ov-kdt-result');toast('Ghi nhận kết quả thành công');
-  viewKdt(KDTS.findIndex(k=>k.id===_curKdt.id));
-}
-function openKdtView(partIdx){
-  const p=(KDT_PARTS[_curKdt.id]||[])[partIdx];
-  document.getElementById('kdt-view-grid').innerHTML=`
-    <div><div class="il">Mã nhân sự</div><div class="iv">${p.id}</div></div>
-    <div><div class="il">Họ tên</div><div class="iv">${p.name}</div></div>
-    <div><div class="il">Đơn vị</div><div class="iv">${p.dept}</div></div>
-    <div><div class="il">Ngày đăng ký</div><div class="iv">${p.date}</div></div>
-    <div><div class="il">Kết quả</div><div class="iv">${p.result==='none'?'<span class="result-none">Chưa có kết quả</span>':p.result==='pass'?'<span class="result-pass">Hoàn thành</span>':'<span class="result-fail">Không đạt</span>'}</div></div>`;
-  openOv('ov-kdt-view');
-}
-
-/* ── CONTRACT / REWARD / DISCIPLINE ── */
-function openAddContract(){['ac-type','ac-dept'].forEach(id=>document.getElementById(id).value='');['ac-sign','ac-eff','ac-exp'].forEach(id=>document.getElementById(id).value='');clrE(['ac-type-e','ac-sign-e','ac-eff-e','ac-dept-e']);openOv('ov-addcontract');}
-function submitAddContract(){
-  const type=document.getElementById('ac-type').value,sign=document.getElementById('ac-sign').value,eff=document.getElementById('ac-eff').value,dept=document.getElementById('ac-dept').value;
-  let ok=true;
-  if(!type){shE('ac-type-e');ok=false;}else hdE('ac-type-e');
-  if(!sign){shE('ac-sign-e');ok=false;}else hdE('ac-sign-e');
-  if(!eff){shE('ac-eff-e');ok=false;}else hdE('ac-eff-e');
-  if(!dept){shE('ac-dept-e');ok=false;}else hdE('ac-dept-e');
-  if(!ok)return;closeOv('ov-addcontract');toast('Thêm hợp đồng thành công');
-}
+/* ── CONTRACT ── */
 function openContract(idx){
   const c=CONTRACTS[idx];
   document.getElementById('contract-grid').innerHTML=`
@@ -1461,80 +532,82 @@ function openContract(idx){
     <div><div class="il">Trạng thái</div><div class="iv">${c.st==='active'?'<span class="bd bd-active">Đang hoạt động</span>':'<span class="bd bd-unused">Ngừng sử dụng</span>'}</div></div>`;
   openOv('ov-contract');
 }
-function openAddReward(){['ar-cat','ar-name','ar-dec','ar-content'].forEach(id=>document.getElementById(id).value='');document.getElementById('ar-amount').value='0';clrE(['ar-cat-e','ar-date-e','ar-name-e','ar-dec-e']);openOv('ov-addreward');}
-function submitAddReward(){
-  const cat=document.getElementById('ar-cat').value,date=document.getElementById('ar-date').value,name=document.getElementById('ar-name').value.trim(),dec=document.getElementById('ar-dec').value.trim();
-  let ok=true;
-  if(!cat){shE('ar-cat-e');ok=false;}else hdE('ar-cat-e');
-  if(!date){shE('ar-date-e');ok=false;}else hdE('ar-date-e');
-  if(!name){shE('ar-name-e');ok=false;}else hdE('ar-name-e');
-  if(!dec){shE('ar-dec-e');ok=false;}else hdE('ar-dec-e');
-  if(!ok)return;closeOv('ov-addreward');toast('Thêm khen thưởng thành công');
-}
+
+/* ── REWARD ── */
 function openReward(idx){
   const r=REWARDS[idx];
-  document.getElementById('reward-sub').textContent='Mã nhân sự: '+(_curNs?_curNs.id:'NS002');
+  document.getElementById('reward-sub').textContent=r.name;
   document.getElementById('reward-grid').innerHTML=`
     <div><div class="il">Loại khen thưởng</div><div class="iv">${r.cat}</div></div>
-    <div><div class="il">Tên khen thưởng</div><div class="iv">${r.name}</div></div>
     <div><div class="il">Ngày quyết định</div><div class="iv">${r.date}</div></div>
     <div><div class="il">Số quyết định</div><div class="iv">${r.decision}</div></div>
-    <div class="span2"><div class="il">Nội dung</div><div class="iv">${r.content}</div></div>
-    <div><div class="il">Số tiền thưởng</div><div class="iv">${r.amount}</div></div>`;
+    <div><div class="il">Tiền thưởng (VNĐ)</div><div class="iv">${parseInt(r.amount)>0?Number(r.amount).toLocaleString('vi-VN'):'Không có'}</div></div>
+    <div class="span2"><div class="il">Nội dung</div><div class="iv">${r.content}</div></div>`;
   openOv('ov-reward');
 }
-function openAddDisc(){['ad-cat','ad-name','ad-action','ad-reason'].forEach(id=>document.getElementById(id).value='');clrE(['ad-cat-e','ad-date-e','ad-name-e','ad-action-e']);openOv('ov-adddisc');}
-function submitAddDisc(){
-  const cat=document.getElementById('ad-cat').value,date=document.getElementById('ad-date').value,name=document.getElementById('ad-name').value.trim(),action=document.getElementById('ad-action').value;
-  let ok=true;
-  if(!cat){shE('ad-cat-e');ok=false;}else hdE('ad-cat-e');
-  if(!date){shE('ad-date-e');ok=false;}else hdE('ad-date-e');
-  if(!name){shE('ad-name-e');ok=false;}else hdE('ad-name-e');
-  if(!action){shE('ad-action-e');ok=false;}else hdE('ad-action-e');
-  if(!ok)return;closeOv('ov-adddisc');toast('Thêm kỷ luật thành công');
-}
-function openDisc(idx){
-  const d=DISCS[idx];
-  document.getElementById('disc-sub').textContent='Mã nhân sự: '+(_curNs?_curNs.id:'NS001');
-  document.getElementById('disc-grid').innerHTML=`
-    <div><div class="il">Loại kỷ luật</div><div class="iv">${d.cat}</div></div>
-    <div><div class="il">Tên kỷ luật</div><div class="iv">${d.name}</div></div>
-    <div><div class="il">Ngày quyết định</div><div class="iv">${d.date}</div></div>
-    <div><div class="il">Hình thức xử lý</div><div class="iv">${d.action}</div></div>
-    <div class="span2"><div class="il">Lý do</div><div class="iv">${d.reason}</div></div>`;
-  openOv('ov-disc');
+
+/* ── TRAINING ── */
+function kdtStBadge(st){const m={open:'<span class="bd bd-open">Đang mở đăng ký</span>',done:'<span class="bd bd-done">Hoàn thành</span>',closed:'<span class="bd bd-closed">Hết hạn đăng ký</span>'};return m[st]||st;}
+
+let _selKdt=null;
+function renderTraining(){
+  document.getElementById('training-avail-body').innerHTML=AVAIL_KDTS.map((k,i)=>`<tr>
+    <td><button class="btn-lk" onclick="openRegKdt(${i})">${k.name}</button></td>
+    <td>${k.type}</td><td>${k.fee}</td><td>${k.count}</td>
+    <td>${kdtStBadge(k.st)}</td>
+    <td><button class="btn-ic" onclick="openRegKdt(${i})" title="Xem & Đăng ký">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+    </button></td>
+  </tr>`).join('');
+  document.getElementById('training-reg-body').innerHTML=MY_KDTS.map((k,i)=>`<tr>
+    <td><button class="btn-lk" onclick="openViewKdt(${i})">${k.name}</button></td>
+    <td>${k.type}</td><td>${k.fee}</td>
+    <td>${kdtStBadge(k.st)}</td>
+    <td>${k.result==='none'?'<span class="result-none">Chưa có kết quả</span>':k.result==='pass'?'<span class="result-pass">Hoàn thành</span>':'<span class="result-fail">Không đạt</span>'}</td>
+    <td><button class="btn-ic" onclick="openViewKdt(${i})" title="Xem">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+    </button></td>
+  </tr>`).join('');
 }
 
-/* ── MY TRAINING ── */
-function openMyTr(idx){
-  const t=MY_TR_LIST[idx];
-  const canReg=t.st==='open';
-  document.getElementById('mytr-title').textContent=canReg?'Đăng ký khóa đào tạo':'Xem khóa đào tạo đã đăng ký';
-  document.getElementById('mytr-sub').textContent='Mã: '+t.id;
-  const stL={open:'Đang mở đăng ký',done:'Đã hoàn thành'},stC={open:'bd-open',done:'bd-done'};
-  document.getElementById('mytr-grid').innerHTML=`
-    <div><div class="il">Tên khóa đào tạo</div><div class="iv">${t.name}</div></div>
-    <div><div class="il">Loại</div><div class="iv">${t.type}</div></div>
-    <div><div class="il">Từ ngày</div><div class="iv">${t.from}</div></div>
-    <div><div class="il">Đến ngày</div><div class="iv">${t.to}</div></div>
-    <div><div class="il">Địa điểm</div><div class="iv">${t.loc}</div></div>
-    <div><div class="il">Kinh phí (VNĐ)</div><div class="iv">${t.fee}</div></div>
-    <div class="span2"><div class="il">Cam kết sau đào tạo</div><div class="iv">${t.commit}</div></div>
-    <div><div class="il">Số lượng đăng ký</div><div class="iv">${t.count}</div></div>
-    <div><div class="il">Trạng thái</div><div class="iv"><span class="bd ${stC[t.st]}">${stL[t.st]}</span></div></div>`;
-  document.getElementById('mytr-reg-btn').style.display=canReg?'inline-flex':'none';
-  openOv('ov-mytr');
+function openRegKdt(idx){
+  _selKdt=AVAIL_KDTS[idx];
+  document.getElementById('reg-kdt-title').textContent=_selKdt.name;
+  document.getElementById('reg-kdt-sub').textContent='Mã: '+_selKdt.id;
+  document.getElementById('reg-kdt-grid').innerHTML=`
+    <div><div class="il">Loại khóa đào tạo</div><div class="iv">${_selKdt.type}</div></div>
+    <div><div class="il">Trạng thái</div><div class="iv">${kdtStBadge(_selKdt.st)}</div></div>
+    <div><div class="il">Thời gian từ ngày</div><div class="iv">${_selKdt.from}</div></div>
+    <div><div class="il">Đến ngày</div><div class="iv">${_selKdt.to}</div></div>
+    <div><div class="il">Địa điểm</div><div class="iv">${_selKdt.loc}</div></div>
+    <div><div class="il">Kinh phí (VNĐ)</div><div class="iv">${_selKdt.fee}</div></div>
+    <div><div class="il">Mở đăng ký từ ngày</div><div class="iv">${_selKdt.regFrom}</div></div>
+    <div><div class="il">Đến ngày</div><div class="iv">${_selKdt.regTo}</div></div>
+    <div><div class="il">Số lượng đăng ký</div><div class="iv">${_selKdt.count}</div></div>
+    <div><div class="il">Chứng chỉ</div><div class="iv">${_selKdt.cert}</div></div>
+    <div class="span2"><div class="il">Cam kết sau đào tạo</div><div class="iv">${_selKdt.commit}</div></div>`;
+  openOv('ov-reg-kdt');
 }
-function doRegMyTr(){closeOv('ov-mytr');toast('Đăng ký khóa đào tạo thành công');}
+function doRegKdt(){closeOv('ov-reg-kdt');toast('Đăng ký khóa đào tạo thành công');}
 
-/* ── CLOSE OV ON BG ── */
-document.querySelectorAll('.ov').forEach(ov=>{ov.addEventListener('click',e=>{if(e.target===ov)ov.classList.remove('open');});});
+function openViewKdt(idx){
+  const k=MY_KDTS[idx];
+  document.getElementById('view-kdt-title').textContent=k.name;
+  document.getElementById('view-kdt-sub').textContent='Mã: '+k.id;
+  document.getElementById('view-kdt-grid').innerHTML=`
+    <div><div class="il">Loại khóa đào tạo</div><div class="iv">${k.type}</div></div>
+    <div><div class="il">Trạng thái</div><div class="iv">${kdtStBadge(k.st)}</div></div>
+    <div><div class="il">Thời gian từ ngày</div><div class="iv">${k.from}</div></div>
+    <div><div class="il">Đến ngày</div><div class="iv">${k.to}</div></div>
+    <div><div class="il">Địa điểm</div><div class="iv">${k.loc}</div></div>
+    <div><div class="il">Kinh phí (VNĐ)</div><div class="iv">${k.fee}</div></div>
+    <div><div class="il">Ngày đăng ký</div><div class="iv">${k.regDate}</div></div>
+    <div><div class="il">Kết quả</div><div class="iv">${k.result==='none'?'<span class="result-none">Chưa có kết quả</span>':k.result==='pass'?'<span class="result-pass">Hoàn thành</span>':'<span class="result-fail">Không đạt</span>'}</div></div>`;
+  openOv('ov-view-kdt');
+}
 
 /* ── INIT ── */
-renderNs();
-renderOrgTree();
-renderHsl();
-renderKdt();
+renderTraining();
 </script>
 </body>
 </html>
