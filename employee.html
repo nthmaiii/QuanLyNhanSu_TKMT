@@ -1,613 +1,1148 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cán bộ - Quản lý Nhân sự</title>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;background:#f5f7fb;min-height:100vh}
-.hdr{position:fixed;top:0;left:0;right:0;height:60px;background:#fff;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 24px;box-shadow:0 1px 4px rgba(0,0,0,.08);border-bottom:1px solid #e5e7eb}
-.hdr-brand{display:flex;align-items:center;gap:12px;color:#1C3B5A;font-size:16px;font-weight:600}
-.hdr-user{position:relative}
-.hdr-btn{display:flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;color:#374151;font-size:14px;padding:6px 10px;border-radius:6px;transition:background .15s}
-.hdr-btn:hover{background:#f3f4f6}
-.avatar{width:32px;height:32px;border-radius:50%;background:#F97316;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.hdr-dd{position:absolute;top:calc(100% + 4px);right:0;background:#fff;border:1px solid #e5e7eb;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.12);min-width:178px;overflow:hidden;display:none;z-index:201}
-.hdr-dd.open{display:block}
-.dd-item{display:flex;align-items:center;gap:10px;padding:11px 16px;font-size:14px;color:#374151;cursor:pointer;transition:background .1s}
-.dd-item:hover{background:#f9fafb}
-.dd-item.red{color:#ef4444}
-.layout{display:flex;margin-top:60px;min-height:calc(100vh - 60px)}
-.sb{width:220px;background:#fff;position:fixed;top:60px;bottom:0;left:0;overflow-y:auto;padding:16px 0;border-right:1px solid #e5e7eb}
-.sb-lbl{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#9ca3af;padding:0 16px 6px;margin-top:12px}
-.sb-item{display:flex;align-items:center;gap:10px;padding:10px 16px 10px 13px;font-size:14px;color:#6b7280;cursor:pointer;border-left:3px solid transparent;transition:background .15s,color .15s}
-.sb-item:hover{background:#f9fafb;color:#374151}
-.sb-item.active{background:#fff7ed;color:#F97316;border-left-color:#F97316;font-weight:600}
-.sb-ic{width:17px;height:17px;flex-shrink:0}
-.main{margin-left:220px;flex:1;padding:28px 32px}
-.pg{display:none}.pg.active{display:block}
-.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:10px}
-.ph-title{font-size:20px;font-weight:700;color:#1C3B5A}
-.btn-s{height:40px;padding:0 16px;background:#fff;color:#374151;border:1px solid #e5e7eb;border-radius:8px;font-size:14px;cursor:pointer;transition:background .1s;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
-.btn-s:hover{background:#f9fafb}
-.btn-p{height:40px;padding:0 16px;background:#F97316;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;transition:background .15s}
-.btn-p:hover{background:#e86d10}
-.btn-ic{width:30px;height:30px;border-radius:6px;border:none;background:#f3f4f6;color:#6b7280;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:background .1s}
-.btn-ic:hover{background:#e5e7eb;color:#374151}
-.btn-lk{background:none;border:none;color:#F97316;font-size:13px;font-weight:600;cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:2px}
-.tw{background:#fff;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.06);overflow:hidden}
-table{width:100%;border-collapse:collapse}
-thead th{background:#f9fafb;padding:12px 16px;text-align:left;font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid #e5e7eb}
-tbody td{padding:13px 16px;font-size:14px;color:#374151;border-bottom:1px solid #f3f4f6}
-tbody tr:last-child td{border-bottom:none}
-tbody tr:hover td{background:#fafafa}
-.bd{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600}
-.bd::before{content:'';width:6px;height:6px;border-radius:50%}
-.bd-active{background:#dcfce7;color:#16a34a}.bd-active::before{background:#16a34a}
-.bd-working{background:#dcfce7;color:#16a34a}.bd-working::before{background:#16a34a}
-.bd-left{background:#f3f4f6;color:#6b7280}.bd-left::before{background:#9ca3af}
-.bd-unused{background:#fef3c7;color:#92400e}.bd-unused::before{background:#f59e0b}
-.bd-open{background:#dbeafe;color:#1d4ed8}.bd-open::before{background:#3b82f6}
-.bd-done{background:#dcfce7;color:#16a34a}.bd-done::before{background:#16a34a}
-.bd-closed{background:#f3f4f6;color:#6b7280}.bd-closed::before{background:#9ca3af}
-.bd-fail{background:#fee2e2;color:#dc2626}.bd-fail::before{background:#dc2626}
-.tabs{display:flex;border-bottom:2px solid #e5e7eb;margin-bottom:24px;flex-wrap:wrap}
-.tab-b{padding:10px 20px;font-size:14px;font-weight:500;color:#6b7280;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color .15s;white-space:nowrap}
-.tab-b:hover{color:#374151}
-.tab-b.active{color:#F97316;border-bottom-color:#F97316;font-weight:600}
-.tp{display:none}.tp.active{display:block}
-.card{background:#fff;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.06);padding:24px;margin-bottom:20px}
-.card-t{font-size:12px;font-weight:700;color:#1C3B5A;text-transform:uppercase;letter-spacing:.6px;padding-bottom:12px;border-bottom:1px solid #f3f4f6;margin-bottom:16px}
-.ig{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px}
-.ig .il{font-size:12px;color:#9ca3af;margin-bottom:3px}
-.ig .iv{font-size:14px;color:#1C3B5A;font-weight:500}
-.span2{grid-column:span 2}
-.ov{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:300;padding:16px}
-.ov.open{display:flex}
-.modal{background:#fff;border-radius:16px;padding:32px;width:480px;max-width:96vw;max-height:90vh;overflow-y:auto;box-shadow:0 8px 40px rgba(0,0,0,.18)}
-.modal-lg{width:600px}
-.mt{font-size:18px;font-weight:700;color:#1C3B5A;margin-bottom:4px}
-.ms{font-size:13px;color:#6b7280;margin-bottom:20px}
-.mf{display:flex;justify-content:flex-end;gap:10px;margin-top:24px}
-.cb{background:#fff;border-radius:16px;padding:32px;width:400px;max-width:90vw;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,.18)}
-.cb-t{font-size:18px;font-weight:700;color:#1C3B5A;margin-bottom:10px}
-.cb-b{font-size:14px;color:#6b7280;margin-bottom:6px}
-.cb-n{font-size:12px;color:#9ca3af;margin-bottom:24px}
-.cb-a{display:flex;gap:12px;justify-content:center}
-.fg{margin-bottom:16px}
-.fgl{display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:5px}
-.req{color:#ef4444}
-.fi{display:block;width:100%;height:42px;padding:0 12px;border:1px solid #e5e7eb;border-radius:8px;font-size:14px;color:#374151;outline:none;transition:border-color .15s;background:#fff;font-family:inherit}
-.fi:focus{border-color:#F97316;box-shadow:0 0 0 3px rgba(249,115,22,.1)}
-.fi.err{border-color:#ef4444}
-.fe{font-size:12px;color:#ef4444;margin-top:4px;display:none}
-.fe.show{display:block}
-.result-none{color:#9ca3af;font-style:italic}
-.result-pass{color:#16a34a;font-weight:600}
-.result-fail{color:#dc2626;font-weight:600}
-.toast{position:fixed;top:76px;right:24px;background:#fff;border:1px solid #e5e7eb;border-left:4px solid #16a34a;border-radius:10px;padding:12px 20px;font-size:14px;font-weight:500;color:#374151;box-shadow:0 4px 20px rgba(0,0,0,.12);display:flex;align-items:center;gap:10px;z-index:999;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;transform:translateX(20px);white-space:nowrap;min-width:240px}
-.toast.show{opacity:1;transform:translateX(0)}
-@keyframes tspin{to{transform:rotate(360deg)}}
-.tspin{animation:tspin 1s linear infinite;display:block}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hồ sơ cá nhân - Quản lý nhân sự</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #f4f6f9;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    input,
+    select,
+    button,
+    textarea {
+      font-family: inherit;
+    }
+
+    .hdr {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      background: #fff;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      border-bottom: 1px solid #eef2f6;
+    }
+
+    .hdr-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      background: #004085;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-logo svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+    }
+
+    .hdr-user {
+      position: relative;
+    }
+
+    .hdr-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .hdr-btn:hover {
+      background: #f7fafc;
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #edf2f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .avatar svg {
+      width: 20px;
+      height: 20px;
+      fill: #4a5568;
+    }
+
+    .user-info-text {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+
+    .user-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #2d3748;
+    }
+
+    .user-role {
+      font-size: 12px;
+      color: #718096;
+    }
+
+    .hdr-dd {
+      position: absolute;
+      top: calc(100% + 4px);
+      right: 0;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      min-width: 180px;
+      overflow: hidden;
+      display: none;
+      z-index: 201;
+    }
+
+    .hdr-dd.open {
+      display: block;
+    }
+
+    .dd-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #4a5568;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .dd-item:hover {
+      background: #f7fafc;
+    }
+
+    .layout {
+      display: flex;
+      margin-top: 64px;
+      min-height: calc(100vh - 64px);
+    }
+
+    .sb {
+      width: 240px;
+      background: #fff;
+      position: fixed;
+      top: 64px;
+      bottom: 0;
+      left: 0;
+      padding: 16px 8px;
+      border-right: 1px solid #eef2f6;
+    }
+
+    .sb-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #4a5568;
+      cursor: pointer;
+      border-radius: 8px;
+      margin-bottom: 4px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .sb-item:hover {
+      background: #f7fafc;
+      color: #2d3748;
+    }
+
+    .sb-item.active {
+      background: #fff2e6;
+      color: #ff8c1a;
+      font-weight: 600;
+    }
+
+    .sb-ic {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .main {
+      margin-left: 240px;
+      flex: 1;
+      padding: 24px;
+      background-color: #f8fafc;
+    }
+
+    .pg {
+      display: none;
+    }
+
+    .pg.active {
+      display: block;
+    }
+
+    .pg-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #4a5568;
+      margin-bottom: 20px;
+    }
+
+    .tabs {
+      display: flex;
+      background: #f3f4f6;
+      padding: 6px;
+      border-radius: 12px;
+      gap: 6px;
+      margin-bottom: 24px;
+      width: 100%;
+    }
+
+    .tab-b {
+      flex: 1;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #4b5563;
+      border: none;
+      background: none;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .tab-b:hover {
+      color: #1f2937;
+    }
+
+    .tab-b.active {
+      background: #fff2e6;
+      color: #ff8c1a;
+      font-weight: 600;
+    }
+
+    .tp {
+      display: none;
+    }
+
+    .tp.active {
+      display: block;
+    }
+
+    .card-wrapper {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    }
+
+    .avatar-section {
+      width: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .avatar-placeholder {
+      width: 140px;
+      height: 180px;
+      background: #f1f3f5;
+      border: 1px dashed #ced4da;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #adb5bd;
+      font-size: 32px;
+      transition: all 0.2s;
+    }
+
+    .form-container {
+      flex: 1;
+    }
+
+    .fg {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .fgl {
+      font-size: 13px;
+      font-weight: 500;
+      color: #4a5568;
+    }
+
+    .fi {
+      height: 40px;
+      padding: 0 12px;
+      border: 1px solid #cbd5e0;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #2d3748;
+      background-color: #fff;
+      outline: none;
+      width: 100%;
+    }
+
+    .fi:focus {
+      border-color: #ff8c1a;
+    }
+
+    .select-wrapper {
+      position: relative;
+    }
+
+    .select-wrapper::after {
+      content: "▼";
+      font-size: 10px;
+      color: #a0aec0;
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .fi-select {
+      appearance: none;
+    }
+
+    .tw {
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    thead th {
+      background: #fff;
+      padding: 14px 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #4a5568;
+      border-bottom: 1px solid #e2e8f0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    tbody td {
+      padding: 14px 20px;
+      font-size: 14px;
+      color: #2d3748;
+      border-bottom: 1px solid #edf2f7;
+    }
+
+    .bd {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .bd::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .bd-open {
+      background: #e6fcf5;
+      color: #0ca678;
+    }
+
+    .bd-open::before {
+      background: #0ca678;
+    }
+
+    .bd-closed {
+      background: #fff5f5;
+      color: #f03e3e;
+    }
+
+    .bd-closed::before {
+      background: #f03e3e;
+    }
+
+    .btn-pdf {
+      background: #ff8c1a;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 16px;
+      float: right;
+    }
+
+    .btn-pdf:hover {
+      background: #e67e17;
+    }
+
+    .pagination-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      font-size: 13px;
+      color: #718096;
+    }
+
+    .pagination-buttons {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .btn-page {
+      padding: 6px 16px;
+      border: 1px solid #e2e8f0;
+      background: #fff;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #4a5568;
+      cursor: pointer;
+    }
+
+    .btn-page:disabled {
+      background: #f7fafc;
+      color: #cbd5e0;
+      cursor: not-allowed;
+    }
+
+    .ov {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 3000;
+    }
+
+    .ov.open {
+      display: flex !important;
+    }
+
+    .ov-toast {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 14px 24px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #10b981;
+      min-width: 280px;
+      animation: slideInToast 0.3s ease;
+    }
+
+    @keyframes slideInToast {
+      from {
+        transform: translateX(120%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    #pg-change-password.active {
+      display: flex !important;
+    }
+
+    .err-msg {
+      color: #f03e3e;
+      font-size: 12px;
+      display: none;
+      margin-top: 2px;
+      text-align: left;
+    }
+
+    .err-msg.show {
+      display: block;
+    }
+
+    .fi.input-err {
+      border-color: #f03e3e !important;
+    }
+  </style>
 </head>
+
 <body>
 
-<header class="hdr">
-  <div class="hdr-brand">
-    <svg width="40" height="40" viewBox="0 0 62 62" fill="none">
-      <circle cx="31" cy="31" r="28" fill="#fff" stroke="#1C3B5A" stroke-width="2.5"/>
-      <circle cx="15" cy="20" r="5" fill="#1C3B5A"/>
-      <path d="M7 36C7 30 10.5 26.5 15 26.5C17.5 26.5 19.5 27.5 21 29.5" fill="#1C3B5A"/>
-      <circle cx="47" cy="20" r="5" fill="#1C3B5A"/>
-      <path d="M41 29.5C42.5 27.5 44.5 26.5 47 26.5C51.5 26.5 55 30 55 36" fill="#1C3B5A"/>
-      <circle cx="31" cy="14" r="7" fill="#1C3B5A"/>
-      <path d="M20 40C20 31.5 25 27 31 27C37 27 42 31.5 42 40Z" fill="#1C3B5A"/>
-      <path d="M5 43L31 39L31 53L5 56Z" fill="#F97316"/>
-      <path d="M31 39L57 43L57 56L31 53Z" fill="#D86010"/>
-      <line x1="31" y1="39" x2="31" y2="53" stroke="#fff" stroke-width="1.5"/>
-      <g transform="translate(50,51)">
-        <rect x="-2" y="-8" width="4" height="3" rx="0.6" fill="#F97316"/>
-        <rect x="-2" y="5" width="4" height="3" rx="0.6" fill="#F97316"/>
-        <rect x="5" y="-2" width="3" height="4" rx="0.6" fill="#F97316"/>
-        <rect x="-8" y="-2" width="3" height="4" rx="0.6" fill="#F97316"/>
-        <circle r="6" fill="#F97316"/>
-        <circle r="2.5" fill="#fff"/>
-      </g>
+  <header class="hdr">
+    <div class="hdr-brand">
+      <svg width="40" height="40" viewBox="0 0 62 62" fill="none">
+        <circle cx="31" cy="31" r="28" fill="#fff" stroke="#1C3B5A" stroke-width="2.5" />
+        <circle cx="15" cy="20" r="5" fill="#1C3B5A" />
+        <path d="M7 36C7 30 10.5 26.5 15 26.5C17.5 26.5 19.5 27.5 21 29.5" fill="#1C3B5A" />
+        <circle cx="47" cy="20" r="5" fill="#1C3B5A" />
+        <path d="M41 29.5C42.5 27.5 44.5 26.5 47 26.5C51.5 26.5 55 30 55 36" fill="#1C3B5A" />
+        <circle cx="31" cy="14" r="7" fill="#1C3B5A" />
+        <path d="M20 40C20 31.5 25 27 31 27C37 27 42 31.5 42 40Z" fill="#1C3B5A" />
+        <path d="M5 43L31 39L31 53L5 56Z" fill="#F97316" />
+        <path d="M31 39L57 43L57 56L31 53Z" fill="#D86010" />
+        <line x1="31" y1="39" x2="31" y2="53" stroke="#fff" stroke-width="1.5" />
+      </svg>
+      <div>
+        <div style="font-size:15px;font-weight:700;color:#1C3B5A;line-height:1.2">Quản lý nhân sự</div>
+        <div style="font-size:12px;font-weight:400;color:#6b7280;line-height:1.2">Trường TKMT</div>
+      </div>
+    </div>
+    <div class="hdr-user">
+      <button class="hdr-btn" onclick="toggleDd()">
+        <div class="avatar">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5-4-8-4z" />
+          </svg>
+        </div>
+        <div class="user-info-text">
+          <span class="user-name">Nguyễn Văn A</span>
+          <span class="user-role">Cán bộ</span>
+        </div>
+        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" style="margin-left: 4px;">
+          <path d="M1 1l4 4 4-4" stroke="#4a5568" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+      <div class="hdr-dd" id="hdr-dd">
+        <div class="dd-item" onclick="navTo('change-password', null)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            style="margin-right:8px;">
+            <rect x="3" y="11" width="18" height="11" rx="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>Đổi mật khẩu
+        </div>
+        <div class="dd-item" onclick="toast('Đăng xuất thành công')" style="border-top: 1px solid #f7fafc;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            style="margin-right:8px;">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" /></svg>Đăng xuất
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sb">
+      <div class="sb-item active" onclick="navTo('profile',this)">
+        <svg class="sb-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" /></svg>Hồ sơ cá nhân
+      </div>
+      <div class="sb-item" onclick="navTo('dept',this)">
+        <svg class="sb-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          <polyline points="9 22 9 12 15 12 15 22" /></svg>Đơn vị công tác
+      </div>
+      <div class="sb-item" onclick="navTo('training',this)">
+        <svg class="sb-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" /></svg>Khóa đào tạo
+      </div>
+    </nav>
+
+    <main class="main">
+
+      <div class="ov" id="ov-training-detail" style="display: none;">
+        <div style="background: #fff; width: 100%; max-width: 700px; border-radius: 16px; padding: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); position: relative;">
+          
+          <h3 style="font-size: 18px; font-weight: 700; color: #1e293b; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #e2e8f0;">
+            Chi tiết khóa đào tạo
+          </h3>
+          
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 20px;">
+            
+            <div class="fg">
+              <label class="fgl">Tên khóa đào tạo</label>
+              <input class="fi" type="text" id="p-train-name">
+            </div>
+            <div class="fg">
+              <label class="fgl">Loại khóa đào tạo</label>
+              <input class="fi" type="text" id="p-train-type">
+            </div>
+            
+            <div class="fg">
+              <label class="fgl">Kinh phí (VNĐ)</label>
+              <input class="fi" type="text" id="p-train-cost">
+            </div>
+            <div class="fg">
+              <label class="fgl">Số lượng đăng ký hiện tại</label>
+              <input class="fi" type="text" id="p-train-slots">
+            </div>
+
+            <div class="fg">
+              <label class="fgl">Thời gian bắt đầu</label>
+              <input class="fi" type="text" id="p-train-start" value="10/07/2026">
+            </div>
+            <div class="fg">
+              <label class="fgl">Thời gian kết thúc</label>
+              <input class="fi" type="text" id="p-train-end" value="25/08/2026">
+            </div>
+
+            <div class="fg" style="grid-column: span 2;">
+              <label class="fgl">Địa điểm tổ chức / Nền tảng học</label>
+              <input class="fi" type="text" value="Phòng hội thảo tầng 3 - Tòa nhà thông tin thư viện TLU">
+            </div>
+
+            <div class="fg">
+              <label class="fgl">Giảng viên / Đơn vị phụ trách</label>
+              <input class="fi" type="text" value="Viện Công nghệ thông tin TLU">
+            </div>
+            <div class="fg">
+              <label class="fgl">Hình thức đánh giá</label>
+              <input class="fi" type="text" value="Làm bài tập lớn luận văn cuối khóa">
+            </div>
+
+            <div class="fg">
+              <label class="fgl">Chứng chỉ cấp kèm</label>
+              <input class="fi" type="text" value="Chứng nhận hoàn thành tiêu chuẩn hạng II">
+            </div>
+            <div class="fg">
+              <label class="fgl">Yêu cầu điều kiện tiên quyết</label>
+              <input class="fi" type="text" value="Cán bộ nhân sự chính thức của trường">
+            </div>
+
+            <div class="fg" style="grid-column: span 2;">
+              <label class="fgl">Nội dung tóm tắt & Mục tiêu khóa học</label>
+              <input class="fi" type="text" value="Trang bị các kỹ năng chuyên môn sâu, cập nhật xu hướng công nghệ mới hỗ trợ trong công tác quản lý và giảng dạy thực tiễn.">
+            </div>
+
+          </div>
+
+          <div style="margin-top: 28px; display: flex; justify-content: flex-end; gap: 12px; border-top: 1px solid #e2e8f0; padding-top: 20px;">
+            <button onclick="closeTrainingPopup()" style="padding: 10px 20px; background: #f3f4f6; color: #4b5563; border: none; border-radius: 8px; font-weight: 500; cursor: pointer; font-size: 14px;">Đóng</button>
+            <button onclick="confirmRegisterTraining()" style="padding: 10px 24px; background: #ff8c1a; color: #fff; border: none; border-radius: 8px; font-weight: 500; cursor: pointer; font-size: 14px;">Đăng ký</button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="pg" id="pg-dept">
+        <div class="pg-title">Đơn vị công tác</div>
+        
+        <div class="tabs">
+          <button class="tab-b active" onclick="pgTab('dept',0,this)">Thông tin đơn vị</button>
+          <button class="tab-b" onclick="pgTab('dept',1,this)">Lịch sử thay đổi</button>
+          <button class="tab-b" onclick="pgTab('dept',2,this)">Kiêm nhiệm / Biệt phái</button>
+        </div>
+
+        <div class="tp active" id="dept-tp0">
+          <div class="card-wrapper" style="border-radius: 12px; padding: 24px; background: #fff; border: 1px solid #e2e8f0;">
+            <div class="form-container">
+              
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 20px;">
+                
+                <div class="fg"><label class="fgl">Mã đơn vị</label><input class="fi" type="text" value="DD01"></div>
+                <div class="fg"><label class="fgl">Tên đơn vị</label><input class="fi" type="text" value="Phòng tài chính"></div>
+                
+                <div class="fg"><label class="fgl">Loại đơn vị</label><input class="fi" type="text" value="TLU-202604"></div>
+                <div class="fg"><label class="fgl">Đơn vị cha</label><input class="fi" type="text" value="Phòng kinh doanh"></div>
+                
+                <div class="fg"><label class="fgl">Email</label><input class="fi" type="text" value="abc@123.com"></div>
+                <div class="fg"><label class="fgl">Số điện thoại</label><input class="fi" type="text" value="0987876764"></div>
+
+                <div class="fg" style="grid-column: span 2;">
+                  <label class="fgl">Link website</label>
+                  <input class="fi" type="text" value="https://google.com">
+                </div>
+                
+                <div class="fg" style="grid-column: span 2;">
+                  <label class="fgl">Địa chỉ</label>
+                  <input class="fi" type="text" value="Hà Nội">
+                </div>
+                
+                <div class="fg" style="grid-column: span 2;">
+                  <label class="fgl">Địa chỉ văn phòng</label>
+                  <input class="fi" type="text" value="Hà Nội.">
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tp" id="dept-tp1">
+          <div class="card-wrapper" style="border-radius: 12px; padding: 24px;">
+            <p style="color:#718096; font-style:italic; text-align: center;">Chưa có dữ liệu lịch sử điều chuyển đơn vị</p>
+          </div>
+        </div>
+
+        <div class="tp" id="dept-tp2">
+          <div class="card-wrapper" style="border-radius: 12px; padding: 24px;">
+            <p style="color:#718096; font-style:italic; text-align: center;">Hiện tại nhân sự không đảm nhiệm vị trí kiêm nhiệm nào</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pg active" id="pg-profile">
+        <div class="pg-title">Hồ sơ cá nhân</div>
+
+        <div class="tabs">
+          <button class="tab-b active" onclick="pgTab('profile',0,this)">Thông tin chung</button>
+          <button class="tab-b" onclick="pgTab('profile',1,this)">Thông tin gia đình</button>
+          <button class="tab-b" onclick="pgTab('profile',2,this)">Lịch sử công tác</button>
+          <button class="tab-b" onclick="pgTab('profile',3,this)">Trình độ học vấn</button>
+          <button class="tab-b" onclick="pgTab('profile',4,this)">Lương và phụ cấp</button>
+          <button class="tab-b" onclick="pgTab('profile',5,this)">Hợp đồng</button>
+          <button class="tab-b" onclick="pgTab('profile',6,this)">Khen thưởng/Kỷ luật</button>
+        </div>
+
+        <div class="tp active" id="profile-tp0">
+          <div class="card-wrapper"
+            style="border-radius: 12px; padding: 24px; background: #fff; border: 1px solid #e2e8f0;">
+            <div class="form-container">
+
+              <div style="display: grid; grid-template-columns: 10% 1fr 1fr 1fr; gap: 16px 20px; align-items: end;">
+                <div class="avatar-section" style="grid-row: span 2; grid-column: span 1; width: 100%;">
+                  <div class="avatar-placeholder"
+                    style="width: 100%; aspect-ratio: 1 / 1; background: #f1f3f5; border: 1px dashed #ced4da; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #adb5bd; font-size: 24px;">
+                    +</div>
+                </div>
+                <div class="fg"><label class="fgl">Họ tên</label><input class="fi" type="text" value="Nguyễn Văn A">
+                </div>
+                <div class="fg"><label class="fgl">Giới tính</label><input class="fi" type="text" value="Nam"></div>
+                <div class="fg"><label class="fgl">Ngày sinh</label><input class="fi" type="text" value="01/01/2000">
+                </div>
+                <div class="fg"><label class="fgl">Quê quán</label><input class="fi" type="text" value="Hà Nội"></div>
+                <div class="fg"><label class="fgl">Email</label><input class="fi" type="text"
+                    value="nguyenvana@tlu.edu.vn"></div>
+                <div class="fg"><label class="fgl">Số điện thoại</label><input class="fi" type="text"
+                    value="0987654321"></div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 20px; margin-top: 16px;">
+                <div class="fg"><label class="fgl">Mã số thuế</label><input class="fi" type="text" value="1200001900">
+                </div>
+                <div class="fg"><label class="fgl">Số bảo hiểm xã hội</label><input class="fi" type="text"
+                    value="00120019"></div>
+                <div class="fg"><label class="fgl">Số bảo hiểm y tế</label><input class="fi" type="text"
+                    value="00120019"></div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 20px; margin-top: 16px;">
+                <div class="fg"><label class="fgl">Địa chỉ</label><input class="fi" type="text"
+                    value="Thanh Trì, Hà Nội"></div>
+                <div class="fg">
+                  <label class="fgl">CCCD</label>
+                  <div class="select-wrapper"><select class="fi fi-select">
+                      <option>001200001900</option>
+                    </select></div>
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 20px; margin-top: 16px;">
+                <div class="fg"><label class="fgl">Số Visa</label><input class="fi" type="text" value=""></div>
+                <div class="fg"><label class="fgl">Ngày hết hạn Visa</label><input class="fi" type="text" value="">
+                </div>
+                <div class="fg"><label class="fgl">Số Hộ chiếu</label><input class="fi" type="text" value=""></div>
+                <div class="fg"><label class="fgl">Ngày hết hạn Hộ chiếu</label><input class="fi" type="text" value="">
+                </div>
+                <div class="fg"><label class="fgl">Số giấy phép lao động</label><input class="fi" type="text" value="">
+                </div>
+                <div class="fg">
+                  <label class="fgl">Ngày hết hạn giấy phép lao động</label>
+                  <div style="display: flex; gap: 8px; width: 100%;">
+                    <input class="fi" type="text" value="" style="flex: 1;">
+                    <button class="btn-pdf"
+                      style="margin-top: 0; height: 40px; padding: 0 16px; white-space: nowrap; background: #ff8c1a; border-radius: 6px; color: #fff; border: none; font-size: 13px; font-weight: 500; cursor: pointer;">Xem
+                      PDF</button>
+                  </div>
+                </div>
+                <div class="fg"><label class="fgl">Thông tin Đảng/Đoàn</label><input class="fi" type="text"
+                    value="Đảng Cộng sản Việt Nam"></div>
+                <div class="fg"><label class="fgl">Ngày vào Đảng/Đoàn</label><input class="fi" type="text"
+                    value="01/01/2020"></div>
+                <div class="fg"><label class="fgl">Số tài khoản</label><input class="fi" type="text"
+                    value="00-120-019-999"></div>
+                <div class="fg"><label class="fgl">Tên ngân hàng</label><input class="fi" type="text"
+                    value="Ngân hàng TMCP Quân đội"></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="tp" id="profile-tp1">
+          <div class="card-wrapper">
+            <p style="color:#718096; font-style:italic;">Không có dữ liệu</p>
+          </div>
+        </div>
+
+        <div class="tp" id="profile-tp2">
+          <div class="card-wrapper"
+            style="border-radius: 12px; padding: 24px; background: #fff; border: 1px solid #e2e8f0;">
+            <div class="form-container">
+              <div
+                style="font-size: 16px; font-weight: 600; color: #1e293b; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px dashed #e2e8f0;">
+                Thông tin đơn vị công tác hiện tại</div>
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 20px;">
+                <div class="fg"><label class="fgl">Đơn vị/Phòng ban</label><input class="fi" type="text"
+                    value="Phòng Phát triển Phần mềm"></div>
+                <div class="fg"><label class="fgl">Chức vụ/Vị trí công tác</label><input class="fi" type="text"
+                    value="Nhân viên chính thức"></div>
+                <div class="fg"><label class="fgl">Mã nhân viên</label><input class="fi" type="text" value="TLU-202604">
+                </div>
+                <div class="fg"><label class="fgl">Ngày bổ nhiệm/Vào đơn vị</label><input class="fi" type="text"
+                    value="15/04/2026"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tp" id="profile-tp3">
+          <div class="card-wrapper">
+            <p style="color:#718096; font-style:italic;">Không có dữ liệu</p>
+          </div>
+        </div>
+        <div class="tp" id="profile-tp4">
+          <div class="card-wrapper">
+            <p style="color:#718096; font-style:italic;">Không có dữ liệu</p>
+          </div>
+        </div>
+        <div class="tp" id="profile-tp5">
+          <div class="card-wrapper">
+            <p style="color:#718096; font-style:italic;">Không có dữ liệu</p>
+          </div>
+        </div>
+        <div class="tp" id="profile-tp6">
+          <div class="card-wrapper">
+            <p style="color:#718096; font-style:italic;">Không có dữ liệu</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pg" id="pg-training">
+        <div class="pg-title">Khóa đào tạo</div>
+        <div class="tabs">
+          <button class="tab-b active" onclick="pgTab('training',0,this)">Đăng ký khóa đào tạo</button>
+          <button class="tab-b" onclick="pgTab('training',1,this)">Các khóa đào tạo đã đăng ký</button>
+        </div>
+
+        <div class="tp active" id="training-tp0">
+          <div class="card-wrapper" style="border-radius: 16px; padding: 24px; margin-bottom: 24px;">
+            <div class="tw" style="margin-bottom: 0; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Tên khóa đào tạo</th>
+                    <th>Loại khóa đào tạo</th>
+                    <th>Kinh phí</th>
+                    <th>Số lượng đăng ký</th>
+                    <th>Trạng thái</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr onclick="openTrainingPopup('Bồi dưỡng tiêu chuẩn Giảng viên chính (Hạng II)', 'Đào tạo chuyên môn', '3.500.000', '4/50')" style="cursor: pointer;">
+                    <td style="font-weight:500;">Bồi dưỡng tiêu chuẩn Giảng viên chính (Hạng II)</td>
+                    <td>Đào tạo chuyên môn</td>
+                    <td>3.500.000</td>
+                    <td>4/50</td>
+                    <td><span class="bd bd-open">Đang mở đăng ký</span></td>
+                  </tr>
+                  <tr onclick="openTrainingPopup('Đào tạo Công nghệ AI trong giảng dạy', 'Đào tạo kỹ năng', '2.000.000', '13/20')" style="cursor: pointer;">
+                    <td style="font-weight:500;">Đào tạo Công nghệ AI trong giảng dạy</td>
+                    <td>Đào tạo kỹ năng</td>
+                    <td>2.000.000</td>
+                    <td>13/20</td>
+                    <td><span class="bd bd-closed" style="color:#ff8c1a;">Hết hạn đăng ký</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="pagination-container">
+              <span>Hiển thị 2 / 2 khóa đào tạo</span>
+              <div class="pagination-buttons">
+                <button class="btn-page" disabled>Trước</button>
+                <span>Trang <b>1</b> / 1</span>
+                <button class="btn-page" disabled>Sau</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tp" id="training-tp1">
+          <div class="tw">
+            <table>
+              <thead>
+                <tr>
+                  <th>Tên khóa đào tạo</th>
+                  <th>Loại khóa đào tạo</th>
+                  <th>Kinh phí</th>
+                  <th>Trạng thái</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="4" style="text-align:center; color:#718096; font-style:italic; padding: 20px;">Chưa đăng ký khóa nào</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="pg" id="pg-change-password"
+        style="min-height: calc(100vh - 120px); flex-direction: column; justify-content: center; align-items: center;">
+        <div class="pg-title">Đổi mật khẩu</div>
+        <div class="card-wrapper" style="width: 100%; max-width: 560px; padding: 40px;">
+          <h3 style="font-size: 16px; font-weight: 600; color: #333; margin-bottom: 28px;">Cập nhật mật khẩu mới</h3>
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="fg">
+              <label class="fgl">Mật khẩu cũ <span style="color: red;">*</span></label>
+              <input type="password" id="old-pass" class="fi" placeholder="Nhập mật khẩu cũ">
+              <div id="err-old-pass" class="err-msg"></div>
+            </div>
+            <div class="fg">
+              <label class="fgl">Mật khẩu mới <span style="color: red;">*</span></label>
+              <input type="password" id="new-pass" class="fi" placeholder="Nhập mật khẩu mới">
+              <div id="err-new-pass" class="err-msg"></div>
+            </div>
+            <div class="fg">
+              <label class="fgl">Xác nhận mật khẩu mới <span style="color: red;">*</span></label>
+              <input type="password" id="confirm-pass" class="fi" placeholder="Nhập lại mật khẩu mới">
+              <div id="err-confirm-pass" class="err-msg"></div>
+            </div>
+          </div>
+          <div style="margin-top: 32px; display: flex; gap: 12px;">
+            <button onclick="submitPassword()"
+              style="flex: 1; height: 44px; background: #ff8c1a; color: #fff; border: none; border-radius: 8px; font-weight: 500; cursor: pointer; font-size: 14px;">Lưu
+              thay đổi</button>
+            <button onclick="cancelChangePassword()"
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <div class="ov" id="ov-confirm-password" style="display: none;">
+    <div
+      style="background: #fff; width: 400px; border-radius: 16px; padding: 32px 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center;">
+      <h3 style="font-size: 18px; font-weight: 700; color: #111827; margin-bottom: 12px;">Xác nhận đổi mật khẩu</h3>
+      <p style="font-size: 14px; color: #4b5563; line-height: 1.5; margin-bottom: 28px;">Bạn có chắc chắn muốn đổi mật
+        khẩu?<br>Hành động này không thể hoàn tác.</p>
+      <div style="display: flex; justify-content: center; gap: 12px;">
+        <button onclick="closeConfirmPopup()"
+          style="padding: 10px 24px; min-width: 80px; background: #fff; color: #4b5563; border: 1px solid #d1d5db; border-radius: 8px; font-weight: 500; cursor: pointer; font-size: 14px;">Hủy</button>
+        <button onclick="doPwd()"
+          style="padding: 10px 24px; min-width: 80px; background: #ff8c1a; color: #fff; border: none; border-radius: 8px; font-weight: 500; cursor: pointer; font-size: 14px;">Xác
+          nhận</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ov-toast" id="ov-toast">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+      <polyline points="22 4 12 14.01 9 11.01"></polyline>
     </svg>
-    <div>
-      <div style="font-size:15px;font-weight:700;color:#1C3B5A;line-height:1.2">Quản lý nhân sự</div>
-      <div style="font-size:12px;font-weight:400;color:#6b7280;line-height:1.2">Trường TKMT</div>
-    </div>
+    <span id="toast-text">Đổi mật khẩu thành công</span>
   </div>
-  <div class="hdr-user">
-    <button class="hdr-btn" onclick="toggleDd()">
-      <div class="avatar" id="hdr-av">L</div>
-      <span id="hdr-name">Lê Văn An - Cán bộ / Giảng viên</span>
-      <svg width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round"/></svg>
-    </button>
-    <div class="hdr-dd" id="hdr-dd">
-      <div class="dd-item" onclick="openChangePwd()">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        Đổi mật khẩu
-      </div>
-      <div class="dd-item red" onclick="openLogout()">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-        Đăng xuất
-      </div>
-    </div>
-  </div>
-</header>
 
-<div class="layout">
-  <nav class="sb">
-    <div class="sb-lbl">Cá nhân</div>
-    <div class="sb-item active" onclick="navTo('profile',this)">
-      <svg class="sb-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      Hồ sơ cá nhân
-    </div>
-    <div class="sb-item" onclick="navTo('dept',this)">
-      <svg class="sb-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      Đơn vị công tác
-    </div>
-    <div class="sb-item" onclick="navTo('training',this)">
-      <svg class="sb-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-      Khóa đào tạo
-    </div>
-  </nav>
+  <script>
+    function toggleDd() {
+      document.getElementById('hdr-dd').classList.toggle('open');
+    }
 
-  <main class="main">
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.hdr-user')) {
+        document.getElementById('hdr-dd').classList.remove('open');
+      }
+    });
 
-    <!-- ═══ HỒ SƠ CÁ NHÂN ═══ -->
-    <div class="pg active" id="pg-profile">
-      <div class="ph"><h1 class="ph-title">Hồ sơ cá nhân</h1></div>
-      <div class="tabs">
-        <button class="tab-b active" onclick="pgTab('profile',0,this)">Thông tin chung</button>
-        <button class="tab-b" onclick="pgTab('profile',1,this)">Thông tin gia đình</button>
-        <button class="tab-b" onclick="pgTab('profile',2,this)">Lịch sử công tác</button>
-        <button class="tab-b" onclick="pgTab('profile',3,this)">Trình độ học vấn</button>
-        <button class="tab-b" onclick="pgTab('profile',4,this)">Lương và phụ cấp</button>
-        <button class="tab-b" onclick="pgTab('profile',5,this)">Hợp đồng</button>
-        <button class="tab-b" onclick="pgTab('profile',6,this)">Khen thưởng/Kỷ luật</button>
-      </div>
-      <div class="tp active" id="profile-tp0">
-        <div class="card">
-          <div class="ig">
-            <div><div class="il">Họ tên</div><div class="iv">Lê Văn An</div></div>
-            <div><div class="il">Giới tính</div><div class="iv">Nam</div></div>
-            <div><div class="il">Ngày sinh</div><div class="iv">10/02/1988</div></div>
-            <div><div class="il">Quê quán</div><div class="iv">Nam Định</div></div>
-            <div><div class="il">Email</div><div class="iv">an.lv@tlu.edu.vn</div></div>
-            <div><div class="il">Số điện thoại</div><div class="iv">0987654321</div></div>
-            <div><div class="il">Địa chỉ</div><div class="iv">Cầu Giấy, Hà Nội</div></div>
-            <div><div class="il">CCCD</div><div class="iv">0011988102345</div></div>
-            <div><div class="il">Mã số thuế</div><div class="iv">1100188102345</div></div>
-            <div><div class="il">Số BHXH</div><div class="iv">00198810234</div></div>
-            <div><div class="il">Số BHYT</div><div class="iv">00198810234</div></div>
-            <div><div class="il">Thông tin Đảng/Đoàn</div><div class="iv">Đảng Cộng sản Việt Nam</div></div>
-            <div><div class="il">Ngày vào Đảng/Đoàn</div><div class="iv">15/05/2015</div></div>
-            <div><div class="il">Số tài khoản</div><div class="iv">19001988234</div></div>
-            <div><div class="il">Tên ngân hàng</div><div class="iv">BIDV</div></div>
-          </div>
-          <div style="margin-top:20px"><button class="btn-s" onclick="alert('Xem PDF')">Xem PDF</button></div>
-        </div>
-      </div>
-      <div class="tp" id="profile-tp1">
-        <div class="tw"><table>
-          <thead><tr><th>Họ tên</th><th>Mối quan hệ</th></tr></thead>
-          <tbody>
-            <tr><td>Lê Văn Thành</td><td>Bố</td></tr>
-            <tr><td>Nguyễn Thị Mai</td><td>Mẹ</td></tr>
-            <tr><td>Trần Thị Lan</td><td>Vợ</td></tr>
-          </tbody>
-        </table></div>
-      </div>
-      <div class="tp" id="profile-tp2">
-        <div class="tw"><table>
-          <thead><tr><th>Tên nơi công tác</th><th>Từ ngày</th><th>Đến ngày</th></tr></thead>
-          <tbody>
-            <tr><td>Công ty Cổ phần Phần mềm ABC</td><td>01/09/2010</td><td>01/08/2013</td></tr>
-            <tr><td>Trường Đại học TKMT</td><td>01/09/2013</td><td>Hiện tại</td></tr>
-          </tbody>
-        </table></div>
-      </div>
-      <div class="tp" id="profile-tp3">
-        <div class="card">
-          <div class="ig">
-            <div><div class="il">Trình độ văn hóa</div><div class="iv">12/12</div></div>
-            <div><div class="il">Học hàm/Học vị</div><div class="iv">Tiến sĩ</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-t">Thông tin bằng cấp</div>
-          <div class="tw"><table>
-            <thead><tr><th>Tên bằng</th><th>Nơi cấp</th><th></th></tr></thead>
-            <tbody>
-              <tr><td>Cử nhân Công nghệ thông tin</td><td>Trường Đại học Bách Khoa Hà Nội</td><td><button class="btn-lk" onclick="alert('Xem PDF')">Xem PDF</button></td></tr>
-              <tr><td>Thạc sĩ Khoa học máy tính</td><td>Trường Đại học TKMT</td><td><button class="btn-lk" onclick="alert('Xem PDF')">Xem PDF</button></td></tr>
-              <tr><td>Tiến sĩ Khoa học máy tính</td><td>Trường Đại học TKMT</td><td><button class="btn-lk" onclick="alert('Xem PDF')">Xem PDF</button></td></tr>
-            </tbody>
-          </table></div>
-        </div>
-      </div>
-      <div class="tp" id="profile-tp4">
-        <div class="card">
-          <div class="card-t">Thông tin hệ số lương</div>
-          <div class="ig">
-            <div><div class="il">Ngạch viên chức</div><div class="iv">Giảng viên</div></div>
-            <div><div class="il">Bậc lương</div><div class="iv">Bậc 3</div></div>
-            <div><div class="il">Hệ số lương</div><div class="iv">2.98</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-t">Thông tin phụ cấp</div>
-          <div class="tw"><table>
-            <thead><tr><th>Tên loại phụ cấp</th><th>Trạng thái</th></tr></thead>
-            <tbody>
-              <tr><td>Phụ cấp thâm niên</td><td><span class="bd bd-active">Đang hoạt động</span></td></tr>
-            </tbody>
-          </table></div>
-        </div>
-      </div>
-      <div class="tp" id="profile-tp5">
-        <div class="tw"><table>
-          <thead><tr><th>Loại hợp đồng</th><th>Ngày ký</th><th>Ngày hiệu lực</th><th>Ngày hết hạn</th><th>Đơn vị</th><th>Trạng thái</th><th>Thao tác</th></tr></thead>
-          <tbody>
-            <tr><td>Hợp đồng không xác định thời gian</td><td>01/09/2013</td><td>01/09/2013</td><td>01/09/2029</td><td>Khoa CNTT</td><td><span class="bd bd-active">Đang hoạt động</span></td><td><button class="btn-lk" onclick="openContract(0)">Xem</button></td></tr>
-            <tr><td>Hợp đồng xác định thời gian</td><td>01/09/2013</td><td>01/09/2013</td><td>31/08/2016</td><td>Khoa CNTT</td><td><span class="bd bd-unused">Ngừng sử dụng</span></td><td><button class="btn-lk" onclick="openContract(1)">Xem</button></td></tr>
-          </tbody>
-        </table></div>
-      </div>
-      <div class="tp" id="profile-tp6">
-        <div class="card">
-          <div class="card-t">Khen thưởng</div>
-          <div class="tw"><table>
-            <thead><tr><th>Loại khen thưởng</th><th>Tên khen thưởng</th><th>Ngày quyết định</th><th>Số quyết định</th><th>Thao tác</th></tr></thead>
-            <tbody>
-              <tr><td>Cấp Trường</td><td>Chiến sĩ thi đua cơ sở</td><td>30/06/2025</td><td>102/QĐ-ĐHTL</td><td><button class="btn-lk" onclick="openReward(0)">Xem</button></td></tr>
-              <tr><td>Cấp Khoa</td><td>Giảng viên tiêu biểu</td><td>20/01/2026</td><td>15/QĐ-CNTT</td><td><button class="btn-lk" onclick="openReward(1)">Xem</button></td></tr>
-            </tbody>
-          </table></div>
-        </div>
-        <div class="card">
-          <div class="card-t">Kỷ luật</div>
-          <div class="tw"><table>
-            <thead><tr><th>Loại kỷ luật</th><th>Tên kỷ luật</th><th>Ngày quyết định</th><th>Hình thức xử lý</th><th>Thao tác</th></tr></thead>
-            <tbody><tr><td colspan="4" style="text-align:center;color:#9ca3af;padding:20px">Không có dữ liệu</td></tr></tbody>
-          </table></div>
-        </div>
-      </div>
-    </div>
+    // Hàm điều hướng tab lớn (Sidebar)
+    function navTo(pg, el) {
+      document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
+      document.querySelectorAll('.pg').forEach(p => p.classList.remove('active'));
 
-    <!-- ═══ ĐƠN VỊ CÔNG TÁC ═══ -->
-    <div class="pg" id="pg-dept">
-      <div class="ph"><h1 class="ph-title">Đơn vị công tác</h1></div>
-      <div class="tabs">
-        <button class="tab-b active" onclick="pgTab('dept',0,this)">Thông tin chung</button>
-        <button class="tab-b" onclick="pgTab('dept',1,this)">Nhân sự</button>
-        <button class="tab-b" onclick="pgTab('dept',2,this)">Đơn vị trực thuộc</button>
-      </div>
-      <div class="tp active" id="dept-tp0">
-        <div class="card"><div class="ig">
-          <div><div class="il">Mã đơn vị</div><div class="iv">DV002</div></div>
-          <div><div class="il">Tên đơn vị</div><div class="iv">Khoa Công nghệ thông tin</div></div>
-          <div><div class="il">Loại đơn vị</div><div class="iv">Khoa</div></div>
-          <div><div class="il">Đơn vị cha</div><div class="iv">Trường Đại học TKMT</div></div>
-          <div><div class="il">Email</div><div class="iv">cntt@tlu.edu.vn</div></div>
-          <div><div class="il">Số điện thoại</div><div class="iv">0999888888</div></div>
-          <div><div class="il">Địa chỉ</div><div class="iv">175 Tây Sơn, Hà Nội</div></div>
-          <div><div class="il">Địa chỉ văn phòng</div><div class="iv">Tòa B2</div></div>
-          <div><div class="il">Trạng thái</div><div class="iv"><span class="bd bd-active">Đang hoạt động</span></div></div>
-        </div></div>
-      </div>
-      <div class="tp" id="dept-tp1">
-        <div class="tw"><table>
-          <thead><tr><th>Mã NS</th><th>Họ tên</th><th>Đơn vị công tác</th><th>Chức vụ</th><th>Ngày bổ nhiệm</th><th>Trạng thái</th></tr></thead>
-          <tbody>
-            <tr><td>NS002</td><td>Trần Thị Bình</td><td>Khoa CNTT</td><td>Trưởng khoa</td><td>01/09/2020</td><td><span class="bd bd-working">Đang công tác</span></td></tr>
-            <tr><td>NS005</td><td>Hoàng Văn Em</td><td>Khoa CNTT</td><td>Giảng viên</td><td>01/09/2017</td><td><span class="bd bd-working">Đang công tác</span></td></tr>
-            <tr><td>NS006</td><td>Ngô Thị Phương</td><td>Khoa CNTT</td><td>Giảng viên chính</td><td>01/09/2018</td><td><span class="bd bd-working">Đang công tác</span></td></tr>
-            <tr><td>NS011</td><td>Nguyễn Thị Ngọc</td><td>Khoa CNTT</td><td>Giảng viên</td><td>01/09/2019</td><td><span class="bd bd-working">Đang công tác</span></td></tr>
-            <tr><td>NS014</td><td>Phạm Văn Sơn</td><td>Khoa CNTT</td><td>Giảng viên</td><td>01/02/2020</td><td><span class="bd bd-working">Đang công tác</span></td></tr>
-            <tr><td>NS018</td><td>Vũ Văn Xuân</td><td>Khoa CNTT</td><td>Giảng viên cao cấp</td><td>01/09/2015</td><td><span class="bd bd-working">Đang công tác</span></td></tr>
-          </tbody>
-        </table></div>
-      </div>
-      <div class="tp" id="dept-tp2">
-        <div style="background:#fff;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.06);padding:20px">
-          <div style="display:flex;align-items:center;gap:8px;padding:8px 10px">
-            <span style="width:16px;font-size:11px;color:#9ca3af">▼</span>
-            <span style="font-size:14px;color:#1C3B5A;font-weight:600">Khoa Công nghệ thông tin</span>
-          </div>
-          <div style="margin-left:28px;border-left:2px solid #e5e7eb;padding-left:8px;padding-top:2px">
-            <div style="display:flex;align-items:center;gap:8px;padding:8px 10px">
-              <span style="width:16px"></span>
-              <span style="font-size:14px;color:#1C3B5A">Bộ môn Công nghệ Phần mềm</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;padding:8px 10px">
-              <span style="width:16px"></span>
-              <span style="font-size:14px;color:#1C3B5A">Bộ môn Mạng máy tính</span>
-              <span style="font-size:11px;font-weight:600;background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:20px">Giải thể</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;padding:8px 10px">
-              <span style="width:16px"></span>
-              <span style="font-size:14px;color:#1C3B5A">Bộ môn Hệ thống thông tin</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      if (el) {
+        el.classList.add('active');
+      }
 
-    <!-- ═══ KHÓA ĐÀO TẠO ═══ -->
-    <div class="pg" id="pg-training">
-      <div class="ph"><h1 class="ph-title">Khóa đào tạo</h1></div>
-      <div class="tabs">
-        <button class="tab-b active" onclick="pgTab('training',0,this)">Đăng ký khóa đào tạo</button>
-        <button class="tab-b" onclick="pgTab('training',1,this)">Các khóa đào tạo đã đăng ký</button>
-      </div>
-      <div class="tp active" id="training-tp0">
-        <div class="tw"><table>
-          <thead><tr><th>Tên khóa đào tạo</th><th>Loại</th><th>Kinh phí (VNĐ)</th><th>Số lượng</th><th>Trạng thái</th><th>Thao tác</th></tr></thead>
-          <tbody id="training-avail-body"></tbody>
-        </table></div>
-      </div>
-      <div class="tp" id="training-tp1">
-        <div class="tw"><table>
-          <thead><tr><th>Tên khóa đào tạo</th><th>Loại</th><th>Kinh phí (VNĐ)</th><th>Trạng thái</th><th>Kết quả</th><th>Thao tác</th></tr></thead>
-          <tbody id="training-reg-body"></tbody>
-        </table></div>
-      </div>
-    </div>
+      const targetPage = document.getElementById('pg-' + pg);
+      if (targetPage) {
+        targetPage.classList.add('active');
+      }
+      document.getElementById('hdr-dd').classList.remove('open');
+    }
 
-  </main>
-</div>
+    // Hàm điều hướng tab nhỏ bên trong phân hệ
+    function pgTab(ns, idx, btn) {
+      document.querySelectorAll('#pg-' + ns + ' .tab-b').forEach((b, i) => b.classList.toggle('active', i === idx));
+      document.querySelectorAll('#pg-' + ns + ' .tp').forEach((p, i) => p.classList.toggle('active', i === idx));
+    }
 
-<!-- ═══════ MODALS ═══════ -->
+    function toast(msg) {
+      const t = document.getElementById('ov-toast');
+      const txt = document.getElementById('toast-text');
+      if (txt) txt.textContent = msg;
+      t.style.display = 'flex';
+      setTimeout(() => {
+        t.style.display = 'none';
+      }, 2500);
+    }
 
-<div class="ov" id="ov-pwd">
-  <div class="modal">
-    <div class="mt">Đổi mật khẩu</div><div style="height:16px"></div>
-    <div class="fg"><label class="fgl">Mật khẩu cũ <span class="req">*</span></label><input class="fi" type="password" id="p-old"><div class="fe" id="p-old-e"></div></div>
-    <div class="fg"><label class="fgl">Mật khẩu mới <span class="req">*</span></label><input class="fi" type="password" id="p-new"><div class="fe" id="p-new-e"></div></div>
-    <div class="fg"><label class="fgl">Xác nhận mật khẩu mới <span class="req">*</span></label><input class="fi" type="password" id="p-cf"><div class="fe" id="p-cf-e"></div></div>
-    <div class="mf"><button class="btn-s" onclick="closeOv('ov-pwd')">Hủy</button><button class="btn-p" onclick="submitPwd()">Lưu mật khẩu</button></div>
-  </div>
-</div>
+    function openConfirmPopup() {
+      document.getElementById('ov-confirm-password').style.display = 'flex';
+    }
 
-<div class="ov" id="ov-cpwd">
-  <div class="cb">
-    <div class="cb-t">Xác nhận đổi mật khẩu</div>
-    <div class="cb-b">Bạn có chắc chắn muốn đổi mật khẩu?</div>
-    <div class="cb-n">Hành động này không thể hoàn tác</div>
-    <div class="cb-a"><button class="btn-s" onclick="closeOv('ov-cpwd')">Hủy</button><button class="btn-p" onclick="doPwd()">Xác nhận đổi</button></div>
-  </div>
-</div>
+    function closeConfirmPopup() {
+      document.getElementById('ov-confirm-password').style.display = 'none';
+    }
 
-<div class="ov" id="ov-logout">
-  <div class="cb">
-    <div class="cb-t">Xác nhận đăng xuất</div>
-    <div class="cb-b">Bạn có chắc chắn muốn đăng xuất?</div>
-    <div class="cb-n" style="margin-bottom:24px"></div>
-    <div class="cb-a"><button class="btn-s" onclick="closeOv('ov-logout')">Hủy</button><button class="btn-p" onclick="doLogout()">Xác nhận</button></div>
-  </div>
-</div>
+    function submitPassword() {
+      const oldPass = document.getElementById('old-pass');
+      const newPass = document.getElementById('new-pass');
+      const confirmPass = document.getElementById('confirm-pass');
 
-<div class="ov" id="ov-contract">
-  <div class="modal">
-    <div class="mt">Chi tiết hợp đồng</div><div style="height:16px"></div>
-    <div class="ig" id="contract-grid"></div>
-    <div class="mf"><button class="btn-s" onclick="closeOv('ov-contract')">Đóng</button></div>
-  </div>
-</div>
+      const errOld = document.getElementById('err-old-pass');
+      const errNew = document.getElementById('err-new-pass');
+      const errConfirm = document.getElementById('err-confirm-pass');
 
-<div class="ov" id="ov-reward">
-  <div class="modal">
-    <div class="mt">Xem chi tiết khen thưởng</div>
-    <div class="ms" id="reward-sub"></div>
-    <div class="ig" id="reward-grid"></div>
-    <div class="mf"><button class="btn-s" onclick="closeOv('ov-reward')">Đóng</button></div>
-  </div>
-</div>
+      let hasError = false;
+      [errOld, errNew, errConfirm].forEach(el => {
+        if (el) {
+          el.textContent = '';
+          el.classList.remove('show');
+        }
+      });
+      [oldPass, newPass, confirmPass].forEach(el => {
+        if (el) el.classList.remove('input-err');
+      });
 
-<div class="ov" id="ov-reg-kdt">
-  <div class="modal modal-lg">
-    <div class="mt" id="reg-kdt-title"></div>
-    <div class="ms" id="reg-kdt-sub"></div>
-    <div class="ig" id="reg-kdt-grid"></div>
-    <div class="mf">
-      <button class="btn-s" onclick="closeOv('ov-reg-kdt')">Hủy</button>
-      <button class="btn-p" onclick="doRegKdt()">Đăng ký</button>
-    </div>
-  </div>
-</div>
+      if (!oldPass.value.trim()) {
+        if (errOld) {
+          errOld.textContent = 'Mật khẩu cũ không được để trống';
+          errOld.classList.add('show');
+        }
+        oldPass.classList.add('input-err');
+        hasError = true;
+      }
+      if (!newPass.value.trim()) {
+        if (errNew) {
+          errNew.textContent = 'Mật khẩu mới không được để trống';
+          errNew.classList.add('show');
+        }
+        newPass.classList.add('input-err');
+        hasError = true;
+      }
+      if (!confirmPass.value.trim()) {
+        if (errConfirm) {
+          errConfirm.textContent = 'Xác nhận mật khẩu mới không được để trống';
+          errConfirm.classList.add('show');
+        }
+        confirmPass.classList.add('input-err');
+        hasError = true;
+      } else if (newPass.value !== confirmPass.value) {
+        if (errConfirm) {
+          errConfirm.textContent = 'Mật khẩu không trùng khớp';
+          errConfirm.classList.add('show');
+        }
+        confirmPass.classList.add('input-err');
+        hasError = true;
+      }
 
-<div class="ov" id="ov-view-kdt">
-  <div class="modal modal-lg">
-    <div class="mt" id="view-kdt-title"></div>
-    <div class="ms" id="view-kdt-sub"></div>
-    <div class="ig" id="view-kdt-grid"></div>
-    <div class="mf"><button class="btn-s" onclick="closeOv('ov-view-kdt')">Đóng</button></div>
-  </div>
-</div>
+      if (hasError) return;
+      openConfirmPopup();
+    }
 
-<div class="toast" id="toast"><span id="toast-ic" style="display:flex;align-items:center;flex-shrink:0"></span><span id="toast-msg"></span></div>
+    function doPwd() {
+      closeConfirmPopup();
+      toast('Đổi mật khẩu thành công');
+      cancelChangePassword();
+    }
 
-<script>
-/* ── SESSION ── */
-const CU = JSON.parse(sessionStorage.getItem('currentUser') || 'null');
-if (!CU || CU.role !== 'employee') { window.location.href = 'login.html'; }
-if (CU) {
-  document.getElementById('hdr-name').textContent = CU.name + ' - Cán bộ / Giảng viên';
-  document.getElementById('hdr-av').textContent = CU.name[0].toUpperCase();
-}
+    function cancelChangePassword() {
+      const profileMenu = document.querySelector('.sb-item[onclick*="profile"]');
+      navTo('profile', profileMenu);
 
-/* ── DATA ── */
-const CONTRACTS = [
-  {type:'Hợp đồng không xác định thời gian',signed:'01/09/2013',eff:'01/09/2013',exp:'01/09/2029',dept:'Khoa CNTT',st:'active'},
-  {type:'Hợp đồng xác định thời gian',signed:'01/09/2013',eff:'01/09/2013',exp:'31/08/2016',dept:'Khoa CNTT',st:'unused'},
-];
-const REWARDS = [
-  {cat:'Cấp Trường',name:'Chiến sĩ thi đua cơ sở',date:'30/06/2025',decision:'102/QĐ-ĐHTL',content:'Hoàn thành xuất sắc nhiệm vụ năm học 2024-2025',amount:'0'},
-  {cat:'Cấp Khoa',name:'Giảng viên tiêu biểu',date:'20/01/2026',decision:'15/QĐ-CNTT',content:'Giảng viên được sinh viên bình chọn tốt nhất học kỳ I năm học 2025-2026',amount:'500000'},
-];
-const AVAIL_KDTS = [
-  {id:'KĐT001',name:'Bồi dưỡng tiêu chuẩn Giảng viên chính (Hạng I)',type:'Đào tạo chuyên môn',from:'01/03/2026',to:'01/06/2026',loc:'Trường TKMT',fee:'3.500.000',commit:'Công tác tại trường tối thiểu 03 năm',cert:'Chứng chỉ bồi dưỡng GV chính (Hạng I)',regFrom:'01/01/2026',regTo:'01/02/2026',count:'4/50',st:'open'},
-  {id:'KĐT004',name:'Đào tạo Công nghệ AI trong giảng dạy',type:'Đào tạo kỹ năng',from:'15/04/2026',to:'15/06/2026',loc:'Trường TKMT',fee:'2.000.000',commit:'Không yêu cầu',cert:'Chứng chỉ AI trong giảng dạy',regFrom:'01/03/2026',regTo:'31/03/2026',count:'8/30',st:'open'},
-];
-const MY_KDTS = [
-  {id:'KĐT002',name:'Bồi dưỡng tiêu chuẩn Giảng viên chính (Hạng II)',type:'Đào tạo chuyên môn',from:'01/09/2025',to:'01/12/2025',loc:'Trường TKMT',fee:'3.500.000',regDate:'15/07/2025',result:'pass',st:'done'},
-  {id:'KĐT003',name:'Bồi dưỡng Quản lý',type:'Đào tạo kỹ năng',from:'01/01/2026',to:'01/03/2026',loc:'Trường TKMT',fee:'4.500.000',regDate:'10/11/2025',result:'none',st:'closed'},
-];
+      document.getElementById('old-pass').value = '';
+      document.getElementById('new-pass').value = '';
+      document.getElementById('confirm-pass').value = '';
+    }
 
-/* ── NAVIGATION ── */
-function navTo(pg,el){
-  document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
-  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('pg-'+pg).classList.add('active');
-  closeDd();
-}
-function toggleDd(){document.getElementById('hdr-dd').classList.toggle('open');}
-function closeDd(){document.getElementById('hdr-dd').classList.remove('open');}
-document.addEventListener('click',e=>{if(!e.target.closest('.hdr-user'))closeDd();});
-function openOv(id){document.getElementById(id).classList.add('open');}
-function closeOv(id){document.getElementById(id).classList.remove('open');}
+    // ═══ CÁC HÀM SỰ KIỆN XỬ LÝ KHÓA ĐÀO TẠO ═══
+    function openTrainingPopup(name, type, cost, slots) {
+      document.getElementById('p-train-name').value = name;
+      document.getElementById('p-train-type').value = type;
+      document.getElementById('p-train-cost').value = cost;
+      document.getElementById('p-train-slots').value = slots;
+      
+      document.getElementById('ov-training-detail').style.display = 'flex';
+      document.getElementById('ov-training-detail').classList.add('open');
+    }
 
-/* ── TOAST ── */
-let _tt;
-const _TIC={
-  success:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>`,
-  warning:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
-  error:  `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`,
-  loading:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2.5" stroke-linecap="round" class="tspin"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>`,
-};
-const _TCLR={success:'#16a34a',warning:'#f59e0b',error:'#ef4444',loading:'#9ca3af'};
-function toast(msg,type){
-  type=type||'success';
-  const el=document.getElementById('toast');
-  el.style.borderLeftColor=_TCLR[type];
-  document.getElementById('toast-ic').innerHTML=_TIC[type];
-  document.getElementById('toast-msg').textContent=msg;
-  el.classList.add('show');
-  clearTimeout(_tt);
-  if(type!=='loading')_tt=setTimeout(()=>el.classList.remove('show'),3000);
-}
+    function closeTrainingPopup() {
+      document.getElementById('ov-training-detail').style.display = 'none';
+      document.getElementById('ov-training-detail').classList.remove('open');
+    }
 
-/* ── TABS ── */
-function pgTab(ns,idx,btn){
-  document.querySelectorAll('#pg-'+ns+' .tab-b').forEach((b,i)=>b.classList.toggle('active',i===idx));
-  document.querySelectorAll('#pg-'+ns+' .tp').forEach((p,i)=>p.classList.toggle('active',i===idx));
-}
-
-/* ── FORM HELPERS ── */
-function shE(id,msg){const el=document.getElementById(id);if(!el)return;if(msg)el.textContent=msg;el.classList.add('show');const inp=el.previousElementSibling;if(inp&&inp.tagName==='INPUT')inp.classList.add('err');}
-function hdE(id){const el=document.getElementById(id);if(!el)return;el.classList.remove('show');const inp=el.previousElementSibling;if(inp)inp.classList.remove('err');}
-function clrE(ids){ids.forEach(hdE);}
-
-/* ── PWD & LOGOUT ── */
-function openChangePwd(){closeDd();['p-old','p-new','p-cf'].forEach(id=>document.getElementById(id).value='');clrE(['p-old-e','p-new-e','p-cf-e']);openOv('ov-pwd');}
-function submitPwd(){
-  const old=document.getElementById('p-old').value,nw=document.getElementById('p-new').value,cf=document.getElementById('p-cf').value;
-  let ok=true;
-  if(!old||old!=='gv123'){shE('p-old-e','Mật khẩu cũ không chính xác');ok=false;}else hdE('p-old-e');
-  if(!nw||nw.length<8){shE('p-new-e','Mật khẩu phải có ít nhất 8 ký tự');ok=false;}else hdE('p-new-e');
-  if(!cf||cf!==nw){shE('p-cf-e','Mật khẩu không trùng khớp');ok=false;}else hdE('p-cf-e');
-  if(!ok)return;
-  closeOv('ov-pwd');openOv('ov-cpwd');
-}
-function doPwd(){closeOv('ov-cpwd');toast('Đổi mật khẩu thành công');}
-function openLogout(){closeDd();openOv('ov-logout');}
-function doLogout(){sessionStorage.removeItem('currentUser');window.location.href='login.html';}
-
-/* ── CONTRACT ── */
-function openContract(idx){
-  const c=CONTRACTS[idx];
-  document.getElementById('contract-grid').innerHTML=`
-    <div><div class="il">Loại hợp đồng</div><div class="iv">${c.type}</div></div>
-    <div><div class="il">Ngày ký</div><div class="iv">${c.signed}</div></div>
-    <div><div class="il">Ngày hiệu lực</div><div class="iv">${c.eff}</div></div>
-    <div><div class="il">Ngày hết hạn</div><div class="iv">${c.exp}</div></div>
-    <div><div class="il">Đơn vị công tác</div><div class="iv">${c.dept}</div></div>
-    <div><div class="il">Trạng thái</div><div class="iv">${c.st==='active'?'<span class="bd bd-active">Đang hoạt động</span>':'<span class="bd bd-unused">Ngừng sử dụng</span>'}</div></div>`;
-  openOv('ov-contract');
-}
-
-/* ── REWARD ── */
-function openReward(idx){
-  const r=REWARDS[idx];
-  document.getElementById('reward-sub').textContent=r.name;
-  document.getElementById('reward-grid').innerHTML=`
-    <div><div class="il">Loại khen thưởng</div><div class="iv">${r.cat}</div></div>
-    <div><div class="il">Ngày quyết định</div><div class="iv">${r.date}</div></div>
-    <div><div class="il">Số quyết định</div><div class="iv">${r.decision}</div></div>
-    <div><div class="il">Tiền thưởng (VNĐ)</div><div class="iv">${parseInt(r.amount)>0?Number(r.amount).toLocaleString('vi-VN'):'Không có'}</div></div>
-    <div class="span2"><div class="il">Nội dung</div><div class="iv">${r.content}</div></div>`;
-  openOv('ov-reward');
-}
-
-/* ── TRAINING ── */
-function kdtStBadge(st){const m={open:'<span class="bd bd-open">Đang mở đăng ký</span>',done:'<span class="bd bd-done">Hoàn thành</span>',closed:'<span class="bd bd-closed">Hết hạn đăng ký</span>'};return m[st]||st;}
-
-let _selKdt=null;
-function renderTraining(){
-  document.getElementById('training-avail-body').innerHTML=AVAIL_KDTS.map((k,i)=>`<tr>
-    <td><button class="btn-lk" onclick="openRegKdt(${i})">${k.name}</button></td>
-    <td>${k.type}</td><td>${k.fee}</td><td>${k.count}</td>
-    <td>${kdtStBadge(k.st)}</td>
-    <td><button class="btn-ic" onclick="openRegKdt(${i})" title="Xem & Đăng ký">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-    </button></td>
-  </tr>`).join('');
-  document.getElementById('training-reg-body').innerHTML=MY_KDTS.map((k,i)=>`<tr>
-    <td><button class="btn-lk" onclick="openViewKdt(${i})">${k.name}</button></td>
-    <td>${k.type}</td><td>${k.fee}</td>
-    <td>${kdtStBadge(k.st)}</td>
-    <td>${k.result==='none'?'<span class="result-none">Chưa có kết quả</span>':k.result==='pass'?'<span class="result-pass">Hoàn thành</span>':'<span class="result-fail">Không đạt</span>'}</td>
-    <td><button class="btn-ic" onclick="openViewKdt(${i})" title="Xem">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-    </button></td>
-  </tr>`).join('');
-}
-
-function openRegKdt(idx){
-  _selKdt=AVAIL_KDTS[idx];
-  document.getElementById('reg-kdt-title').textContent=_selKdt.name;
-  document.getElementById('reg-kdt-sub').textContent='Mã: '+_selKdt.id;
-  document.getElementById('reg-kdt-grid').innerHTML=`
-    <div><div class="il">Loại khóa đào tạo</div><div class="iv">${_selKdt.type}</div></div>
-    <div><div class="il">Trạng thái</div><div class="iv">${kdtStBadge(_selKdt.st)}</div></div>
-    <div><div class="il">Thời gian từ ngày</div><div class="iv">${_selKdt.from}</div></div>
-    <div><div class="il">Đến ngày</div><div class="iv">${_selKdt.to}</div></div>
-    <div><div class="il">Địa điểm</div><div class="iv">${_selKdt.loc}</div></div>
-    <div><div class="il">Kinh phí (VNĐ)</div><div class="iv">${_selKdt.fee}</div></div>
-    <div><div class="il">Mở đăng ký từ ngày</div><div class="iv">${_selKdt.regFrom}</div></div>
-    <div><div class="il">Đến ngày</div><div class="iv">${_selKdt.regTo}</div></div>
-    <div><div class="il">Số lượng đăng ký</div><div class="iv">${_selKdt.count}</div></div>
-    <div><div class="il">Chứng chỉ</div><div class="iv">${_selKdt.cert}</div></div>
-    <div class="span2"><div class="il">Cam kết sau đào tạo</div><div class="iv">${_selKdt.commit}</div></div>`;
-  openOv('ov-reg-kdt');
-}
-function doRegKdt(){closeOv('ov-reg-kdt');toast('Đăng ký khóa đào tạo thành công');}
-
-function openViewKdt(idx){
-  const k=MY_KDTS[idx];
-  document.getElementById('view-kdt-title').textContent=k.name;
-  document.getElementById('view-kdt-sub').textContent='Mã: '+k.id;
-  document.getElementById('view-kdt-grid').innerHTML=`
-    <div><div class="il">Loại khóa đào tạo</div><div class="iv">${k.type}</div></div>
-    <div><div class="il">Trạng thái</div><div class="iv">${kdtStBadge(k.st)}</div></div>
-    <div><div class="il">Thời gian từ ngày</div><div class="iv">${k.from}</div></div>
-    <div><div class="il">Đến ngày</div><div class="iv">${k.to}</div></div>
-    <div><div class="il">Địa điểm</div><div class="iv">${k.loc}</div></div>
-    <div><div class="il">Kinh phí (VNĐ)</div><div class="iv">${k.fee}</div></div>
-    <div><div class="il">Ngày đăng ký</div><div class="iv">${k.regDate}</div></div>
-    <div><div class="il">Kết quả</div><div class="iv">${k.result==='none'?'<span class="result-none">Chưa có kết quả</span>':k.result==='pass'?'<span class="result-pass">Hoàn thành</span>':'<span class="result-fail">Không đạt</span>'}</div></div>`;
-  openOv('ov-view-kdt');
-}
-
-/* ── INIT ── */
-renderTraining();
-</script>
+    function confirmRegisterTraining() {
+      closeTrainingPopup();
+      toast('Đăng ký và cập nhật khóa đào tạo thành công!');
+    }
+  </script>
 </body>
+
 </html>
